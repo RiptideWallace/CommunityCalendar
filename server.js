@@ -1,7 +1,6 @@
 const express       = require("express");
 const PORT          = 3000;
 const app           = express();
-const jquery        = require("jquery");
 const pg            = require("pg");
 const knex          = require("knex");
 const ejs           = require("ejs");
@@ -9,10 +8,9 @@ const bcrypt        = require("bcrypt");
 const cookieSession = require('cookie-session');
 const bodyParser    = require("body-parser");
 const sass          = require("node-sass-middleware");
-const bootstrap     = require("bootstrap");
 
 app.set("view engine", "ejs");
-app.use(bodyParser.urlencoded({ extended: true}));\
+app.use(bodyParser.urlencoded({ extended: true}));
 app.use(express.static("public"));
 
 //Home Page
