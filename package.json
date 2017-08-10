@@ -1,7 +1,7 @@
 {
   "name"              : "community-calendar",
   "version"           : "1.0.0",
-  "description"       : "Activities around Victoria",
+  "description"       : "Local activities aggregation application",
   "main"              : "server.js",
   "authors"           : "Chris Bryson, Lawrence Surges, Tyler Krys",
   "license"           : "ISC",
