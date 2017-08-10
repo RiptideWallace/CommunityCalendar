@@ -3,7 +3,11 @@
   "version"           : "1.0.0",
   "description"       : "Activities around Victoria",
   "main"              : "server.js",
-  "authors"           : "Tyler, Lawrence & Chris",
+  "authors"           : "Chris Bryson, Lawrence Surges, Tyler Krys",
+  "license"           : "ISC",
+  "repository"        : { "type" : "git"
+                        , "url" : "https://github.com/RiptideWallace/CommunityCalendar"
+                        },
   "dependencies"      : {
     "express"         : "latest",
     "jquery"          : "latest",
