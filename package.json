@@ -1,0 +1,22 @@
+{
+  "name"              : "community-calendar",
+  "version"           : "1.0.0",
+  "description"       : "Activities around Victoria",
+  "main"              : "server.js",
+  "authors"           : "Tyler, Lawrence & Chris",
+  "dependencies"      : {
+    "express"         : "latest",
+    "jquery"          : "latest",
+    "pg"              : "latest",
+    "knex"            : "latest",
+    "knex-logger"     : "latest",
+    "ejs"             : "latest",
+    "bcrypt"          : "latest",
+    "cookie-session"  : "latest",
+    "body-parser"     : "latest",
+    "node-sass"       : "latest",
+    "node-sass-middleware" : "latest",
+    "bootstrap"       : "latest",
+    "dotenv"          : "latest"
+  }
+}
