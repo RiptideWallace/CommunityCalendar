@@ -1,8 +1,13 @@
+require('dotenv').config();
+
 const express       = require("express");
 const PORT          = 3000;
+const ENV           = process.env.ENV || "development";
 const app           = express();
 const pg            = require("pg");
+const knexConfig    = require("./knexfile");
 const knex          = require("knex");
+const knexLogger    = require('knex-logger');
 const ejs           = require("ejs");
 const bcrypt        = require("bcrypt");
 const cookieSession = require('cookie-session');
@@ -12,6 +17,7 @@ const sass          = require("node-sass-middleware");
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(express.static("public"));
+app.use(knexLogger(knex));
 
 //Home Page
 app.get("/", (req, res) => {
