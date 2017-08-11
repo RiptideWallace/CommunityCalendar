@@ -1,0 +1,26 @@
+{
+  "name"              : "community-calendar",
+  "version"           : "1.0.0",
+  "description"       : "Local activities aggregation application",
+  "main"              : "server.js",
+  "authors"           : "Chris Bryson, Lawrence Surges, Tyler Krys",
+  "license"           : "ISC",
+  "repository"        : { "type" : "git"
+                        , "url" : "https://github.com/RiptideWallace/CommunityCalendar"
+                        },
+  "dependencies"      : {
+    "express"         : "latest",
+    "jquery"          : "latest",
+    "pg"              : "latest",
+    "knex"            : "latest",
+    "knex-logger"     : "latest",
+    "ejs"             : "latest",
+    "bcrypt"          : "latest",
+    "cookie-session"  : "latest",
+    "body-parser"     : "latest",
+    "node-sass"       : "latest",
+    "node-sass-middleware" : "latest",
+    "bootstrap"       : "latest",
+    "dotenv"          : "latest"
+  }
+}

@@ -1,0 +1,52 @@
+<!-- views/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <% include partials/_head.ejs %>
+
+    <link rel="stylesheet" href="/styles/index.css" type="text/css">
+
+    <!-- <script type="text/javascript" src="/scripts/index.js"></script> -->
+
+    <title>
+      Victoria Community Calendar
+    </title>
+  </head>
+
+  <body>
+
+    <% include partials/_header.ejs %>
+
+    <div class="dropdown">
+      <button class="dropbtn">Choose A Region</button>
+      <div class="dropdown-content">
+        <a href="search">Victoria</a>
+        <a href="search">Saanich</a>
+        <a href="search">Oak Bay</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">Choose A Centre</button>
+      <div class="dropdown-content">
+        <a href="search">YMCA</a>
+        <a href="search">Crystal Pool</a>
+        <a href="search">Cedar Hill Rec Centre</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn">Choose an Activity</button>
+      <div class="dropdown-content">
+        <a href="search">Swimming</a>
+        <a href="search">Hiking</a>
+        <a href="search">Skating</a>
+      </div>
+    </div>
+
+    <% include partials/_footer.ejs %>
+
+  </body>
+</html>
