@@ -8,4 +8,4 @@ A [Lighthouse Labs](https://github.com/lighthouse-labs) group project by [Chris 
 
 ## Run
 
-`node server.js`
+`npm start`
