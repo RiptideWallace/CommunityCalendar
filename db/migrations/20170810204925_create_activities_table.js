@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
     table.increments();
     table.integer('place_id').references('id').inTable('places')
     table.string('name');
-    table.varchar(10000)('description');
+    table.text('description');
     table.string('start_date');
     table.string('end_date');
     table.integer('price_range');
