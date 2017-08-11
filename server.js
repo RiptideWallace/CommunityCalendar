@@ -18,6 +18,12 @@ app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(express.static("public"));
 app.use(knexLogger(knex));
+app.use("/styles", sass({
+  src: __dirname + "/styles",
+  dest: __dirname + "/public/styles",
+  debug: true,
+  outputStyle: 'expanded'
+}));
 
 //Home Page
 app.get("/", (req, res) => {
