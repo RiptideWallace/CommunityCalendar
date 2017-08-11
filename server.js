@@ -33,6 +33,15 @@ app.get("/event", (req, res) => {
   res.render("event")
 });
 
+app.get("/search/seeds", (req, res) => {
+  knex
+    .select("*")
+    .from("activities")
+    .then((results) => {
+      res.json(results);
+    })
+})
+
 app.listen(PORT, () =>{
   console.log("Listening in on Port " + PORT)
 });
