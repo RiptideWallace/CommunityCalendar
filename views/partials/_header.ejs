@@ -4,10 +4,14 @@
 
       <nav>
         <ul>
-        <li class="left"><a href="/">Home</a></li>
+        <% if (userId) { %>
+          <li class="left"><a href="/">Home</a></li>
+          <li class="right"><a href="/">Logout</a></li>
+        <% } else { %>
+          <li class="left"><a href="/">Home</a></li>
           <li class="right"><a href="/register">Register</a></li>
           <li class="right"><a href="/login">Login</a></li>
-          <li class="right"><a href="/">Logout</a></li>
+        <% } %>
         </ul>
       </nav>
 

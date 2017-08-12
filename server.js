@@ -1,23 +1,34 @@
 require('dotenv').config();
 
-const express       = require("express");
-const PORT          = process.env.PORT || 3000;
-const ENV           = process.env.ENV || "development";
-const app           = express();
-const pg            = require("pg");
-const knexConfig    = require('./knexfile');
-const knex          = require('knex')(knexConfig[ENV]);
-const knexLogger    = require('knex-logger');
-const ejs           = require('ejs');
-const bcrypt        = require('bcrypt');
-const cookieSession = require('cookie-session');
-const bodyParser    = require('body-parser');
-const sass          = require('node-sass-middleware');
+const express          = require("express");
+const PORT             = process.env.PORT || 3000;
+const ENV              = process.env.ENV || "development";
+const googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY;
+const app              = express();
+const pg               = require("pg");
+const knexConfig       = require('./knexfile');
+const knex             = require('knex')(knexConfig[ENV]);
+const knexLogger       = require('knex-logger');
+const ejs              = require('ejs');
+const bcrypt           = require('bcrypt');
+const cookieSession    = require('cookie-session');
+const bodyParser       = require('body-parser');
+const sass             = require('node-sass-middleware');
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(express.static("public"));
 app.use(knexLogger(knex));
+
+app.use(cookieSession({
+  keys: ['hello', 'world']
+}));
+
+app.use((req, res, next) => {
+  res.locals.userId = req.session.userId;
+  next();
+})
+
 app.use("/styles", sass({
   src: __dirname + "/styles",
   dest: __dirname + "/public/styles",
@@ -47,15 +58,16 @@ app.post("/register", (req, res) => {
       return knex
         .select("*")
         .from('users')
-        .where({
-          email: req.body.email
+        .where({email: req.body.email});
+      })
+        .then((results) => {
+          req.session.userId = results[0].id;
+          res.redirect("/")
         })
         .catch((err) => {
           console.log(err);
           res.status(404).send("Bad Register");
         })
-    })
-    res.redirect("/")
 })
 
 //Login Page (GET)
@@ -78,6 +90,7 @@ app.post("/login", (req, res) => {
         res.status(404).send("Invalid password")
         return;
       }
+      req.session.userId = results[0].id;
       res.redirect("/");
     });
 });
@@ -95,7 +108,10 @@ app.get("/search", (req, res) => {
 
 //Event Page
 app.get("/event", (req, res) => {
-  res.render("event")
+  let templateVars = {
+    apiKey: googleMapsApiKey
+  };
+  res.render("event", templateVars)
 });
 
 //User Profile Page
