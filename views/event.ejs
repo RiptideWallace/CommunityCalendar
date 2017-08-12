@@ -1,7 +1,7 @@
 <!-- views/event.ejs -->
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <title>
       Victoria Community Calendar
@@ -9,15 +9,36 @@
 
     <% include partials/_head.ejs %>
 
-  </head>
+    <script type="text/javascript" src="/scripts/event.js"></script>
 
+
+    <style>
+       #map {
+        height: 150px;
+        width: 20%;
+        float: right;
+        margin-right: 1em;
+        border-style: solid;
+        border-width: 1px;
+
+       }
+    </style>
+  </head>
   <body>
 
     <% include partials/_header.ejs %>
 
-    <p>Event Details Go Here</p>
+    <h3>Event Details</h3>
+    <div id="map"></div>
 
-    <% include partials/_footer.ejs %>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCn4r-zd3LlJSCZkI_QBxOts3grrEDvLQg  &callback=initMap">
+    </script>
+
+
 
   </body>
+
+  <% include partials/_footer.ejs %>
+
 </html>

@@ -7,14 +7,12 @@ jQuery(document).ready(function() {
       ($("main")
         .append($("<div class='activity-name'>").text(
           activities.name))
-        .append($("<div class='activity-description'>").text(
-          activities.description))
         .append($("<div class='activity-start-date'>").text(
-          activities.start_date))
+          "Start Date - " + activities.start_date))
         .append($("<div class='activity-end-date'>").text(
-          activities.end_date))
+          "End Date - " + activities.end_date))
         .append($("<div class='activity-price-range'>").text(
-          activities.price_range))
+          "Cost - " + activities.price_range))
         .append($("<div class='activity-source'>").text(
           activities.source))
         .append($("<a class='event-link' href='event'>").text(
