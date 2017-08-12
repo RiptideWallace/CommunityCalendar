@@ -1,18 +1,19 @@
 require('dotenv').config();
 
-const express       = require("express");
-const PORT          = process.env.PORT || 3000;
-const ENV           = process.env.ENV || "development";
-const app           = express();
-const pg            = require("pg");
-const knexConfig    = require('./knexfile');
-const knex          = require('knex')(knexConfig[ENV]);
-const knexLogger    = require('knex-logger');
-const ejs           = require('ejs');
-const bcrypt        = require('bcrypt');
-const cookieSession = require('cookie-session');
-const bodyParser    = require('body-parser');
-const sass          = require('node-sass-middleware');
+const express          = require("express");
+const PORT             = process.env.PORT || 3000;
+const ENV              = process.env.ENV || "development";
+const googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY;
+const app              = express();
+const pg               = require("pg");
+const knexConfig       = require('./knexfile');
+const knex             = require('knex')(knexConfig[ENV]);
+const knexLogger       = require('knex-logger');
+const ejs              = require('ejs');
+const bcrypt           = require('bcrypt');
+const cookieSession    = require('cookie-session');
+const bodyParser       = require('body-parser');
+const sass             = require('node-sass-middleware');
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true}));
@@ -95,7 +96,10 @@ app.get("/search", (req, res) => {
 
 //Event Page
 app.get("/event", (req, res) => {
-  res.render("event")
+  let templateVars = {
+    apiKey: googleMapsApiKey
+  };
+  res.render("event", templateVars)
 });
 
 //User Profile Page
