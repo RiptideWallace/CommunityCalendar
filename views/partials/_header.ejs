@@ -1,5 +1,52 @@
 <!-- views/partials/_header.ejs -->
 
     <header>
+
+      <nav>
+        <ul>
+        <li class="left"><a href="/">Home</a></li>
+          <li class="right"><a href="/register">Register</a></li>
+          <li class="right"><a href="/login">Login</a></li>
+          <li class="right"><a href="/">Logout</a></li>
+        </ul>
+      </nav>
+
       <h1>Community Calendar</h1>
+
+      <style>
+        ul {
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+          overflow:hidden;
+          background-color: #333;
+        }
+
+        .left {
+          float: left;
+        }
+
+        .right {
+          float: right;
+        }
+
+        li a{
+          display: block;
+          color: white;
+          text-align: center;
+          padding: 14px 16px;
+          text-decoration: none;
+        }
+
+        li a:hover {
+          background-color: #111;
+        }
+
+        .active {
+          background-color: #4CAF50;
+        }
+      </style>
+
+
+
     </header>

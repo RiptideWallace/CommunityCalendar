@@ -1,0 +1,42 @@
+<!-- views/register.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>
+      Victoria Community Calendar
+    </title>
+
+    <% include partials/_head.ejs %>
+
+  </head>
+
+  <body>
+
+    <% include partials/_header.ejs %>
+
+    <div class="main-contianer">
+      <div class="form-container">
+        <h1>Register</h1>
+        <form action="/register" method="POST">
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter you e-mail" name="email" required autofocus>
+          </div>
+          <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" class="form-control" id="username" placeholder="Enter A Username" name="username" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Passowrd:</label>
+            <input type="password" class="form-control" id="password" placeholer="Enter password" name="password" required>
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+
+    <% include partials/_footer.ejs %>
+
+  </body>
+</html>

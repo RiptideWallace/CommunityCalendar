@@ -30,11 +30,70 @@ app.get("/", (req, res) => {
   res.render("index")
 });
 
+//Register Page (GET)
+app.get("/register", (req, res) => {
+  res.render("register")
+});
+
+//Register Page (POST)
+app.post("/register", (req, res) => {
+  knex('users')
+    .insert({
+      name: req.body.username,
+      email: req.body.email,
+      password: bcrypt.hashSync(req.body.password, 10)
+    })
+    .then(() => {
+      return knex
+        .select("*")
+        .from('users')
+        .where({
+          email: req.body.email
+        })
+        .catch((err) => {
+          console.log(err);
+          res.status(404).send("Bad Register");
+        })
+    })
+    res.redirect("/")
+})
+
+//Login Page (GET)
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+
+//Login Page (POST)
+app.post("/login", (req, res) => {
+  knex
+    .select("*")
+    .from('users')
+    .where({email: req.body.email})
+    .then((results) => {
+      if (results.length === 0) {
+        res.status(404).send("This e-mail is not associated with a registered user")
+        return;
+      }
+      if (!bcrypt.compareSync(req.body.password, results[0].password)) {
+        res.status(404).send("Invalid password")
+        return;
+      }
+      res.redirect("/");
+    });
+});
+
+//Logout (POST)
+app.post("/logout", (req, res) => {
+  req.session = null;
+  res.redirect("/");
+});
+
 //Search Page
 app.get("/search", (req, res) => {
   res.render("search")
 });
 
+//Event Page
 app.get("/event", (req, res) => {
   res.render("event")
 });
