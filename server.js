@@ -98,6 +98,20 @@ app.get("/event", (req, res) => {
   res.render("event")
 });
 
+//User Profile Page
+app.get("/:id/show", (req, res) => {
+  knex('users')
+  .where({id: req.params.id})
+  .then((results) => {
+    if (results.length === 0) {
+      res.status(404).send("This user does not exist");
+      return;
+    }
+    const templateVars = {user: results[0]};
+    res.render("user", templateVars);
+  });
+});
+
 app.get("/search/seeds", (req, res) => {
   knex
     .select("*")

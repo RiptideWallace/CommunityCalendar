@@ -1,0 +1,22 @@
+<!DOCTYPE hmtl>
+<html>
+  <head>
+    <title>
+      Victoria Community Calendar
+    </title>
+    <% include partials/_head.ejs %>
+  </head>
+
+  <body>
+
+    <% include partials/_header.ejs %>
+
+    <div>
+      <input type="hidden" id="user-profile-id" value="<%=user.id%>">
+      <h1><span class="user-name-highlight"><%=user.name%></span>'s profile</h1>
+    </div>
+
+    <% include partials/_footer.ejs %>
+
+  </body>
+</html>
