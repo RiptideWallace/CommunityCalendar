@@ -1,56 +1,71 @@
 <!-- views/partials/_header.ejs -->
 
-    <header>
+<header>
 
-      <nav>
-        <ul>
-        <% if (userId) { %>
-          <li class="left"><a href="/">Home</a></li>
-          <li class="right"><a href="/">Logout</a></li>
-        <% } else { %>
-          <li class="left"><a href="/">Home</a></li>
-          <li class="right"><a href="/register">Register</a></li>
-          <li class="right"><a href="/login">Login</a></li>
-        <% } %>
-        </ul>
-      </nav>
+  <nav>
+    <ul>
+      <% if (userId) { %>
+        <li class="left"><a href="/">Home</a></li>
+        <li class="left">
+          <form class="profile" action="/:id/show" method="GET">
+            <input type="submit" value="User Profile">
+          </form>
+        </li>
+        <li class="right">
+          <form class="logout" action="/logout" method="POST">
+            <input type="submit" value="Logout">
+          </form>
+        </li>
+      <% } else { %>
+        <li class="left"><a href="/">Home</a></li>
+        <li class="right"><a href="/register">Register</a></li>
+        <li class="right"><a href="/login">Login</a></li>
+      <% } %>
+    </ul>
+  </nav>
 
-      <h1>Community Calendar</h1>
+  <h1>Community Calendar</h1>
 
-      <style>
-        ul {
-          list-style-type: none;
-          margin: 0;
-          padding: 0;
-          overflow:hidden;
-          background-color: #333;
-        }
+  <style>
 
-        .left {
-          float: left;
-        }
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow:hidden;
+      background-color: #333;
+    }
 
-        .right {
-          float: right;
-        }
+    .left {
+      float: left;
+    }
 
-        li a{
-          display: block;
-          color: white;
-          text-align: center;
-          padding: 14px 16px;
-          text-decoration: none;
-        }
+    .profile {
+      padding-top: 10px;
+      padding-left: 10px;
+    }
 
-        li a:hover {
-          background-color: #111;
-        }
+    .right {
+      float: right;
+    }
 
-        .active {
-          background-color: #4CAF50;
-        }
-      </style>
+    .logout {
+      padding-top: 10px;
+      padding-right: 10px;
+    }
 
+    li a{
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
 
+    li a:hover {
+      background-color: #111;
+    }
 
-    </header>
+  </style>
+
+</header>
