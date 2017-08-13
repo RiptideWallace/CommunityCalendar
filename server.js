@@ -102,7 +102,7 @@ app.post("/logout", (req, res) => {
 });
 
 //Search Page
-app.get("/search/:id", (req, res) => {
+app.get("/search", (req, res) => {
   res.render("search")
 });
 
