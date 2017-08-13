@@ -102,7 +102,7 @@ app.post("/logout", (req, res) => {
 });
 
 //Search Page
-app.get("/search", (req, res) => {
+app.get("/search/:id", (req, res) => {
   res.render("search")
 });
 
@@ -128,10 +128,11 @@ app.get("/:id/show", (req, res) => {
   });
 });
 
-app.get("/search/seeds", (req, res) => {
+app.get("/search/seeds/:id", (req, res) => {
   knex
     .select("*")
     .from("activities")
+    .where({place_id: req.params.id})
     .then((results) => {
       res.json(results);
     })
