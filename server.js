@@ -138,6 +138,41 @@ app.get("/search/seeds/:id", (req, res) => {
     })
 })
 
+// Route to an event's page with descriptive URLs
+app.get('/:region/:place/:activity', function(req, res, next) {
+  knex('activities')
+    .select([
+      'activities.id as id',
+      'activities.name as name',
+      'activities.start_date',
+      'activities.end_date',
+      'activities.price_range',
+      'activities.source',
+      'activities.description',
+      'places.id as place_id',
+      'places.name as place_name',
+      'places.abbreviation',
+      'places.street_address',
+      'regions.id as region_id',
+      'regions.name as region_name'
+    ])
+    .join('places', 'places.id', '=', 'activities.place_id')
+    .join('regions', 'regions.id', '=', 'places.region_id')
+    .where({'activities.name': req.params.activity})
+    .then((results) => {
+      console.log(results);
+      if (results.length === 0) {
+        res.status(404).send("This activity does not exist");
+        return;
+      }
+      let templateVars = {
+        activity: results[0],
+        apiKey: googleMapsApiKey
+      }
+      res.render("event", templateVars);
+    });
+});
+
 app.listen(PORT, () =>{
   console.log("Listening in on Port " + PORT)
 });
