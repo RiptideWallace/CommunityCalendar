@@ -102,17 +102,11 @@ app.post("/logout", (req, res) => {
 });
 
 //Search Page
-app.get("/search", (req, res) => {
-  res.render("search")
+app.get('search',(req, res) => {
+      res.render("search");
+    });
 });
 
-//Event Page
-app.get("/event", (req, res) => {
-  let templateVars = {
-    apiKey: googleMapsApiKey
-  };
-  res.render("event", templateVars)
-});
 
 //User Profile Page
 app.get("/:id/show", (req, res) => {
