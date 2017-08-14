@@ -50,13 +50,12 @@
     </script>
 
     <% if (userId) { %>
-
     <div>
-      <form action="#" method="POST">
+      <input type="hidden" id="activity-id" value="<%=activityId%>">
+      <form action="/event/saved/<%=activityId%>/<%=userId%>" method="POST">
         <button class="save-event" type="button">Save Event</button>
       </form>
     </div>
-
     <% } %>
 
 

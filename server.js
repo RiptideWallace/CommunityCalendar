@@ -105,7 +105,7 @@ app.post("/logout", (req, res) => {
 app.get('search',(req, res) => {
       res.render("search");
     });
-});
+
 
 
 //User Profile Page
@@ -166,6 +166,20 @@ app.get('/:region/:place/:activity', function(req, res, next) {
       res.render("event", templateVars);
     });
 });
+
+
+//Route for when an event is saved by a user
+app.post('/event/saved/:activityId/:userId', (req, res) => {
+  knex('saved-events')
+    .insert({activity_id: req.params.activityId, user_id: req.params.userId})
+    .then((results) => {
+      res.redirect(`/${req.params.userId}/show`)
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).send("Event Not Saved");
+    })
+})
 
 app.listen(PORT, () =>{
   console.log("Listening in on Port " + PORT)
