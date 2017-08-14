@@ -140,7 +140,7 @@ app.get("/search/seeds/:id", (req, res) => {
     })
 })
 
-// Route to an event's page with descriptive URLs
+// Route to an event's page with URLs in slug form
 app.get('/:region/:place/:activity', function(req, res, next) {
   knex('activities')
     .select([
@@ -160,7 +160,11 @@ app.get('/:region/:place/:activity', function(req, res, next) {
     ])
     .join('places', 'places.id', '=', 'activities.place_id')
     .join('regions', 'regions.id', '=', 'places.region_id')
-    .where({'activities.name': req.params.activity})
+    .where({
+      'activities.slug': req.params.activity,
+      'places.slug': req.params.place,
+      'regions.slug': req.params.region
+    })
     .then((results) => {
       console.log(results);
       if (results.length === 0) {
