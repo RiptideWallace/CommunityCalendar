@@ -1,7 +1,5 @@
-<!-- views/event.ejs -->
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <title>
       Victoria Community Calendar
@@ -9,15 +7,58 @@
 
     <% include partials/_head.ejs %>
 
-  </head>
+    <script type="text/javascript" src="/scripts/event.js"></script>
 
+  </head>
   <body>
 
     <% include partials/_header.ejs %>
 
-    <p>Event Details Go Here</p>
+    <div class="container">
 
-    <% include partials/_footer.ejs %>
+    <h3>Event Details</h3>
+      <div>
+        <h2><%= activity.name %></h2>
+        <h3>at <%= activity.place_name %></h3>
+        <p>Address: <%= activity.street_address %>, <%= activity.region_name %></p>
+        <p><%= activity.description %></p>
+        <% if (activity.start_date === activity.end_date) { %>
+          <p>Date: <%= activity.start_date %></p>
+        <% } %>
+        <p>Starts: <%= activity.start_date %></p>
+        <p>Ends: <%= activity.end_date %></p>
+        <p>
+          Price:
+          <% if (activity.price_range === 0) { %>
+            <p>Free!</p>
+          <% } else { %>
+            <% for (p = 0; p < activity.price_range; p++) { %>
+             <span>&#36;</span>
+            <% } %>
+          <% } %>
+        </p>
+        <p><a href="<%= activity.source %>" title="<%= activity.name %>">Source</a></p>
+      </div>
+    </div>
+
+    <div id="map"></div>
+
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=<%= apiKey %>&callback=initMap">
+    </script>
+
+    <% if (userId) { %>
+    <div>
+      <input type="hidden" id="activity-id" value="<%=activityId%>">
+      <form action="/event/saved/<%=activityId%>/<%=userId%>" method="POST">
+        <button class="save-event" type="button">Save Event</button>
+      </form>
+    </div>
+    <% } %>
+
 
   </body>
+
+  <% include partials/_footer.ejs %>
+
 </html>

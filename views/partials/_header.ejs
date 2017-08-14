@@ -1,5 +1,75 @@
 <!-- views/partials/_header.ejs -->
 
-    <header>
-      <h1>Community Calendar</h1>
-    </header>
+<header>
+
+  <nav>
+    <ul>
+      <% if (userId) { %>
+        <li class="left"><a href="/">Home</a></li>
+        <li class="left">
+          <form class="profile" action="/:id/show" method="GET">
+            <button type="button" value="User Profile">
+          </form>
+        </li>
+        <li class="right">
+          <form class="logout" action="/logout" method="POST">
+            <input type="submit" value="Logout">
+          </form>
+        </li>
+      <% } else { %>
+        <li class="left"><a href="/">Home</a></li>
+        <li class="right"><a href="/register">Register</a></li>
+        <li class="right"><a href="/login">Login</a></li>
+      <% } %>
+    </ul>
+  </nav>
+
+  <h1 class="title-name">Community Calendar</h1>
+
+  <style>
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow:hidden;
+      background-color: #333;
+    }
+
+    .left {
+      float: left;
+    }
+
+    .profile {
+      padding-top: 10px;
+      padding-left: 10px;
+    }
+
+    .right {
+      float: right;
+    }
+
+    .logout {
+      padding-top: 10px;
+      padding-right: 10px;
+    }
+
+    .title-name {
+      margin-left: 450px;
+    }
+
+    li a{
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    li a:hover {
+      background-color: #111;
+    }
+
+  </style>
+
+</header>
