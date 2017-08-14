@@ -22,8 +22,10 @@
     src="https://maps.googleapis.com/maps/api/js?key=<%= apiKey %>&callback=initMap">
     </script>
 
-    <button class="save-event" type="button">Save Event</button>
-
+    <% if (userId) { %>
+      <button class="save-event" type="button">Save Event</button>
+    <% } else { %>
+    <% } %>
 
 
   </body>
