@@ -1,3 +1,7 @@
+jQuery(document).ready(function() {
+  var activityId = $("#activity-id").val();
+})
+
 function initMap() {
   var victoria = {
     lat: 48.4284,
@@ -8,5 +12,6 @@ function initMap() {
     center: victoria
   });
 }
+
 
 
