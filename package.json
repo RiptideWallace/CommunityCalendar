@@ -13,19 +13,20 @@
     "url": "https://github.com/RiptideWallace/CommunityCalendar"
   },
   "dependencies": {
+    "bcrypt": "latest",
+    "body-parser": "latest",
+    "bootstrap": "latest",
+    "cookie-session": "latest",
+    "dotenv": "latest",
+    "ejs": "latest",
     "express": "latest",
     "jquery": "latest",
-    "pg": "latest",
     "knex": "latest",
     "knex-logger": "latest",
-    "ejs": "latest",
-    "bcrypt": "latest",
-    "cookie-session": "latest",
-    "body-parser": "latest",
     "node-sass": "latest",
     "node-sass-middleware": "latest",
-    "bootstrap": "latest",
-    "dotenv": "latest"
+    "pg": "latest",
+    "slug": "^0.9.1"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"

@@ -14,6 +14,8 @@ const bcrypt           = require('bcrypt');
 const cookieSession    = require('cookie-session');
 const bodyParser       = require('body-parser');
 const sass             = require('node-sass-middleware');
+const slug             = require('slug')
+slug.defaults.mode     = 'rfc3986';
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true}));
