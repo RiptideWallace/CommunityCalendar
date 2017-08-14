@@ -124,16 +124,6 @@ app.get("/:id/show", (req, res) => {
   });
 });
 
-app.get("/search/seeds/:id", (req, res) => {
-  knex
-    .select("*")
-    .from("activities")
-    .where({place_id: req.params.id})
-    .then((results) => {
-      res.json(results);
-    })
-})
-
 // Route to an event's page with URLs in slug form
 app.get('/:region/:place/:activity', function(req, res, next) {
   knex('activities')
@@ -173,7 +163,7 @@ app.get('/:region/:place/:activity', function(req, res, next) {
     });
 });
 
-// Route for when a search is conducted on a place
+//Route for when a search is conducted on a place
 app.get('/:region/:place', function(req, res, next) {
   knex('activities')
     .select([
@@ -194,6 +184,40 @@ app.get('/:region/:place', function(req, res, next) {
     .join('places', 'places.id', '=', 'activities.place_id')
     .join('regions', 'regions.id', '=', 'places.region_id')
     .where({'places.name': req.params.place})
+    .then((results) => {
+      console.log(results);
+      if (results.length === 0) {
+        res.status(404).send("This place does not exist");
+        return;
+      }
+      let templateVars = {
+        activity: results
+      }
+      res.render("search", templateVars);
+    });
+});
+
+//Route for when a search is conducted on a region
+app.get('/:region', (req, res) => {
+   knex('activities')
+    .select([
+      'activities.id as id',
+      'activities.name as name',
+      'activities.start_date',
+      'activities.end_date',
+      'activities.price_range',
+      'activities.source',
+      'activities.description',
+      'places.id as place_id',
+      'places.name as place_name',
+      'places.abbreviation',
+      'places.street_address',
+      'regions.id as region_id',
+      'regions.name as region_name'
+    ])
+    .join('places', 'places.id', '=', 'activities.place_id')
+    .join('regions', 'regions.id', '=', 'places.region_id')
+    .where({'regions.name': req.params.region})
     .then((results) => {
       console.log(results);
       if (results.length === 0) {
