@@ -201,7 +201,7 @@ app.get('/:region/:place', function(req, res, next) {
         return;
       }
       let templateVars = {
-        place: results[0]
+        activity: results
       }
       res.render("search", templateVars);
     });
