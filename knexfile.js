@@ -36,5 +36,6 @@ module.exports = {
       directory: './db/seeds'
     },
     ssl: true
+    use_env_variable: "DATABASE_URL"
   }
 };
