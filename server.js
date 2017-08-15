@@ -135,7 +135,7 @@ app.get("/search/seeds/:id", (req, res) => {
 })
 
 // Route to an event's page with URLs in slug form
-app.get('/:region/:place/:activity', function(req, res, next) {
+app.get('bc/:region/:place/:activity', function(req, res, next) {
   knex('activities')
     .select([
       'activities.id as id',
@@ -174,7 +174,7 @@ app.get('/:region/:place/:activity', function(req, res, next) {
 });
 
 // Route for when a search is conducted on a place
-app.get('/:region/:place', function(req, res, next) {
+app.get('bc/:region/:place', function(req, res, next) {
   knex('activities')
     .select([
       'activities.id as id',
@@ -219,6 +219,21 @@ app.post('/event/saved/:activityId/:userId', (req, res) => {
       res.status(400).send("Event Not Saved");
     })
 })
+
+//Route for accessing saved events
+app.get("/user/:id/saved-events", (req, res) => {
+  knex
+    .select("*")
+    .from("saved-events")
+    .leftJoin('activities', 'saved-events.activity_id', 'activities.id')
+    .where("saved-events.user_id", req.params.id)
+    .then((results) => {
+      res.json(results);
+    })
+    .catch((err) => {
+      res.status(404).send("This Event is Not Saved");
+    });
+});
 
 app.listen(PORT, () =>{
   console.log("Listening in on Port " + PORT)
