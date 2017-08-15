@@ -174,9 +174,9 @@ app.get('/BC/:region/:place/:activity', function(req, res, next) {
     .join('places', 'places.id', '=', 'activities.place_id')
     .join('regions', 'regions.id', '=', 'places.region_id')
     .where({
-      'activities.slug': req.params.activity,
-      'places.slug': req.params.place,
-      'regions.slug': req.params.region
+      'activities.name': req.params.activity,
+      'places.name': req.params.place,
+      'regions.name': req.params.region
     })
     .then((results) => {
       console.log(results);
