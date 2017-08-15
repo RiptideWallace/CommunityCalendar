@@ -24,7 +24,7 @@
     <% if (userId) { %>
 
       <div>
-        <form action="#" method="POST">
+        <form action="/place/saved/<%=place.id%>/<%=userId%>" method="POST">
           <button type="submit" class="btn btn-block btn-primary">
             <span class="glyphicon"></span>
             <span>&nbsp Add This Place to Favourties</span>

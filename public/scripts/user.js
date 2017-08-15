@@ -22,4 +22,18 @@ jQuery(document).ready(function() {
         )
     })
   })
+
+  $.ajax({
+    method: 'GET',
+    url: "/user/" + userProfileId + "/favourited-places",
+  }).done((places) => {
+    places.forEach(function(places) {
+      ($("body")
+        .append($("<div class='place-name'>").text(
+          places.name))
+        .appendTo($("body"))
+        )
+    })
+  })
+
 })

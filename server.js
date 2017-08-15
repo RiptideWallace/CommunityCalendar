@@ -103,11 +103,6 @@ app.post("/logout", (req, res) => {
   res.redirect("/");
 });
 
-//Search Page
-app.get('search',(req, res) => {
-      res.render("search");
-    });
-
 //User Profile Page
 app.get("/:id/show", (req, res) => {
   knex('users')
@@ -189,7 +184,8 @@ app.get('/BC/:region/:place', function(req, res, next) {
         return;
       }
       let templateVars = {
-        activity: results
+        activity: results,
+        place: results
       }
       res.render("search", templateVars);
     });
@@ -223,7 +219,8 @@ app.get('/BC/:region', (req, res) => {
         return;
       }
       let templateVars = {
-        activity: results
+        activity: results,
+        place: results
       }
       res.render("search", templateVars);
     });
@@ -243,7 +240,20 @@ app.post('/event/saved/:activityId/:userId', (req, res) => {
 })
 
 //Route for when a place is favourited by a user
-app.post('/place/favourited/:placeId/:userId' (req, res) => {
+app.post('/place/saved/:placeId/:userId', (req, res) => {
+  knex('favourtied-places')
+    .insert({place_id: req.params.placeId, user_id: req.params.userId})
+    .then((results) => {
+      res.redirect(`/${req.params.userId}/show`)
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).send("Place Not Favourited")
+    })
+})
+
+//Route for accessing favourited places
+app.get('/user/:id/favourited-places', (req, res) => {
   knex
     .select("*")
     .from("favourited-places")
@@ -258,7 +268,7 @@ app.post('/place/favourited/:placeId/:userId' (req, res) => {
 });
 
 //Route for accessing saved events
-app.get("/user/:id/saved-events", (req, res) => {
+app.get('/user/:id/saved-events', (req, res) => {
   knex
     .select("*")
     .from("saved-events")

@@ -48,7 +48,10 @@
     <% if (userId) { %>
       <div>
         <form action="/event/saved/<%=activity.id%>/<%=userId%>" method="POST">
-          <input type="submit" class="save-event" value="Save Event">
+          <button type="submit" class="btn btn-block btn-primary">
+            <span class="glyphicon"></span>
+            <span>&nbsp Save This Event</span>
+          </button>
         </form>
       </div>
     <% } %>
