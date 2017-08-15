@@ -125,7 +125,7 @@ app.get("/:id/show", (req, res) => {
 });
 
 // Route to an event's page with URLs in slug form
-app.get('bc/:region/:place/:activity', function(req, res, next) {
+app.get('/BC/:region/:place/:activity', function(req, res, next) {
   knex('activities')
     .select([
       'activities.id as id',
@@ -164,7 +164,7 @@ app.get('bc/:region/:place/:activity', function(req, res, next) {
 });
 
 // Route for when a search is conducted on a place
-app.get('bc/:region/:place', function(req, res, next) {
+app.get('/BC/:region/:place', function(req, res, next) {
   knex('activities')
     .select([
       'activities.id as id',
@@ -198,7 +198,7 @@ app.get('bc/:region/:place', function(req, res, next) {
 });
 
 //Route for when a search is conducted on a region
-app.get('/:region', (req, res) => {
+app.get('/BC/:region', (req, res) => {
    knex('activities')
     .select([
       'activities.id as id',
