@@ -26,19 +26,16 @@
         <% } %>
         <p>Starts: <%= activity.start_date %></p>
         <p>Ends: <%= activity.end_date %></p>
-        <p>
-          Price:
-          <div class="price-box">
-            <% if (activity.price_range === 0) { %>
-              <p>Free!</p>
-            <% } else { %>
-              <% for (p = 0; p < activity.price_range; p++) { %><span class="glyphicon glyphicon-usd price-range" aria-hidden="true"></span><% } %>
-              / <span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span><span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span><span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span>
-            <% } %>
-          </div>
-        </p>
-        <p>
-          <a href="<%= activity.source %>" title="<%= activity.name %>">Source</a></p>
+        <p>Price:</p>
+        <div class="price-box">
+          <% if (activity.price_range === 0) { %>
+            <p class="price-range">Free!</p>
+          <% } else { %>
+            <% for (p = 0; p < activity.price_range; p++) { %><span class="glyphicon glyphicon-usd price-range" aria-hidden="true"></span><% } %>
+            / <span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span><span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span><span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span>
+          <% } %>
+        </div>
+        <p><a href="<%= activity.source %>" title="<%= activity.name %>">Source</a></p>
       </div>
     </div>
 
