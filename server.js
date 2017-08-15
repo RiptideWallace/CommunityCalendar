@@ -108,8 +108,6 @@ app.get('search',(req, res) => {
       res.render("search");
     });
 
-
-
 //User Profile Page
 app.get("/:id/show", (req, res) => {
   knex('users')
@@ -243,6 +241,21 @@ app.post('/event/saved/:activityId/:userId', (req, res) => {
       res.status(400).send("Event Not Saved");
     })
 })
+
+//Route for when a place is favourited by a user
+app.post('/place/favourited/:placeId/:userId' (req, res) => {
+  knex
+    .select("*")
+    .from("favourited-places")
+    .leftJoin('places', 'favourited-places.place_id', 'places.id')
+    .where("favourited-places.user_id", req.params.id)
+    .then((results) => {
+      res.json(results);
+    })
+    .catch((err) => {
+      res.status(404).send("You Did Not Favourite This Place")
+    });
+});
 
 //Route for accessing saved events
 app.get("/user/:id/saved-events", (req, res) => {
