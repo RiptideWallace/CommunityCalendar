@@ -38,6 +38,35 @@ app.use("/styles", sass({
   outputStyle: 'expanded'
 }));
 
+// // Connecting to Heroku Postgres
+// // Require SSL true
+// pg.defaults.ssl = true;
+// // Create a pool
+// const pool = new pg.Pool()
+// // connection using created pool
+// pool.connect(function(err, client, done) {
+//   if (err) throw err;
+//   client.query('SELECT table_schema,table_name FROM information_schema.tables;')
+//     .on('row', function(row) {
+//       console.log(JSON.stringify(row));
+//     });
+//   done()
+// })
+// // pool shutdown
+// pool.end()
+
+// // Deprecated
+// // pg.connect(process.env.DATABASE_URL, function(err, client) {
+// //   if (err) throw err;
+// //   console.log('Connected to postgres! Getting schemas...');
+
+// //   client
+// //     .query('SELECT table_schema,table_name FROM information_schema.tables;')
+// //     .on('row', function(row) {
+// //       console.log(JSON.stringify(row));
+// //     });
+// // });
+
 //Home Page
 app.get("/", (req, res) => {
   res.render("index")
