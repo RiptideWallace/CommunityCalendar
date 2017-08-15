@@ -3,16 +3,18 @@
 <footer class="footer">
   <% if (userId) { %>
     <p class="footer-links">
-      <a href="/">Home - </a>
-      <a href='/logout'>Logout</a>
+      <a href="/">Home</a>
+      <form class="logout" action="/logout" method="POST">
+        <input type="submit" value="Logout">
+      </form>
     </p>
       <p class="footer-company-name">
       Victoria Community Calendar</p>
   <% } else { %>
     <p class="footer-links">
-      <a href="/">Home - </a>
+      <a href="/">Home -</a>
       <a href="/register">Register - </a>
-      <a href="/login">Login</a>
+      <a href="/logout">Login</a>
     </p>
     <p class="footer-company-name">
       Victoria Community Calendar</p>

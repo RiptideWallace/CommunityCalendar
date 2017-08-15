@@ -7,9 +7,7 @@
       <% if (userId) { %>
         <li class="left"><a href="/">Home</a></li>
         <li class="left">
-          <form class="profile" action="/:id/show" method="GET">
-            <input type="submit" value="User Profile">
-          </form>
+          <a href="/<%= userId %>/show">User Profile</a>
         </li>
         <img src="/images/logo.png" class="logo">
         <li class="right">
@@ -19,6 +17,7 @@
         </li>
       <% } else { %>
         <li class="left"><a href="/">Home</a></li>
+        <img src="/images/logo.png" class="logo">
         <li class="right"><a href="/register">Register</a></li>
         <li class="right"><a href="/login">Login</a></li>
       <% } %>
