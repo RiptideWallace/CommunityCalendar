@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const express          = require("express");
 const PORT             = process.env.PORT || 3000;
-const ENV              = process.env.ENV || "development";
+const ENV              = process.env.NODE_ENV || "development";
 const googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY;
 const app              = express();
 const pg               = require("pg");
