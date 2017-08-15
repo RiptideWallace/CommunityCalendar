@@ -1,3 +1,12 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 180px;
+}
+
 /* Dropdown Button */
 .dropbtn {
   background-color: #4CAF50;
@@ -115,12 +124,13 @@ footer {
     color: inherit;
   }
   background-color: #292c2f;
+  bottom: 0;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0);
   box-sizing: border-box;
-  text-align: center;
+  height: 140px;
   padding: 10px;
   position: absolute;
-  bottom: 0;
+  text-align: center;
   width: 100%
 }
 
@@ -130,8 +140,20 @@ footer {
   }
   .price-range {
     color: #255704;
+    margin: 0;
   }
   background-color: #eee;
-  display: inline;
+  display: inline-block;
+  font-weight: 900;
+  margin-bottom: 10px;
   padding: 10px;
+}
+
+.well.authentication-well{
+  p {
+    margin-bottom: 0;
+  }
+  line-height: 1em;
+  margin-top: 40px;
+  text-align: center;
 }

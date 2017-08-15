@@ -32,16 +32,15 @@
         <% } %>
         <p>Starts: <%= a.start_date %></p>
         <p>Ends: <%= a.end_date %></p>
-        <p>
-          Price:
+        <p>Price:</p>
+        <div class="price-box">
           <% if (a.price_range === 0) { %>
-            <p>Free!</p>
+            <p class="price-range">Free!</p>
           <% } else { %>
-            <% for (p = 0; p < a.price_range; p++) { %>
-             <span>&#36;</span>
-            <% } %>
+            <% for (p = 0; p < a.price_range; p++) { %><span class="glyphicon glyphicon-usd price-range" aria-hidden="true"></span><% } %>
+            / <span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span><span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span><span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span>
           <% } %>
-        </p>
+        </div>
          <p><a href="<%= a.source %>" title="<%= a.name %>">Source</a></p>
       <% } ) %>
       </div>
