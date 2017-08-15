@@ -46,3 +46,92 @@
 .dropdown:hover .dropbtn {
     background-color: #3e8e41;
 }
+
+header {
+  nav {
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow:hidden;
+      background-color: #333;
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+      li a:hover {
+        background-color: #111;
+      }
+    }
+    .left {
+        float: left;
+      }
+
+      .profile {
+        padding-top: 10px;
+        padding-left: 10px;
+      }
+
+      .right {
+        float: right;
+      }
+
+      .logout {
+        padding-top: 10px;
+        padding-right: 10px;
+      }
+
+      .title-name {
+        align: center;
+      }
+  }
+  h1 {
+    text-align: center;
+  }
+}
+
+footer {
+  .footer-links {
+    list-style: none;
+    font-weight: bold;
+    font-size: 18px;
+    color: #ffffff;
+    padding: 35px 0 23px;
+    margin: 0;
+  }
+
+  .footer-company-name {
+    color: #8f9296;
+    font-size: 14px;
+    margin: 0;
+  }
+
+  .footer-links a {
+    display: inline-block;
+    text-decoration: none;
+    color: inherit;
+  }
+  background-color: #292c2f;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0);
+  box-sizing: border-box;
+  text-align: center;
+  padding: 10px;
+  position: absolute;
+  bottom: 0;
+  width: 100%
+}
+
+.price-box{
+  .price-denominator {
+    color: #888;
+  }
+  .price-range {
+    color: #255704;
+  }
+  background-color: #eee;
+  display: inline;
+  padding: 10px;
+}
