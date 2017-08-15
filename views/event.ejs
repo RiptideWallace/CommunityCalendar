@@ -48,8 +48,8 @@
 
     <% if (userId) { %>
       <div>
-        <input type="hidden" id="activity-id" value="<%=activityId%>">
         <form action="/event/saved/<%=activityId%>/<%=userId%>" method="POST">
+          <input type="hidden" id="activity-id" value="<%=activityId%>">
           <button class="save-event" type="button">Save Event</button>
         </form>
       </div>
