@@ -38,6 +38,20 @@ app.use("/styles", sass({
   outputStyle: 'expanded'
 }));
 
+pg.defaults.ssl = true;
+const pool = new pg.Pool()
+pool.connect(function(err, client, done) {
+  if (err) throw err;
+  console.log('Connected to postgres! Getting schemas...');
+
+  client
+    .query('SELECT table_schema,table_name FROM information_schema.tables;')
+    .on('row', function(row) {
+      console.log(JSON.stringify(row));
+    });
+  done();
+});
+
 //Home Page
 app.get("/", (req, res) => {
   res.render("index")
