@@ -13,7 +13,7 @@
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/">Home</a></li>
-        <% if (!userId) { %>
+        <% if (userId) { %>
           <li><a href="/users/<%= userId %>/show">User Profile</a></li>
           <li>
             <form class="logout" action="/logout" method="POST">
