@@ -14,9 +14,10 @@
 
     <% include partials/_header.ejs %>
 
-    <div class="container">
+    <input type="hidden" id="activity-id" value="<%=activity.id%>">
 
-    <h3>Event Details</h3>
+    <div class="container">
+      <h3>Event Details</h3>
       <div>
         <h2><%= activity.name %></h2>
         <h3>at <%= activity.place_name %></h3>
@@ -27,35 +28,33 @@
         <% } %>
         <p>Starts: <%= activity.start_date %></p>
         <p>Ends: <%= activity.end_date %></p>
-        <p>
-          Price:
+        <p>Price:</p>
+        <div class="price-box">
           <% if (activity.price_range === 0) { %>
-            <p>Free!</p>
+            <p class="price-range">Free!</p>
           <% } else { %>
-            <% for (p = 0; p < activity.price_range; p++) { %>
-             <span>&#36;</span>
-            <% } %>
+            <% for (p = 0; p < activity.price_range; p++) { %><span class="glyphicon glyphicon-usd price-range" aria-hidden="true"></span><% } %>
+            / <span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span><span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span><span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span>
           <% } %>
-        </p>
+        </div>
         <p><a href="<%= activity.source %>" title="<%= activity.name %>">Source</a></p>
       </div>
     </div>
 
     <div id="map"></div>
 
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=<%= apiKey %>&callback=initMap">
-    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= apiKey %>&callback=initMap"></script>
 
     <% if (userId) { %>
-    <div>
-      <input type="hidden" id="activity-id" value="<%=activityId%>">
-      <form action="/event/saved/<%=activityId%>/<%=userId%>" method="POST">
-        <button class="save-event" type="button">Save Event</button>
-      </form>
-    </div>
+      <div>
+        <form action="/event/saved/<%=activity.id%>/<%=userId%>" method="POST">
+          <button type="submit" class="btn btn-block btn-primary">
+            <span class="glyphicon"></span>
+            <span>&nbsp Save This Event</span>
+          </button>
+        </form>
+      </div>
     <% } %>
-
 
   </body>
 

@@ -1,75 +1,30 @@
 <!-- views/partials/_header.ejs -->
 
 <header>
-
-  <nav>
-    <ul>
-      <% if (userId) { %>
-        <li class="left"><a href="/">Home</a></li>
-        <li class="left">
-          <form class="profile" action="/:id/show" method="GET">
-            <button type="button" value="User Profile">
-          </form>
-        </li>
-        <li class="right">
-          <form class="logout" action="/logout" method="POST">
-            <input type="submit" value="Logout">
-          </form>
-        </li>
-      <% } else { %>
-        <li class="left"><a href="/">Home</a></li>
-        <li class="right"><a href="/register">Register</a></li>
-        <li class="right"><a href="/login">Login</a></li>
-      <% } %>
-    </ul>
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">
+        <img src="/images/logo.png" class="navbar-brand logo">
+      </a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="glyphicon glyphicon-menu-hamburger navbar-toggler-icon"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/" class="header-link">Home</a></li>
+        <% if (userId) { %>
+          <li><a href="/users/<%= userId %>/show" class="header-link">User Profile</a></li>
+          <li>
+            <form class="logout" action="/logout" method="POST">
+              <input type="submit" value="Logout" class="btn btn-block btn-link logout-button">
+            </form>
+          </li>
+        <% } else { %>
+          <li><a href="/register" class="header-link">Register</a></li>
+          <li><a href="/login" class="header-link">Login</a></li>
+        <% } %>
+      </ul>
+    </div>
   </nav>
-
-  <h1 class="title-name">Community Calendar</h1>
-
-  <style>
-
-    ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      overflow:hidden;
-      background-color: #333;
-    }
-
-    .left {
-      float: left;
-    }
-
-    .profile {
-      padding-top: 10px;
-      padding-left: 10px;
-    }
-
-    .right {
-      float: right;
-    }
-
-    .logout {
-      padding-top: 10px;
-      padding-right: 10px;
-    }
-
-    .title-name {
-      margin-left: 450px;
-    }
-
-    li a{
-      display: block;
-      color: white;
-      text-align: center;
-      padding: 14px 16px;
-      text-decoration: none;
-    }
-
-    li a:hover {
-      background-color: #111;
-    }
-
-  </style>
-
 </header>

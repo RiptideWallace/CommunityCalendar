@@ -5,6 +5,8 @@
       Victoria Community Calendar
     </title>
     <% include partials/_head.ejs %>
+
+    <script type="text/javascript" src="/scripts/user.js"></script>
   </head>
 
   <body>
@@ -13,7 +15,7 @@
 
     <div>
       <input type="hidden" id="user-profile-id" value="<%=user.id%>">
-      <h1><span class="user-name-highlight"><%=user.name%></span>'s profile</h1>
+      <h1><span class="user-name-highlight"><%=user.name%></span></h1>
     </div>
 
     <div>

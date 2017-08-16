@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const express          = require("express");
 const PORT             = process.env.PORT || 3000;
-const ENV              = process.env.ENV || "development";
+const ENV              = process.env.NODE_ENV || "development";
 const googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY;
 const app              = express();
 const pg               = require("pg");
@@ -103,15 +103,8 @@ app.post("/logout", (req, res) => {
   res.redirect("/");
 });
 
-//Search Page
-app.get('search',(req, res) => {
-      res.render("search");
-    });
-
-
-
 //User Profile Page
-app.get("/:id/show", (req, res) => {
+app.get("/users/:id/show", (req, res) => {
   knex('users')
   .where({id: req.params.id})
   .then((results) => {
@@ -124,18 +117,8 @@ app.get("/:id/show", (req, res) => {
   });
 });
 
-app.get("/search/seeds/:id", (req, res) => {
-  knex
-    .select("*")
-    .from("activities")
-    .where({place_id: req.params.id})
-    .then((results) => {
-      res.json(results);
-    })
-})
-
 // Route to an event's page with URLs in slug form
-app.get('/:region/:place/:activity', function(req, res, next) {
+app.get('/BC/:region/:place/:activity', function(req, res, next) {
   knex('activities')
     .select([
       'activities.id as id',
@@ -174,7 +157,7 @@ app.get('/:region/:place/:activity', function(req, res, next) {
 });
 
 // Route for when a search is conducted on a place
-app.get('/:region/:place', function(req, res, next) {
+app.get('/BC/:region/:place', function(req, res, next) {
   knex('activities')
     .select([
       'activities.id as id',
@@ -193,7 +176,36 @@ app.get('/:region/:place', function(req, res, next) {
     ])
     .join('places', 'places.id', '=', 'activities.place_id')
     .join('regions', 'regions.id', '=', 'places.region_id')
-    .where({'places.name': req.params.place})
+    .where({
+      'places.slug': req.params.place,
+      'regions.slug': req.params.region
+    })
+    .then((results) => {
+      console.log(results);
+      if (results.length === 0) {
+        res.status(404).send("This place does not have any events");
+        return;
+      }
+      let templateVars = {
+        activity: results,
+      }
+      res.render("event-search", templateVars);
+    });
+});
+
+//Route for when a search is conducted on a region
+app.get('/BC/:region', (req, res) => {
+   knex('places')
+    .select([
+      'places.id as id',
+      'places.name as name',
+      'places.abbreviation',
+      'places.street_address as street_address',
+      'regions.id as region_id',
+      'regions.name as region_name'
+    ])
+    .join('regions', 'regions.id', '=', 'places.region_id')
+    .where({'regions.slug': req.params.region})
     .then((results) => {
       console.log(results);
       if (results.length === 0) {
@@ -201,9 +213,9 @@ app.get('/:region/:place', function(req, res, next) {
         return;
       }
       let templateVars = {
-        activity: results
+        place: results,
       }
-      res.render("search", templateVars);
+      res.render("place-search", templateVars);
     });
 });
 
@@ -219,6 +231,49 @@ app.post('/event/saved/:activityId/:userId', (req, res) => {
       res.status(400).send("Event Not Saved");
     })
 })
+
+//Route for when a place is favourited by a user
+app.post('/place/saved/:placeId/:userId', (req, res) => {
+  knex('favourited-places')
+    .insert({place_id: req.params.placeId, user_id: req.params.userId})
+    .then((results) => {
+      res.redirect(`/${req.params.userId}/show`)
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).send("Place Not Favourited")
+    })
+})
+
+//Route for accessing favourited places
+app.get('/user/:id/favourited-places', (req, res) => {
+  knex
+    .select("*")
+    .from("favourited-places")
+    .leftJoin('places', 'favourited-places.place_id', 'places.id')
+    .where("favourited-places.user_id", req.params.id)
+    .then((results) => {
+      res.json(results);
+    })
+    .catch((err) => {
+      res.status(404).send("You Did Not Favourite This Place")
+    });
+});
+
+//Route for accessing saved events
+app.get('/user/:id/saved-events', (req, res) => {
+  knex
+    .select("*")
+    .from("saved-events")
+    .leftJoin('activities', 'saved-events.activity_id', 'activities.id')
+    .where("saved-events.user_id", req.params.id)
+    .then((results) => {
+      res.json(results);
+    })
+    .catch((err) => {
+      res.status(404).send("This Event is Not Saved");
+    });
+});
 
 app.listen(PORT, () =>{
   console.log("Listening in on Port " + PORT)

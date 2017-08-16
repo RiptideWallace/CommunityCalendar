@@ -1,7 +1,7 @@
 <!-- views/login.ejs -->
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>
       Victoria Community Calendar
@@ -14,21 +14,25 @@
 
     <% include partials/_header.ejs %>
 
-    <div class="main-container">
-      <div class="form-container">
-        <h1>Login</h1>
+    <div class="container">
+      <div class="form-container col-xs-12 col-sm-6 col-sm-offset-3">
+        <h2>Login</h2>
         <form action="/login" method="POST">
           <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email" class="form-control" id="email" placeholder="Enter your Email" name="email" required autofocus>
+            <input type="email" class="form-control" id="email" placeholder="Enter your email address" name="email" required autofocus>
           </div>
           <div class="form-group">
             <label for="password">Password:</label>
             <input type="password" class="form-control" id="password" placeholder="Enter your password" name="password" required>
           </div>
-          <button type="submit">Submit</button>
+          <button type="submit" class="btn btn-block btn-primary">Submit</button>
         </form>
+        <div class="well authentication-well">
+          <p>First time? <a href="/register">Register an account</a>.</p>
+        </div>
       </div>
+
     </div>
 
     <% include partials/_footer.ejs %>

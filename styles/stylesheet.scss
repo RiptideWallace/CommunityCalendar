@@ -1,3 +1,12 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 180px;
+}
+
 /* Dropdown Button */
 .dropbtn {
   background-color: #4CAF50;
@@ -46,3 +55,141 @@
 .dropdown:hover .dropbtn {
     background-color: #3e8e41;
 }
+
+header {
+  nav {
+    background-color: #292c2f;
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow:hidden;
+      li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+      }
+      li a:hover {
+        background-color: #111;
+      }
+    }
+    .header-link:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+    .logout-button {
+      border: 0;
+      height: 50px;
+      padding: 15px 15px;
+      text-align: center;
+    }
+    .navbar-nav {
+      margin-left: 0;
+    }
+    .navbar-right {
+      margin-right: 0;
+    }
+    .navbar-toggler-icon {
+      color: white;
+    }
+  }
+  h1 {
+    text-align: center;
+  }
+}
+
+footer {
+  .footer-link {
+    a {
+      color: #9d9d9d;
+    }
+    a:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+    color: #9d9d9d;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: bold;
+    list-style: none;
+    margin: 0;
+    padding: 35px 0 23px;
+  }
+  .footer-company-name {
+    color: #8f9296;
+    font-size: 14px;
+    margin: 0;
+  }
+  .footer-logout {
+    .btn {
+      border: 0;
+      color: #9d9d9d;
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: -4px;
+      padding: 0;
+    }
+    .btn:hover {
+      color: #ffffff;
+    }
+  display: inline;
+}
+  background-color: #292c2f;
+  bottom: 0;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0);
+  box-sizing: border-box;
+  height: 140px;
+  padding: 10px;
+  position: absolute;
+  text-align: center;
+  width: 100%
+}
+
+.navbar-brand {
+  padding: 0 0 0 0;
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  margin-left: -52px !important;
+  padding-top: 5px;
+  display: block;
+}
+
+.price-box{
+  .price-denominator {
+    color: #888;
+  }
+  .price-range {
+    color: #255704;
+    margin: 0;
+  }
+  background-color: #eee;
+  display: inline-block;
+  font-weight: 900;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.well.authentication-well{
+  p {
+    margin-bottom: 0;
+  }
+  line-height: 1em;
+  margin-top: 40px;
+  text-align: center;
+}
+
+.home-page-body {
+  background-image: url("/images/victoria/victoria-hero-inner-harbour-parliament.jpg");
+}
+
+.scrollable-menu {
+  height: auto;
+  max-height: 200px;
+  overflow-x: hidden;
+}
+

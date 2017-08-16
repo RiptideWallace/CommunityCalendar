@@ -15,24 +15,31 @@
 
     <% include partials/_header.ejs %>
 
-    <div class="main-contianer">
-      <div class="form-container">
-        <h1>Register</h1>
+    <div class="container">
+      <div class="form-container col-xs-12 col-sm-6 col-sm-offset-3">
+        <h2>Register</h2>
         <form action="/register" method="POST">
           <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email" class="form-control" id="email" placeholder="Enter you e-mail" name="email" required autofocus>
+            <input type="email" class="form-control" id="email" placeholder="Enter your email address" name="email" required autofocus>
           </div>
           <div class="form-group">
             <label for="username">Username:</label>
-            <input type="text" class="form-control" id="username" placeholder="Enter A Username" name="username" required>
+            <input type="text" class="form-control" id="username" placeholder="Enter a username" name="username" required>
           </div>
           <div class="form-group">
             <label for="password">Password:</label>
-            <input type="password" class="form-control" id="password" placeholer="Enter password" name="password" required>
+            <input type="password" class="form-control" id="password" placeholder="Enter a password" name="password" required>
           </div>
-          <button type="submit">Submit</button>
+          <div class="form-group">
+            <label for="password">Confirm password:</label>
+            <input type="password" class="form-control" id="password_confirmation" placeholder="Confirm password" name="password_confirmation" required>
+          </div>
+          <button type="submit" class="btn btn-block btn-primary">Submit</button>
         </form>
+        <div class="well authentication-well">
+          <p>Already have an account? <a href="/login">Login</a>.</p>
+        </div>
       </div>
     </div>
 
