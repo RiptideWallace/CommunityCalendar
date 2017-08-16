@@ -1,27 +1,30 @@
 <!-- views/partials/_header.ejs -->
 
 <header>
-
-  <nav>
-    <ul>
-      <% if (userId) { %>
-        <li class="left"><a href="/">Home</a></li>
-        <li class="left">
-          <a href="/<%= userId %>/show">User Profile</a>
-        </li>
-        <img src="/images/logo.png" class="logo">
-        <li class="right">
-          <form class="logout" action="/logout" method="POST">
-            <input type="submit" value="Logout">
-          </form>
-        </li>
-      <% } else { %>
-        <li class="left"><a href="/">Home</a></li>
-        <img src="/images/logo.png" class="logo">
-        <li class="right"><a href="/register">Register</a></li>
-        <li class="right"><a href="/login">Login</a></li>
-      <% } %>
-    </ul>
+  <nav class="navbar navbar-inverse navbar-static-top">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/">
+        <img src="/images/logo.png" class="navbar-brand logo">
+      </a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="glyphicon glyphicon-menu-hamburger navbar-toggler-icon"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/">Home</a></li>
+        <% if (userId) { %>
+          <li><a href="/users/<%= userId %>/show">User Profile</a></li>
+          <li>
+            <form class="logout" action="/logout" method="POST">
+              <input type="submit" value="Logout" class="btn btn-block btn-link logout-button">
+            </form>
+          </li>
+        <% } else { %>
+          <li><a href="/register">Register</a></li>
+          <li><a href="/login">Login</a></li>
+        <% } %>
+      </ul>
+    </div>
   </nav>
-
 </header>
