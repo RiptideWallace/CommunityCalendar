@@ -2,21 +2,20 @@
 
 <footer class="footer">
   <% if (userId) { %>
-    <p class="footer-links">
-      <a href="/">Home</a>
-      <form class="logout" action="/logout" method="POST">
-        <input type="submit" value="Logout">
+    <div class="footer-link">
+      <a href="/">Home</a> -
+      <a href="/users/<%= userId %>/show">User Profile</a> -
+      <form class="footer-logout" action="/logout" method="POST">
+        <input type="submit" value="Logout" class="btn btn-link">
       </form>
-    </p>
-      <p class="footer-company-name">
-      Victoria Community Calendar</p>
+    </div>
+      <p class="footer-company-name">Victoria Community Calendar</p>
   <% } else { %>
-    <p class="footer-links">
-      <a href="/">Home -</a>
-      <a href="/register">Register - </a>
-      <a href="/logout">Login</a>
-    </p>
-    <p class="footer-company-name">
-      Victoria Community Calendar</p>
+    <div class="footer-link">
+      <a href="/">Home</a> -
+      <a href="/register">Register</a> -
+      <a href="/login">Login</a>
+    </div>
+    <p class="footer-company-name">Victoria Community Calendar</p>
   <% } %>
 </footer>
