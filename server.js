@@ -104,7 +104,7 @@ app.post("/logout", (req, res) => {
 });
 
 //User Profile Page
-app.get("/:id/show", (req, res) => {
+app.get("/users/:id/show", (req, res) => {
   knex('users')
   .where({id: req.params.id})
   .then((results) => {
