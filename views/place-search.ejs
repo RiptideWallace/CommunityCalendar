@@ -15,16 +15,28 @@
 
     <% include partials/_header.ejs %>
 
-     <div class="container">
+      <div class="container">
 
-    <h3>Place Details</h3>
+        <h3>Place Details</h3>
 
-    <div>
-    <% place.forEach(function(p) { %>
-      <h2><%= p.name %></h2>
-      <p>Address: <%= p.street_address %>, <%= p.region_name %></p>
-    <% } ) %>
-    </div>
+        <div>
+          <% place.forEach(function(p) { %>
+            <h2><%= p.name %></h2>
+            <p>Address: <%= p.street_address %>, <%= p.region_name %></p>
+            <% if (userId) { %>
+              <div>
+                <form action="/place/saved/<%=p.id%>/<%=userId%>" method="POST">
+                  <button type="submit" class="btn btn-block btn-primary">
+                    <span class="glyphicon"></span>
+                    <span>&nbsp Add This Place to Favourties</span>
+                  </button>
+                </form>
+              </div>
+            <% } %>
+          <% } ) %>
+        </div>
+
+      </div>
 
     <% include partials/_footer.ejs %>
 

@@ -231,7 +231,7 @@ app.post('/event/saved/:activityId/:userId', (req, res) => {
 
 //Route for when a place is favourited by a user
 app.post('/place/saved/:placeId/:userId', (req, res) => {
-  knex('favourtied-places')
+  knex('favourited-places')
     .insert({place_id: req.params.placeId, user_id: req.params.userId})
     .then((results) => {
       res.redirect(`/${req.params.userId}/show`)
