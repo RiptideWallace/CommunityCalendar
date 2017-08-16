@@ -43,7 +43,7 @@ if (app.get('env') === 'production') {
   app.use((req, res, next) => {
     console.log(req)
     if (req.header['X-Forwarded-Proto'] !== 'https')
-      res.redirect("https://" + req.header['Host'] + req.url)
+      res.redirect(`https://${req.header('host')}${req.url}`)
     else
       next()
   })
