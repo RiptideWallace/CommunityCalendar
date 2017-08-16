@@ -167,3 +167,9 @@ footer {
 .home-page-body {
   background-image: url("/images/victoria/victoria-hero-inner-harbour-parliament.jpg");
 }
+
+.scrollable-menu {
+  height: auto;
+  max-height: 200px;
+  overflow-x: hidden;
+}
