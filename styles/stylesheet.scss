@@ -58,12 +58,12 @@ body {
 
 header {
   nav {
+    background-color: #292c2f;
     ul {
       list-style-type: none;
       margin: 0;
       padding: 0;
       overflow:hidden;
-      background-color: #333;
       li a {
         display: block;
         color: white;
@@ -75,27 +75,21 @@ header {
         background-color: #111;
       }
     }
-    .left {
-        float: left;
-      }
-
-      .profile {
-        padding-top: 10px;
-        padding-left: 10px;
-      }
-
-      .right {
-        float: right;
-      }
-
-      .logout {
-        padding-top: 10px;
-        padding-right: 10px;
-      }
-
-      .title-name {
-        align: center;
-      }
+    .logout-button {
+      border: 0;
+      height: 50px;
+      padding: 15px 15px;
+      text-align: center;
+    }
+    .navbar-nav {
+      margin-left: 0;
+    }
+    .navbar-right {
+      margin-right: 0;
+    }
+    .navbar-toggler-icon {
+      color: white;
+    }
   }
   h1 {
     text-align: center;
@@ -134,6 +128,18 @@ footer {
   width: 100%
 }
 
+.navbar-brand {
+  padding: 0 0 0 0;
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  margin-left: -52px !important;
+  paddig-top: 5px;
+  display: block;
+}
+
 .price-box{
   .price-denominator {
     color: #888;
@@ -156,4 +162,8 @@ footer {
   line-height: 1em;
   margin-top: 40px;
   text-align: center;
+}
+
+.home-page-body {
+  background-image: url("/images/victoria/victoria-hero-inner-harbour-parliament.jpg");
 }
