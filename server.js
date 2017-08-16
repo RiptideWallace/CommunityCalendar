@@ -185,31 +185,22 @@ app.get('/BC/:region/:place', function(req, res, next) {
       }
       let templateVars = {
         activity: results,
-        place: results
       }
-      res.render("search", templateVars);
+      res.render("event-search", templateVars);
     });
 });
 
 //Route for when a search is conducted on a region
 app.get('/BC/:region', (req, res) => {
-   knex('activities')
+   knex('places')
     .select([
-      'activities.id as id',
-      'activities.name as name',
-      'activities.start_date',
-      'activities.end_date',
-      'activities.price_range',
-      'activities.source',
-      'activities.description',
-      'places.id as place_id',
-      'places.name as place_name',
+      'places.id as id',
+      'places.name as name',
       'places.abbreviation',
-      'places.street_address',
+      'places.street_address as street_address',
       'regions.id as region_id',
       'regions.name as region_name'
     ])
-    .join('places', 'places.id', '=', 'activities.place_id')
     .join('regions', 'regions.id', '=', 'places.region_id')
     .where({'regions.name': req.params.region})
     .then((results) => {
@@ -219,10 +210,9 @@ app.get('/BC/:region', (req, res) => {
         return;
       }
       let templateVars = {
-        activity: results,
-        place: results
+        place: results,
       }
-      res.render("search", templateVars);
+      res.render("place-search", templateVars);
     });
 });
 

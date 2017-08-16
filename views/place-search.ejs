@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>
+      Victoria Community Calendar
+    </title>
+
+    <% include partials/_head.ejs %>
+
+     <script type="text/javascript" src="/scripts/search.js"></script>
+
+  </head>
+
+  <body>
+
+    <% include partials/_header.ejs %>
+
+     <div class="container">
+
+    <h3>Place Details</h3>
+
+    <div>
+    <% place.forEach(function(p) { %>
+      <h2><%= p.name %></h2>
+      <p>Address: <%= p.street_address %>, <%= p.region_name %></p>
+    <% } ) %>
+    </div>
+
+    <% include partials/_footer.ejs %>
+
+  </body>
+</html>
