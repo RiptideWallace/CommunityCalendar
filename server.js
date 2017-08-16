@@ -176,11 +176,14 @@ app.get('/BC/:region/:place', function(req, res, next) {
     ])
     .join('places', 'places.id', '=', 'activities.place_id')
     .join('regions', 'regions.id', '=', 'places.region_id')
-    .where({'places.name': req.params.place})
+    .where({
+      'places.slug': req.params.place,
+      'regions.slug': req.params.region
+    })
     .then((results) => {
       console.log(results);
       if (results.length === 0) {
-        res.status(404).send("This place does not exist");
+        res.status(404).send("This place does not have any events");
         return;
       }
       let templateVars = {
@@ -202,7 +205,7 @@ app.get('/BC/:region', (req, res) => {
       'regions.name as region_name'
     ])
     .join('regions', 'regions.id', '=', 'places.region_id')
-    .where({'regions.name': req.params.region})
+    .where({'regions.slug': req.params.region})
     .then((results) => {
       console.log(results);
       if (results.length === 0) {

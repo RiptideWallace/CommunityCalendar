@@ -5,6 +5,7 @@ id,region_id,name,abbreviation,street_address,slug
 2,3,Esquimalt Recreation Centre,ERC,"527 Fraser Street Esquimalt, BC V9A 6H6",esquimalt-recreation-centre
 
 3,8,Juan de Fuca Recreation Centre,JDFRC,"1767 Island Highway Victoria, BC V9B 1J1",juan-de-fuca-recreation-centre
+
 4,8,The Q Centre,TQC,"1767 Island Highway Victoria, BC V9B 1J1",the-q-centre
 
 5,2,Henderson Recreation Centre,HRC,"2291 Cedar Hill X Road Victoria, BC V8P 5H9",henderson-recreation-centre
