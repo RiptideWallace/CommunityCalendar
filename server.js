@@ -41,7 +41,6 @@ app.use("/styles", sass({
 // For production (Heroku) http:// requests, redirect to https://
 if (app.get('env') === 'production') {
   app.use((req, res, next) => {
-    console.log('HTTP CHECK', req.header('X-Forwarded-Proto'), req.header('x-forwarded-proto'));
     if (req.header('X-Forwarded-Proto') !== 'https')
       res.redirect(`https://${req.header('host')}${req.url}`)
     else
