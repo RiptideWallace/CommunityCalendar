@@ -14,6 +14,8 @@ const bcrypt           = require('bcrypt');
 const cookieSession    = require('cookie-session');
 const bodyParser       = require('body-parser');
 const sass             = require('node-sass-middleware');
+const basicAuth        = require("basic-auth");
+const secureRoute      = require("secure-route");
 const slug             = require('slug')
 slug.defaults.mode     = 'rfc3986';
 
@@ -37,6 +39,16 @@ app.use("/styles", sass({
   debug: true,
   outputStyle: 'expanded'
 }));
+
+// For production (Heroku) http:// requests, redirect to https://
+if (app.get('env') === 'production') {
+  app.use((req, res, next) => {
+    if (req.header('X-Forwarded-Proto') !== 'https')
+      res.redirect(`https://${req.header('host')}${req.url}`)
+    else
+      next()
+  })
+}
 
 //Home Page
 app.get("/", (req, res) => {
@@ -76,6 +88,33 @@ app.post("/register", (req, res) => {
 app.get("/login", (req, res) => {
   res.render("login");
 });
+
+//Create Event Page (GET)
+app.get("/create-event", (req, res, next) => {
+  res.render("create-event");
+})
+
+//Create Event (POST)
+app.post("/create-event", (req, res) => {
+  knex('activities')
+    .insert ({
+      place_id: req.body.placeID,
+      name: req.body.event,
+      description: req.body.description,
+      start_date: req.body.start_date,
+      end_date: req.body.end_date,
+      price_range: req.body.price_range,
+      source: req.body.source,
+      slug: (slug(req.body.event))
+    })
+    .then((results) => {
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).send("Event Not Saved")
+    })
+    res.redirect("/")
+})
 
 //Login Page (POST)
 app.post("/login", (req, res) => {
