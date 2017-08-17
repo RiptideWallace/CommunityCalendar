@@ -260,7 +260,7 @@ app.post('/event/saved/:activityId/:userId', (req, res) => {
   knex('saved-events')
     .insert({activity_id: req.params.activityId, user_id: req.params.userId})
     .then((results) => {
-      res.redirect(`/${req.params.userId}/show`)
+      res.redirect(`/users/${req.params.userId}/show`)
     })
     .catch((err) => {
       console.log(err);
