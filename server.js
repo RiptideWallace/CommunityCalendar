@@ -61,7 +61,31 @@ if (app.get('env') === 'production') {
 
 //Home Page
 app.get("/", (req, res) => {
-  res.render("index")
+  knex('regions')
+    .select([
+      'regions.name as region_name',
+      'regions.slug as region_slug'
+    ])
+    .orderBy('region_name')
+    .then((regionResults) => {
+      knex('places')
+        .select([
+          'regions.slug as region_slug',
+          'regions.id as region_id',
+          'places.name as place_name',
+          'places.slug as place_slug'
+          ])
+        .join('regions', 'regions.id', '=', 'places.region_id')
+        .orderBy('place_name')
+        .then((placeResults) => {
+          let templateVars = {
+            region: regionResults,
+            place: placeResults,
+          }
+
+          res.render("index", templateVars);
+        });
+    });
 });
 
 //Register Page (GET)
@@ -100,7 +124,19 @@ app.get("/login", (req, res) => {
 
 //Create Event Page (GET)
 app.get("/create-event", (req, res, next) => {
-  res.render("create-event");
+  knex('places')
+    .select([
+      'places.id as id',
+      'places.name as place_name'
+      ])
+      .orderBy('id')
+      .then((results) => {
+        console.log(results);
+        let templateVars = {
+          place: results,
+        }
+  res.render("create-event", templateVars);
+  });
 })
 
 //Create Event (POST)
