@@ -40,6 +40,15 @@ app.use("/styles", sass({
   outputStyle: 'expanded'
 }));
 
+function randomString() {
+  let output = "";
+  let characters = "abcdefghijklmnopqrstuvwxyz1234567890"
+    for (let i = 0; i < 6; i++) {
+      output += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return output;
+}
+
 // For production (Heroku) http:// requests, redirect to https://
 if (app.get('env') === 'production') {
   app.use((req, res, next) => {
@@ -105,9 +114,10 @@ app.post("/create-event", (req, res) => {
       end_date: req.body.end_date,
       price_range: req.body.price_range,
       source: req.body.source,
-      slug: (slug(req.body.event))
+      slug: (slug(req.body.event)) + "-" + randomString()
     })
     .then((results) => {
+      console.log(results)
     })
     .catch((err) => {
       console.log(err);
