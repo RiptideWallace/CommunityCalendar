@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>
+      Victoria Community Calendar
+    </title>
+
+    <% include partials/_head.ejs %>
+
+  </head>
+
+  <body>
+
+    <% include partials/_header.ejs %>
+
+     <div class="container">
+
+    <h3>Event Details</h3>
+
+      <div>
+      <% activity.forEach(function(a) { %>
+        <h2><%= a.name %></h2>
+        <h3>at <%= a.place_name %></h3>
+        <p>Address: <%= a.street_address %>, <%= a.region_name %></p>
+        <p><%= a.description %></p>
+        <% if (a.start_date === a.end_date) { %>
+          <p>Date: <%= a.start_date %></p>
+        <% } %>
+        <p>Starts: <%= a.start_date %></p>
+        <p>Ends: <%= a.end_date %></p>
+        <p>Price:</p>
+        <div class="price-box">
+          <% if (a.price_range === 0) { %>
+            <p class="price-range">Free!</p>
+          <% } else { %>
+            <% for (p = 0; p < a.price_range; p++) { %><span class="glyphicon glyphicon-usd price-range" aria-hidden="true"></span><% } %>
+            / <span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span><span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span><span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span>
+          <% } %>
+        </div>
+         <p><a href="<%= a.source %>" title="<%= a.name %>">Source</a></p>
+      <% } ) %>
+      </div>
+    </div>
+
+    <% include partials/_footer.ejs %>
+
+  </body>
+</html>

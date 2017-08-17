@@ -219,6 +219,42 @@ app.get('/BC/:region', (req, res) => {
     });
 });
 
+//Route for when a search is conducted by price range
+app.get('/price/:pricerange', (req, res) => {
+  knex('activities')
+   .select([
+      'activities.id as id',
+      'activities.name as name',
+      'activities.start_date',
+      'activities.end_date',
+      'activities.price_range',
+      'activities.source',
+      'activities.description',
+      'places.id as place_id',
+      'places.name as place_name',
+      'places.abbreviation',
+      'places.street_address',
+      'regions.id as region_id',
+      'regions.name as region_name'
+    ])
+    .join('places', 'places.id', '=', 'activities.place_id')
+    .join('regions', 'regions.id', '=', 'places.region_id')
+    .where({
+      'activities.price_range': req.params.pricerange,
+    })
+    .then((results) => {
+      console.log(results);
+      if (results.length === 0) {
+        res.status(404).send("There are no activities in this price range");
+        return;
+      }
+      let templateVars = {
+        activity: results,
+      }
+      res.render("price-search", templateVars);
+    });
+});
+
 //Route for when an event is saved by a user
 app.post('/event/saved/:activityId/:userId', (req, res) => {
   knex('saved-events')
