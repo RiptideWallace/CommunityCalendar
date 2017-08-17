@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>
+      Victoria Community Calendar
+    </title>
+
+    <% include partials/_head.ejs %>
+
+  </head>
+
+  <body>
+
+    <% include partials/_header.ejs %>
+
+    <div class="container">
+      <div class="form-container col-xs-12 col-sm-6 col-sm-offset-3">
+        <h2>Create An Event</h2>
+        <form action="/create-event" method="POST">
+          <div class="form-group">
+            <label for="place-id">Place ID:</label>
+            <input type="text" class="form-control" id="placeID" placeholder="Enter Place ID (see below)" name="placeID" required autofocus>
+          </div>
+          <div class="form-group">
+            <label for="name">Event Name:</label>
+            <input type="text" class="form-control" id="event" placeholder="Enter the events name" name="event" required>
+          </div>
+          <div class = "form-group">
+            <label for="description">Description:</label>
+            <input type="text" class="form-control" id="description" placeholder="Enter a description of the event" name="description" required>
+          </div>
+          <div class = "form-group">
+            <label for="start-date">Start Date:</label>
+            <input type="text" class="form-control" id="start_date" placeholder="Start Date" name="start_date" required>
+          </div>
+          <div class = "form-group">
+            <label for="end_date">End Date:</label>
+            <input type="text" class="form-control" id="end-date" placeholder="End Date" name="end_date" required>
+          </div>
+          <div class = "form-group">
+            <label for="price_range">Price Range:</label>
+            <input type="text" class="form-control" id="price-range" placeholder="0 = Free, 1 = < $10, 2 = < $100, 3 = > $100" name="price_range" required>
+          </div>
+          <div class = "form-group">
+            <label for="source">Source:</label>
+            <input type="text" class="form-control" id="source" placeholder="Enter the Events Website" name="source" required>
+          </div>
+          <button type="submit" class="btn btn-block btn-parimary">Create Event</button>
+        </form>
+      </div>
+    </div>
+
+    <% include partials/_footer.ejs %>
+
+  </body>
+</html>

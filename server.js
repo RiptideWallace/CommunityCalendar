@@ -77,6 +77,32 @@ app.get("/login", (req, res) => {
   res.render("login");
 });
 
+//Create Event Page (GET)
+app.get("/create-event", (req, res) => {
+  res.render("create-event");
+})
+
+//Create Event (POST)
+app.post("/create-event", (req, res) => {
+  knex('activities')
+    .insert ({
+      place_id: req.body.placeID,
+      name: req.body.event,
+      description: req.body.description,
+      start_date: req.body.start_date,
+      end_date: req.body.end_date,
+      price_range: req.body.price_range,
+      source: req.body.source,
+    })
+    .then((results) => {
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).send("Event Not Saved")
+    })
+    res.redirect("/")
+})
+
 //Login Page (POST)
 app.post("/login", (req, res) => {
   knex
