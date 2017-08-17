@@ -14,6 +14,8 @@ const bcrypt           = require('bcrypt');
 const cookieSession    = require('cookie-session');
 const bodyParser       = require('body-parser');
 const sass             = require('node-sass-middleware');
+const basicAuth        = require("basic-auth");
+const secureRoute      = require("secure-route");
 const slug             = require('slug')
 slug.defaults.mode     = 'rfc3986';
 
@@ -78,7 +80,7 @@ app.get("/login", (req, res) => {
 });
 
 //Create Event Page (GET)
-app.get("/create-event", (req, res) => {
+app.get("/create-event", (req, res, next) => {
   res.render("create-event");
 })
 

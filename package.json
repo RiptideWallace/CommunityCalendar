@@ -13,6 +13,7 @@
     "url": "https://github.com/RiptideWallace/CommunityCalendar"
   },
   "dependencies": {
+    "basic-auth": "^1.1.0",
     "bcrypt": "latest",
     "body-parser": "latest",
     "bootstrap": "latest",
@@ -26,6 +27,7 @@
     "node-sass": "latest",
     "node-sass-middleware": "latest",
     "pg": "latest",
+    "secure-route": "^3.0.1",
     "slug": "^0.9.1"
   },
   "devDependencies": {
