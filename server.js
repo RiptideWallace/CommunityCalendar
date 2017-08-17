@@ -93,6 +93,7 @@ app.post("/create-event", (req, res) => {
       end_date: req.body.end_date,
       price_range: req.body.price_range,
       source: req.body.source,
+      slug: (slug(req.body.event))
     })
     .then((results) => {
     })
