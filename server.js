@@ -117,7 +117,6 @@ app.post("/create-event", (req, res) => {
       slug: (slug(req.body.event)) + "-" + randomString()
     })
     .then((results) => {
-      console.log(results)
     })
     .catch((err) => {
       console.log(err);
@@ -177,11 +176,14 @@ app.get('/BC/:region/:place/:activity', function(req, res, next) {
       'activities.price_range',
       'activities.source',
       'activities.description',
+      'activities.slug as activity_slug',
       'places.id as place_id',
       'places.name as place_name',
+      'places.slug as place_slug',
       'places.abbreviation',
       'places.street_address',
       'regions.id as region_id',
+      'regions.slug as region_slug',
       'regions.name as region_name'
     ])
     .join('places', 'places.id', '=', 'activities.place_id')
@@ -216,11 +218,14 @@ app.get('/BC/:region/:place', function(req, res, next) {
       'activities.price_range',
       'activities.source',
       'activities.description',
+      'activities.slug as activity_slug',
       'places.id as place_id',
       'places.name as place_name',
+      'places.slug as place_slug',
       'places.abbreviation',
       'places.street_address',
       'regions.id as region_id',
+      'regions.slug as region_slug',
       'regions.name as region_name'
     ])
     .join('places', 'places.id', '=', 'activities.place_id')

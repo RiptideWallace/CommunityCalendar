@@ -7,8 +7,6 @@
 
     <% include partials/_head.ejs %>
 
-     <script type="text/javascript" src="/scripts/search.js"></script>
-
   </head>
 
   <body>
@@ -21,7 +19,7 @@
 
         <div>
           <% place.forEach(function(p) { %>
-            <h2><%= p.name %></h2>
+            <a><%= p.name %></h2>
             <p>Address: <%= p.street_address %>, <%= p.region_name %></p>
             <% if (userId) { %>
               <div>
