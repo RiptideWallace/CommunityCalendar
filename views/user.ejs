@@ -21,7 +21,7 @@
       <h3>Saved Events</h3>
       <% savedEvents.forEach(function(savedEvent) { %>
       <div class="saved-events well">
-        <a href="/BC/<%=savedEvent.region_slug%>/<%=savedEvent.place_slug%>/<savedEvent.activity_slug%>"><%=savedEvent.activity_name%></a>
+        <a href="/BC/<%=savedEvent.region_slug%>/<%=savedEvent.place_slug%>/<%=savedEvent.activity_slug%>"><%=savedEvent.activity_name%></a>
         <p> at <%=savedEvent.place_name%></p>
         <p><%=savedEvent.activity_start_date%></p>
         <p><%=savedEvent.activity_end_date%></p>
