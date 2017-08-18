@@ -365,7 +365,7 @@ app.post('/place/saved/:placeId/:userId', (req, res) => {
   knex('favourited-places')
     .insert({place_id: req.params.placeId, user_id: req.params.userId})
     .then((results) => {
-      res.redirect(`/${req.params.userId}/show`)
+      res.redirect(`/users/${req.params.userId}/show`)
     })
     .catch((err) => {
       console.log(err);
