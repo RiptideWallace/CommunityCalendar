@@ -244,7 +244,7 @@ app.get('/BC/:region/:place/:activity', function(req, res, next) {
 });
 
 // Route for when a search is conducted on a place
-app.get('/BC/:region/:place', function(req, res, next) {
+app.get('/BC/:region/:place', function(req, res) {
   knex('activities')
     .select([
       'activities.id as id',
@@ -273,13 +273,41 @@ app.get('/BC/:region/:place', function(req, res, next) {
     .then((results) => {
       console.log(results);
       if (results.length === 0) {
-        res.status(404).send("This place does not have any events");
-        return;
+        knex('places')
+          .select([
+            'places.id as place_id',
+            'places.name as place_name',
+            'places.slug as place_slug',
+            'places.abbreviation',
+            'places.street_address',
+            'regions.id as region_id',
+            'regions.slug as region_slug',
+            'regions.name as region_name'
+          ])
+          .join('regions', 'regions.id', '=', 'places.region_id')
+          .where({
+            'places.slug': req.params.place,
+            'regions.slug': req.params.region
+          })
+          .then((subResults) => {
+            let templateVars = {
+              activities: [],
+              place: subResults,
+              apiKey: googleMapsApiKey
+            }
+            res.render("event-search", templateVars);
+          })
+          .catch((err) => {
+            console.log(err);
+            res.status(404).send("Inside of the catch error in the sub query");
+          })
+      } else {
+        let templateVars = {
+          activities: results,
+          apiKey: googleMapsApiKey
+        }
+        res.render("event-search", templateVars);
       }
-      let templateVars = {
-        activity: results,
-      }
-      res.render("event-search", templateVars);
     });
 });
 
@@ -306,6 +334,10 @@ app.get('/BC/:region', (req, res) => {
         place: results,
       }
       res.render("place-search", templateVars);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(404).send("Event Not Saved");
     });
 });
 
