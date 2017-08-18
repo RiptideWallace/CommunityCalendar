@@ -218,6 +218,8 @@ app.get('/BC/:region/:place/:activity', function(req, res, next) {
       'places.slug as place_slug',
       'places.abbreviation',
       'places.street_address',
+      'places.latitude as latitude',
+      'places.longitude as longitude',
       'regions.id as region_id',
       'regions.slug as region_slug',
       'regions.name as region_name'

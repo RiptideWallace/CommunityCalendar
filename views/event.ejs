@@ -7,14 +7,24 @@
 
     <% include partials/_head.ejs %>
 
-    <script type="text/javascript" src="/scripts/event.js"></script>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 25%;
+        width: 25%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin-top: 75px;
+        margin-right: 25px;
+      }
+    </style>
 
   </head>
   <body>
 
     <% include partials/_header.ejs %>
-
-    <input type="hidden" id="activity-id" value="<%=activity.id%>">
 
     <div class="container">
       <h3>Event Details</h3>
@@ -42,10 +52,27 @@
     </div>
 
     <div id="map"></div>
+    <script>
+      function initMap() {
+        var eventLoc = {
+          lat: <%= activity.latitude %>,
+          lng: <%= activity.longitude %>
+        };
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: eventLoc
+        });
+        var marker = new google.maps.Marker({
+          position: eventLoc,
+          map: map
+        });
+      }
+    </script>
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= apiKey %>&callback=initMap"
+    async defer></script>
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= apiKey %>&callback=initMap"></script>
-
-    <% if (userId) { %>
+      <% if (userId) { %>
       <div>
         <form action="/event/saved/<%=activity.id%>/<%=userId%>" method="POST">
           <button type="submit" class="btn btn-block btn-primary">
@@ -55,6 +82,8 @@
         </form>
       </div>
     <% } %>
+
+
 
   </body>
 
