@@ -4,49 +4,107 @@
 <html lang="en">
   <head>
     <title>
-      Victoria Community Calendar
+      Events at
+      <% if (activities.length === 0) { %>
+        <%= place[0].place_name %>
+      <% } else { %>
+        <%= activities[0].place_name %>
+      <% } %>
+      - Victoria Community Calendar
     </title>
 
     <% include partials/_head.ejs %>
 
-     <script type="text/javascript" src="/scripts/search.js"></script>
-
+    <script type="text/javascript" src="/scripts/search.js"></script>
   </head>
 
   <body>
 
     <% include partials/_header.ejs %>
 
-     <div class="container">
+    <div class="container">
 
-    <h3>Event Details</h3>
-
-      <div>
-      <% activity.forEach(function(a) { %>
-        <h2><a href="/BC/<%=a.region_slug%>/<%=a.place_slug%>/<%=a.activity_slug%>"><%= a.name %></a></h2>
-        <h3>at <%= a.place_name %></h3>
-        <p>Address: <%= a.street_address %>, <%= a.region_name %></p>
-        <p><%= a.description %></p>
-        <% if (a.start_date === a.end_date) { %>
-          <p>Date: <%= a.start_date %></p>
+      <h3>Events at
+        <% if (activities.length === 0) { %>
+          <%= place[0].place_name %>
+        <% } else { %>
+          <%= activities[0].place_name %>
         <% } %>
-        <p>Starts: <%= a.start_date %></p>
-        <p>Ends: <%= a.end_date %></p>
-        <p>Price:</p>
-        <div class="price-box">
-          <% if (a.price_range === 0) { %>
-            <p class="price-range">Free!</p>
+      </h3>
+
+      <div class="well">
+        <h4>Location details</h4>
+        <p>
+          <strong>
+            <% if (activities.length === 0) { %>
+              <%= place[0].place_name %>
+            <% } else { %>
+              <%= activities[0].place_name %>
+            <% } %>
+          </strong>
+          in
+          <strong>
+            <% if (activities.length === 0) { %>
+              <%= place[0].region_name %>
+            <% } else { %>
+              <%= activities[0].region_name %>
+            <% } %>
+          </strong>
+        </p>
+        <p>Address:
+          <% if (activities.length === 0) { %>
+            <%= place[0].street_address %>
           <% } else { %>
-            <% for (p = 0; p < a.price_range; p++) { %><span class="glyphicon glyphicon-usd price-range" aria-hidden="true"></span><% } %>
-            / <span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span><span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span><span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span>
+            <%= activities[0].street_address %>
           <% } %>
-        </div>
-         <p><a href="<%= a.source %>" title="<%= a.name %>">Source</a></p>
-      <% } ) %>
+        </p>
+        <div id="map" class="map-place-event-search"></div>
       </div>
+
+      <% if (activities.length === 0) { %>
+        <h2>No current activities for this place. :(</h2>
+      <% } else { %>
+        <div>
+          <% activities.forEach(function(a) { %>
+            <div class="well">
+              <h2><a href="/BC/<%=a.region_slug%>/<%=a.place_slug%>/<%=a.activity_slug%>"><%= a.name %></a></h2>
+              <h3>at <%= a.place_name %></h3>
+              <p>Address: <%= a.street_address %>, <%= a.region_name %></p>
+              <p><%= a.description %></p>
+              <% if (a.start_date === a.end_date) { %>
+                <p>Date: <%= a.start_date %></p>
+              <% } else { %>
+              <p>Starts: <%= a.start_date %></p>
+              <p>Ends: <%= a.end_date %></p>
+              <% } %>
+              <p>Price:</p>
+              <div class="price-box">
+                <% if (a.price_range === 0) { %>
+                  <p class="price-range">Free!</p>
+                <% } else { %>
+                  <% for (p = 0; p < a.price_range; p++) { %><span class="glyphicon glyphicon-usd price-range" aria-hidden="true"></span><% } %>
+                  / <span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span><span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span><span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span>
+                <% } %>
+              </div>
+              <p><a href="<%= a.source %>" title="<%= a.name %>">Source</a></p>
+            </div>
+          <% } ) %>
+        </div>
+      <% } %>
+
     </div>
 
     <% include partials/_footer.ejs %>
 
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: -34.397, lng: 150.644},
+          zoom: 8
+        });
+      }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=<%= apiKey %>&callback=initMap"></script>
   </body>
 </html>

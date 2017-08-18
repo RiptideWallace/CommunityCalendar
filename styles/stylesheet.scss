@@ -7,55 +7,6 @@ body {
   margin-bottom: 180px;
 }
 
-/* Dropdown Button */
-.dropbtn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {
-  background-color: #f1f1f1
-}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {
-    background-color: #3e8e41;
-}
-
 header {
   nav {
     background-color: #292c2f;
@@ -75,15 +26,28 @@ header {
         background-color: #111;
       }
     }
+    h1 {
+      text-align: center;
+    }
     .header-link:hover {
       color: #ffffff;
       text-decoration: underline;
+    }
+    .logo {
+      position: absolute;
+      left: 50%;
+      margin-left: -52px !important;
+      padding-top: 5px;
+      display: block;
     }
     .logout-button {
       border: 0;
       height: 50px;
       padding: 15px 15px;
       text-align: center;
+    }
+    .navbar-brand {
+      padding: 0;
     }
     .navbar-nav {
       margin-left: 0;
@@ -94,9 +58,6 @@ header {
     .navbar-toggler-icon {
       color: white;
     }
-  }
-  h1 {
-    text-align: center;
   }
 }
 
@@ -134,11 +95,10 @@ footer {
     .btn:hover {
       color: #ffffff;
     }
-  display: inline;
-}
+    display: inline;
+  }
   background-color: #292c2f;
   bottom: 0;
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0);
   box-sizing: border-box;
   height: 140px;
   padding: 10px;
@@ -147,16 +107,68 @@ footer {
   width: 100%
 }
 
-.navbar-brand {
-  padding: 0 0 0 0;
+/* Dropdown Button */
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: 1px;
+  cursor: pointer;
 }
 
-.logo {
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  background-color: #f9f9f9;
+  display: none;
   position: absolute;
-  left: 50%;
-  margin-left: -52px !important;
-  padding-top: 5px;
+  width: 100%;
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
   display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #f1f1f1
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+
+.dropdown-menu {
+  border: 1px solid #ccc;
+  margin: 0;
+}
+
+.home-page-body {
+  background-attachment: fixed;
+  background-image: url("/images/victoria/victoria-hero-inner-harbour-parliament.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.map-place-event-search {
+  height: 200px;
 }
 
 .price-box{
@@ -174,6 +186,12 @@ footer {
   padding: 10px;
 }
 
+.scrollable-menu {
+  height: auto;
+  max-height: 200px;
+  overflow-x: hidden;
+}
+
 .well.authentication-well{
   p {
     margin-bottom: 0;
@@ -183,15 +201,18 @@ footer {
   text-align: center;
 }
 
-.home-page-body {
-  background-image: url("/images/victoria/victoria-hero-inner-harbour-parliament.jpg");
+.well-icon-text {
+  .calendar-icon {
+    display: block;
+  }
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
-.scrollable-menu {
-  height: auto;
-  max-height: 200px;
-  overflow-x: hidden;
+.favourited-places-body {
+  float: right;
+  position: absolute;
+  top: 115;
+  right: 75;
 }
-
-
 
