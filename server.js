@@ -187,19 +187,21 @@ app.post("/logout", (req, res) => {
   res.redirect("/");
 });
 
-//User Profile Page
 app.get("/users/:id/show", (req, res) => {
   knex('users')
   .where({id: req.params.id})
-  .then((results) => {
-    if (results.length === 0) {
-      res.status(404).send("This user does not exist");
-      return;
-    }
-    const templateVars = {user: results[0]};
+  .then((userResults) => {
+      if (userResults.length === 0) {
+        res.status(404).send("This user does not exist");
+        return;
+      }
+      const templateVars = {
+        user: userResults[0],
+      };
     res.render("user", templateVars);
   });
 });
+
 
 // Route to an event's page with URLs in slug form
 app.get('/BC/:region/:place/:activity', function(req, res, next) {
@@ -218,6 +220,8 @@ app.get('/BC/:region/:place/:activity', function(req, res, next) {
       'places.slug as place_slug',
       'places.abbreviation',
       'places.street_address',
+      'places.latitude as latitude',
+      'places.longitude as longitude',
       'regions.id as region_id',
       'regions.slug as region_slug',
       'regions.name as region_name'
@@ -374,9 +378,15 @@ app.post('/place/saved/:placeId/:userId', (req, res) => {
 //Route for accessing favourited places
 app.get('/user/:id/favourited-places', (req, res) => {
   knex
-    .select("*")
+    .select([
+      '*',
+      'regions.slug as region_slug',
+      'places.slug as place_slug',
+      'places.name as place_name'
+      ])
     .from("favourited-places")
-    .leftJoin('places', 'favourited-places.place_id', 'places.id')
+    .join('places', 'favourited-places.place_id', 'places.id')
+    .join('regions', 'places.region_id', 'regions.id')
     .where("favourited-places.user_id", req.params.id)
     .then((results) => {
       res.json(results);
@@ -389,9 +399,20 @@ app.get('/user/:id/favourited-places', (req, res) => {
 //Route for accessing saved events
 app.get('/user/:id/saved-events', (req, res) => {
   knex
-    .select("*")
+    .select([
+      "*",
+      'activities.name as activity_name',
+      'activities.start_date as activity_start_date',
+      'activities.end_date as activity_end_date',
+      'activities.source as activity_source',
+      'activities.slug as activity_slug',
+      'regions.slug as region_slug',
+      'places.slug as place_slug'
+      ])
     .from("saved-events")
     .leftJoin('activities', 'saved-events.activity_id', 'activities.id')
+    .leftJoin('places', 'activities.place_id', 'places.id')
+    .leftJoin('regions', 'places.region_id', 'regions.id')
     .where("saved-events.user_id", req.params.id)
     .then((results) => {
       res.json(results);
