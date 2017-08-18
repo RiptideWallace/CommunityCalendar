@@ -19,7 +19,7 @@
 
         <div>
           <% place.forEach(function(p) { %>
-            <a><%= p.name %></h2>
+            <h2><a href="/BC/<%=p.region_slug%>/<%=p.place_slug%>"><%= p.name %></a></h2>
             <p>Address: <%= p.street_address %>, <%= p.region_name %></p>
             <% if (userId) { %>
               <div>

@@ -19,7 +19,7 @@
 
       <div>
       <% activity.forEach(function(a) { %>
-        <h2><%= a.name %></h2>
+        <h2><a href="/BC/<%=a.region_slug%>/<%=a.place_slug%>/<%=a.activity_slug%>"><%= a.name %></a></h2>
         <h3>at <%= a.place_name %></h3>
         <p>Address: <%= a.street_address %>, <%= a.region_name %></p>
         <p><%= a.description %></p>

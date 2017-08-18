@@ -354,8 +354,10 @@ app.get('/BC/:region', (req, res) => {
       'places.name as name',
       'places.abbreviation',
       'places.street_address as street_address',
+      'places.slug as place_slug',
       'regions.id as region_id',
-      'regions.name as region_name'
+      'regions.name as region_name',
+      'regions.slug as region_slug'
     ])
     .join('regions', 'regions.id', '=', 'places.region_id')
     .where({'regions.slug': req.params.region})
@@ -387,12 +389,15 @@ app.get('/price/:pricerange', (req, res) => {
       'activities.price_range',
       'activities.source',
       'activities.description',
+      'activities.slug as activity_slug',
       'places.id as place_id',
       'places.name as place_name',
       'places.abbreviation',
       'places.street_address',
+      'places.slug as place_slug',
       'regions.id as region_id',
-      'regions.name as region_name'
+      'regions.name as region_name',
+      'regions.slug as region_slug'
     ])
     .join('places', 'places.id', '=', 'activities.place_id')
     .join('regions', 'regions.id', '=', 'places.region_id')
@@ -437,53 +442,6 @@ app.post('/place/saved/:placeId/:userId', (req, res) => {
       res.status(400).send("Place Not Favourited")
     })
 })
-
-//Route for accessing favourited places
-app.get('/user/:id/favourited-places', (req, res) => {
-  knex
-    .select([
-      '*',
-      'regions.slug as region_slug',
-      'places.slug as place_slug',
-      'places.name as place_name'
-      ])
-    .from("favourited-places")
-    .join('places', 'favourited-places.place_id', 'places.id')
-    .join('regions', 'places.region_id', 'regions.id')
-    .where("favourited-places.user_id", req.params.id)
-    .then((results) => {
-      res.json(results);
-    })
-    .catch((err) => {
-      res.status(404).send("You Did Not Favourite This Place")
-    });
-});
-
-//Route for accessing saved events
-app.get('/user/:id/saved-events', (req, res) => {
-  knex
-    .select([
-      "*",
-      'activities.name as activity_name',
-      'activities.start_date as activity_start_date',
-      'activities.end_date as activity_end_date',
-      'activities.source as activity_source',
-      'activities.slug as activity_slug',
-      'regions.slug as region_slug',
-      'places.slug as place_slug'
-      ])
-    .from("saved-events")
-    .leftJoin('activities', 'saved-events.activity_id', 'activities.id')
-    .leftJoin('places', 'activities.place_id', 'places.id')
-    .leftJoin('regions', 'places.region_id', 'regions.id')
-    .where("saved-events.user_id", req.params.id)
-    .then((results) => {
-      res.json(results);
-    })
-    .catch((err) => {
-      res.status(404).send("This Event is Not Saved");
-    });
-});
 
 app.listen(PORT, () =>{
   console.log("Listening in on Port " + PORT)
