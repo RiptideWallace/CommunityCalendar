@@ -6,7 +6,6 @@
     </title>
     <% include partials/_head.ejs %>
 
-    <script type="text/javascript" src="/scripts/user.js"></script>
   </head>
 
   <body>
@@ -20,12 +19,24 @@
 
     <div class="saved-events-body">
       <h3>Saved Events</h3>
-      <div class="saved-events well"></div>
+      <% savedEvents.forEach(function(savedEvent) { %>
+      <div class="saved-events well">
+        <a href="/BC/<%=savedEvent.region_slug%>/<%=savedEvent.place_slug%>/<savedEvent.activity_slug%>"><%=savedEvent.activity_name%></a>
+        <p> at <%=savedEvent.place_name%></p>
+        <p><%=savedEvent.activity_start_date%></p>
+        <p><%=savedEvent.activity_end_date%></p>
+        <p><%=savedEvent.activity_source%></p>
+      </div>
+      <% } ) %>
     </div>
 
     <div>
       <h3> Favourited Places</h3>
-      <div class="favourited-places well"></div>
+      <% favedPlaces.forEach(function(favedPlace) { %>
+      <div class="favourited-places well">
+        <a href="/BC/<%=favedPlace.region_slug%>/<%=favedPlace.place_slug%>"><%=favedPlace.place_name%></a>
+      </div>
+      <% } ) %>
     </div>
 
     <% include partials/_footer.ejs %>

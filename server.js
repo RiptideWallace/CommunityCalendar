@@ -191,17 +191,48 @@ app.get("/users/:id/show", (req, res) => {
   knex('users')
   .where({id: req.params.id})
   .then((userResults) => {
-      if (userResults.length === 0) {
-        res.status(404).send("This user does not exist");
-        return;
-      }
-      const templateVars = {
-        user: userResults[0],
-      };
-    res.render("user", templateVars);
+    if (userResults.length === 0) {
+      res.status(404).send("This user does not exist");
+      return;
+    }
+    knex
+      .select([
+        '*',
+        'activities.name as activity_name',
+        'activities.start_date as activity_start_date',
+        'activities.end_date as activity_end_date',
+        'activities.source as activity_source',
+        'activities.slug as activity_slug',
+        'regions.slug as region_slug',
+        'places.slug as place_slug',
+        'places.name as place_name'
+      ])
+    .from("saved-events")
+    .leftJoin('activities', 'saved-events.activity_id', 'activities.id')
+    .leftJoin('places', 'activities.place_id', 'places.id')
+    .leftJoin('regions', 'places.region_id', 'regions.id')
+    .then((savedResults) => {
+      knex
+        .select([
+          '*',
+          'regions.slug as region_slug',
+          'places.slug as place_slug',
+          'places.name as place_name'
+        ])
+      .from("favourited-places")
+      .join('places', 'favourited-places.place_id', 'places.id')
+      .join('regions', 'places.region_id', 'regions.id')
+      .then((favedResults) => {
+        const templateVars = {
+          user: userResults[0],
+          savedEvents: savedResults,
+          favedPlaces: favedResults
+        };
+        res.render("user", templateVars);
+      });
+    });
   });
 });
-
 
 // Route to an event's page with URLs in slug form
 app.get('/BC/:region/:place/:activity', function(req, res, next) {
