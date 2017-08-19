@@ -15,7 +15,6 @@
 
     <% include partials/_head.ejs %>
 
-    <script type="text/javascript" src="/scripts/search.js"></script>
   </head>
 
   <body>
@@ -59,10 +58,30 @@
           <% } %>
         </p>
         <div id="map" class="map-place-event-search"></div>
+        <% if (userId) { %>
+          <div>
+          <% if (activities.length === 0) { %>
+            <form action="/place/saved/<%= place[0].place_id %>/<%= userId %>" method="POST">
+              <button type="submit" class="btn btn-block btn-primary">
+                <i class="fa fa-heart" aria-hidden="true"></i>
+                <span>&nbsp Add this place to favourites</span>
+              </button>
+            </form>
+          <% } else { %>
+            <form action="/place/saved/<%= activities[0].place_id %>/<%= userId %>" method="POST">
+              <button type="submit" class="btn btn-block btn-primary">
+                <i class="fa fa-heart" aria-hidden="true"></i>
+                <span>&nbsp Add this place to favourites</span>
+              </button>
+            </form>
+          <% } %>
+
+          </div>
+        <% } %>
       </div>
 
       <% if (activities.length === 0) { %>
-        <h2>No current activities for this place. :(</h2>
+        <h3>No activities for this place. <i class="fa fa-frown-o" aria-hidden="true"></i></h3>
       <% } else { %>
         <div>
           <% activities.forEach(function(a) { %>

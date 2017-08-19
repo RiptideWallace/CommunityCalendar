@@ -334,7 +334,7 @@ app.get('/BC/:region/:place', function(req, res) {
           })
           .catch((err) => {
             console.log(err);
-            res.status(404).send("Inside of the catch error in the sub query");
+            res.status(404).send("No such event!");
           })
       } else {
         let templateVars = {
@@ -343,6 +343,10 @@ app.get('/BC/:region/:place', function(req, res) {
         }
         res.render("event-search", templateVars);
       }
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(404).send("No such event!");
     });
 });
 
