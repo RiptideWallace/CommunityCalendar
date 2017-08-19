@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <title>
-      Victoria Community Calendar
+      Places in <%= place[0].region_name %> - Victoria Community Calendar
     </title>
 
     <% include partials/_head.ejs %>
@@ -15,22 +15,26 @@
 
       <div class="container">
 
-        <h3>Place Details</h3>
+        <h3>Places in <%= place[0].region_name %></h3>
+
+        <p>The following centres host activities in the <%= place[0].region_name %> area. Check out a venue to see what's going on.</p>
 
         <div>
           <% place.forEach(function(p) { %>
-            <h2><a href="/BC/<%=p.region_slug%>/<%=p.place_slug%>"><%= p.name %></a></h2>
-            <p>Address: <%= p.street_address %>, <%= p.region_name %></p>
-            <% if (userId) { %>
-              <div>
-                <form action="/place/saved/<%=p.id%>/<%=userId%>" method="POST">
-                  <button type="submit" class="btn btn-block btn-primary">
-                    <span class="glyphicon"></span>
-                    <span>&nbsp Add This Place to Favourties</span>
-                  </button>
-                </form>
-              </div>
-            <% } %>
+            <div class="well">
+              <h2><a href="/BC/<%=p.region_slug%>/<%=p.place_slug%>"><%= p.name %></a></h2>
+              <p>Address: <%= p.street_address %>, <%= p.region_name %></p>
+              <% if (userId) { %>
+                <div>
+                  <form action="/place/saved/<%=p.id%>/<%=userId%>" method="POST">
+                    <button type="submit" class="btn btn-block btn-primary">
+                      <i class="fa fa-heart" aria-hidden="true"></i>
+                      <span>&nbsp Add this place to favourites</span>
+                    </button>
+                  </form>
+                </div>
+              <% } %>
+            </div>
           <% } ) %>
         </div>
 
