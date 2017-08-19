@@ -124,6 +124,10 @@ app.get("/login", (req, res) => {
 
 //Create Event Page (GET)
 app.get("/create-event", (req, res, next) => {
+  knex('*')
+    .from('users')
+    .where('admin is true')
+    .then((userResults) => {
   knex('places')
     .select([
       'places.id as id',
