@@ -21,6 +21,7 @@
     "dotenv": "latest",
     "ejs": "latest",
     "express": "latest",
+    "helmet": "^3.8.1",
     "jquery": "latest",
     "knex": "latest",
     "knex-logger": "latest",
