@@ -5,6 +5,7 @@ const PORT             = process.env.PORT || 3000;
 const ENV              = process.env.NODE_ENV || "development";
 const googleMapsApiKey = process.env.GOOGLE_MAPS_API_KEY;
 const app              = express();
+const helmet           = require('helmet');
 const pg               = require("pg");
 const knexConfig       = require('./knexfile');
 const knex             = require('knex')(knexConfig[ENV]);
@@ -17,12 +18,14 @@ const sass             = require('node-sass-middleware');
 const basicAuth        = require("basic-auth");
 const secureRoute      = require("secure-route");
 const slug             = require('slug')
+
 slug.defaults.mode     = 'rfc3986';
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(express.static("public"));
 app.use(knexLogger(knex));
+app.use(helmet());
 
 app.use(cookieSession({
   keys: ['hello', 'world']
