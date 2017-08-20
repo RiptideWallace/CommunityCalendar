@@ -1,135 +1,69 @@
 id,region_id,name,abbreviation,street_address,slug
-
 1,3,Archie Browning Sports Centre,ABSC,"1151 Esquimalt Road Esquimalt, BC V9A 3N6",archie-browning-sports-centre
-
 2,3,Esquimalt Recreation Centre,ERC,"527 Fraser Street Esquimalt, BC V9A 6H6",esquimalt-recreation-centre
-
 3,8,Juan de Fuca Recreation Centre,JDFRC,"1767 Island Highway Victoria, BC V9B 1J1",juan-de-fuca-recreation-centre
-
 4,8,The Q Centre,TQC,"1767 Island Highway Victoria, BC V9B 1J1",the-q-centre
-
 5,2,Henderson Recreation Centre,HRC,"2291 Cedar Hill X Road Victoria, BC V8P 5H9",henderson-recreation-centre
-
 6,2,Monterey Recreation Centre,MRC,"1442 Monterey Avenue Victoria, BC V8S 4W1",monterey-recreation-centre
-
 7,2,Oak Bay Recreation Centre,OBRC,"1975 Bee Street Victoria, BC V8R 5E6",oak-bay-recreation-centre
-
 8,7,Panorama Recreation Centre,PanoramaRC,"1885 Forest Park Drive North Saanich, BC V8L 4A3",panorama-recreation-centre
-
 9,10,Greenglade Community Centre,GCC,"2151 Lannon Way Sidney, BC  V8L 3Z1",greenglade-community-centre
-
 10,4,Cedar Hill Golf Course,CHGC,"1400 Derby Road Victoria, BC V8P 1T1",cedar-hill-golf-course
-
 11,4,Cedar Hill Recreation Centre,CHRC,"3220 Cedar Hill Road Victoria, BC V8P 3Y3",cedar-hill-recreation-centre
-
 12,4,Gordon Head Recreation Centre,GHRC,"4100 Lambrick Way (off Feltham Road) Victoria, BC V8N 5R3",gordon-head-recreation-centre
-
 13,4,Pearkes Recreation Centre,PearkesRC,"3100 Tillicum Road Victoria, BC V9A 6T2",pearkes-recreation-centre
-
 14,4,Saanich Commonwealth Place,SCP,"4636 Elk Lake Drive Victoria, BC V8Z 5M1",saanich-commonwealth-place
-
 15,1,Crystal Pool & Fitness Centre,CPFC,"2275 Quadra Street Victoria, BC V8T 4C4",crystal-pool-&-fitness-centre
-
 16,1,Royal Athletic Park,RAP,"1014 Caledonia Avenue Victoria, BC V8T 1G1",royal-athletic-park
-
 17,1,Save-On-Foods Memorial Centre,SOFMC,"1952 Blanshard St Victoria, BC V8T 4J2",save-on-foods-memorial-centre
-
 18,1,Blanshard Community Centre,BlanshardCC,"901 Kings Rd Victoria, BC V8T 1W5",blanshard-community-centre
-
 19,1,Quadra Village Community Centre,QVCC,"901 Kings Rd Victoria, BC V8T 1W5",quadra-village-community-centre
-
 20,1,Burnside Community Centre,BurnsideCC,"471 Cecelia Road Victoria, BC V8T 4T4",burnside-community-centre
-
 21,1,Fairfield Community Centre,FairfieldCC,"1330 Fairfield Rd Victoria BC V8S 5J1",fairfield-community-centre
-
 22,1,Fairfield Activity Centre,FAC,"380 Cook St Victoria BC V8V 3X7",fairfield-activity-centre
-
-23,1,Fernwood Community Centre,FernwoodCC,"1240
-Gladstone Ave Victoria, BC V8T 1G6",fernwood-community-centre
-
+23,1,Fernwood Community Centre,FernwoodCC,"1240 Gladstone Ave Victoria, BC V8T 1G6",fernwood-community-centre
 24,1,James Bay Community Centre,JBCC,"140 Oswego St Victoria BC, V8V 2B1",james-bay-community-centre
-
 25,1,Oaklands Community Centre,OCC,"#1-2827 Belmont Ave Victoria BC V8R 4B2",oaklands-community-centre
-
 26,1,Victoria West Community Centre,VWCC,"521 Craigflower Rd Victoria, BC, V9A 6Z5",victoria-west-community-centre
-
 27,1,James Bay New Horizons,JBNH,"234 Menzies St Victoria BC V8V 2G7",james-bay-new-horizons
-
 28,1,Victoria Silver Threads,VST,,victoria-silver-threads
-
 29,1,Burnside Gorge Community Centre,BGCC,"471 Cecelia Road Victoria, BC V8T 4T4",burnside-gorge-community-centre
-
 30,1,Fairfield Community Place,FCP,"1330 Fairfield Rd Victoria BC V8S 5J1",fairfield-community-place
-
 31,1,Fairfield Community Centre - Garry Oaks Room,FCC-GAR,"Thurlow Rd Victoria BC V8S 5K2",fairfield-community-centre---garry-oaks-room
-
 32,1,James Bay Community School Centre,JBCSC,"140 Oswego St Victoria BC, V8V 2B1",james-bay-community-school-centre
-
 33,1,Oaklands Neighbourhood House (Little Acorn),ONH-LA,"2629 Victor St Victoria, BC  V8R 4E3",oaklands-neighbourhood-house-(little-acorn)
-
 34,1,YMCA-YWCA Downtown,Y-Downtown,"851 Broughton St Victoria, BC V8W 1E5",ymca-ywca-downtown
-
 35,11,SEAPARC Leisure Complex,SEAPARC,"2168 Phillips Rd Sooke, BC V0S 1N0",seaparc-leisure-complex
-
 36,5,Eagle Ridge Community Centre,ERCC,"1089 Langford Pkwy Langford, BC V9A 0A5",eagle-ridge-community-centre
-
 37,5,North Langford Recreation Centre,NLRC,"1999 Country Club Way Victoria, BC V9B 6R3",north-langford-recreation-centre
-
 38,5,Langford Lanes,LL,"1089 Langford Pkwy Langford, BC V9A 0A5",langford-lanes
-
 39,5,Westhills Arena,WHA,"1089 Langford Pkwy Langford, BC V9A 0A5",westhills-arena
-
-40,5,Westhills Stadium,WHS,"1089 Langford
-Pkwy Langford, BC V9A 0A5",westhills-stadium
-
+40,5,Westhills Stadium,WHS,"1089 Langford Pkwy Langford, BC V9A 0A5",westhills-stadium
 41,5,Goudy Field,GF,"1089 Langford Pkwy Langford, BC V9A 0A5",goudy-field
-
-42,5,City Centre Park Family Fun Zone,CCPFFZ,"1089 Langford Pkwy Langford, BC V9A
-0A5",city-centre-park-family-fun-zone
-
+42,5,City Centre Park Family Fun Zone,CCPFFZ,"1089 Langford Pkwy Langford, BC V9A 0A5",city-centre-park-family-fun-zone
 43,5,YMCA-YWCA Westhills,Y-Westhills,"1319 Westhills Drive Langford, BC V9B 0S2",ymca-ywca-westhills
-
-44,13,YMCA-YWCA Eagle Creek,Y-EagleCreek,"110– 25 Helmcken Rd
-View Royal, BC V8Z 5G5",ymca-ywca-eagle-creek
-
+44,13,YMCA-YWCA Eagle Creek,Y-EagleCreek,"110– 25 Helmcken Rd View Royal, BC V8Z 5G5",ymca-ywca-eagle-creek
 45,5,Centennial Centre,CC,"Goldstream & Carlow Langford, BC",centennial-centre
-
 46,8,Bear Mountain Arena,BMA,"1767 Island Highway Victoria, BC V9B 1J1",bear-mountain-arena
-
 47,8,Juan de Fuca Arena,JDFA,"1767 Island Highway Victoria, BC V9B 1J1",juan-de-fuca-arena
-
 48,8,WildPlay West Shore Element Park,WPWSEP,"1767 Island Highway Victoria, BC V9B 1J1",wildplay-west-shore-element-park
-
 49,8,Juan de Fuca Par 3 Golf Course,JDFGC,"1767 Island Highway Victoria, BC V9B 1J1",juan-de-fuca-par-3-golf-course
-
 50,13,Shoreline Community Middle School,SCMS,"2750 Shoreline Dr Victoria, BC V9B 1M6",shoreline-community-middle-school
-
 51,12,Butchart Gardens,BG,"800 Benvenuto Ave Brentwood Bay, BC V8M 1J8",butchart-gardens
-
 52,6,Metchosin Arts and Cultural Centre,MACC,"4495 Happy Valley Rd Metchosin, BC",metchosin-arts-and-cultural-centre
-
 53,10,Shaw Centre for the Salish Sea,SCSS,"9811 Seaport Place Sidney, BC, V8L 4X3",shaw-centre-for-the-salish-sea
-
 54,7,British Columbia Aviation Museum,BCAM,"1910 Norseman Rd North Saanich, BC V8L 5V5",british-columbia-aviation-museum
-
 55,9,Caleb Pike House,CPH,"1589 Millstream Rd Highlands, BC",caleb-pike-house
-
 56,1,Canadian Scottish Regimental Museum,CSRM,"715 Bay St Victoria, BC",canadian-scottish-regimental-museum
-
 57,1,Craigdarroch Castle and Historic House Museum,CCHHM,"1050 Joan Cres Victoria, BC",craigdarroch-castle-and-historic-house-museum
-
 58,12,Heritage Acres (Saanich Historical Artifacts Society),HASHAS,"7321 Lochside Dr Central Saanich, BC",heritage-acres-(saanich-historical-artifacts-society)
-
 59,1,Maritime Museum of BC,MMBC,"28 Bastion Square Victoria, BC",maritime-museum-of-bc
-
 60,11,Sooke Region Museum & Visitor Centre,SRMVC,"2070 Phillips Rd Sooke, BC",sooke-region-museum-&-visitor-centre
-
 61,1,Art Gallery of Greater Victoria,AGGV,"1040 Moss St Victoria, BC",art-gallery-of-greater-victoria
-
 62,1,Royal BC Museum,RBCM,"675 Belleville St Victoria, BC",royal-bc-museum
-
 63,3,CFB Esquimalt Naval and Military Museum,CFBENMM,"1299 Naden Way Esquimalt, BC",cfb-esquimalt-naval-and-military-museum
-
 64,12,Saanich Pioneers Museum and Archives,SPMA,"7900 block East Saanich Rd Central Saanich, BC",saanich-pioneers-museum-and-archives
-
 65,10,Sidney Museum and Archives,SMA,"2423 Beacon Ave Sidney, BC",sidney-museum-and-archives
+66,3,L’Ecole Victor Brodeur,EVB,"Head St Esquimalt, BC",l’ecole-victor-brodeur
+67,2,Windsor Pavillion,WP,"2451 Windsor Rd Victoria BC, V8S 5H3",windsor-pavillion
+68,2,Oak Bay Online,OBOnline,,oak-bay-online
