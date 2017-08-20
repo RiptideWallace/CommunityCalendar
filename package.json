@@ -24,6 +24,7 @@
     "helmet": "^3.8.1",
     "jquery": "latest",
     "knex": "latest",
+    "knex-csv-seeder": "^0.4.1",
     "knex-logger": "latest",
     "node-sass": "latest",
     "node-sass-middleware": "latest",
