@@ -45,11 +45,11 @@ app.use("/styles", sass({
 
 function randomString() {
   let output = "";
-  let characters = "abcdefghijklmnopqrstuvwxyz1234567890"
-    for (let i = 0; i < 6; i++) {
-      output += characters.charAt(Math.floor(Math.random() * characters.length));
-    }
-    return output;
+  let characters = "abcdefghijklmnopqrstuvwxyz1234567890";
+  for (let i = 0; i < 6; i++) {
+    output += characters.charAt(Math.floor(Math.random() * characters.length));
+  }
+  return output;
 }
 
 // For production (Heroku) http:// requests, redirect to https://
@@ -85,7 +85,6 @@ app.get("/", (req, res) => {
             region: regionResults,
             place: placeResults,
           }
-
           res.render("index", templateVars);
         });
     });
@@ -98,6 +97,7 @@ app.get("/register", (req, res) => {
 
 //Register Page (POST)
 app.post("/register", (req, res) => {
+  if (req.body.password === req.body.password_confirmation) {
   knex('users')
     .insert({
       name: req.body.username,
@@ -116,9 +116,12 @@ app.post("/register", (req, res) => {
         })
         .catch((err) => {
           console.log(err);
-          res.status(404).send("Bad Register");
+          res.status(404).send("Could not complete registration");
         })
-})
+  } else {
+    res.status(404).send("Password and confirmation don't match");
+  }
+});
 
 //Login Page (GET)
 app.get("/login", (req, res) => {
@@ -138,9 +141,9 @@ app.get("/create-event", (req, res, next) => {
         let templateVars = {
           place: results,
         }
-  res.render("create-event", templateVars);
+        res.render("create-event", templateVars);
   });
-})
+});
 
 //Create Event (POST)
 app.post("/create-event", (req, res) => {
@@ -159,9 +162,9 @@ app.post("/create-event", (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      res.status(400).send("Event Not Saved")
+      res.status(400).send("Event Not Saved");
     })
-    res.redirect("/")
+    res.redirect("/");
 })
 
 //Login Page (POST)
@@ -172,11 +175,11 @@ app.post("/login", (req, res) => {
     .where({email: req.body.email})
     .then((results) => {
       if (results.length === 0) {
-        res.status(404).send("This e-mail is not associated with a registered user")
+        res.status(404).send("Login failed");
         return;
       }
       if (!bcrypt.compareSync(req.body.password, results[0].password)) {
-        res.status(404).send("Invalid password")
+        res.status(404).send("Login failed");
         return;
       }
       req.session.userId = results[0].id;
@@ -285,73 +288,48 @@ app.get('/BC/:region/:place/:activity', function(req, res, next) {
 
 // Route for when a search is conducted on a place
 app.get('/BC/:region/:place', function(req, res) {
-  knex('activities')
-    .select([
-      'activities.id as id',
-      'activities.name as name',
-      'activities.start_date',
-      'activities.end_date',
-      'activities.price_range',
-      'activities.source',
-      'activities.description',
-      'activities.slug as activity_slug',
-      'places.id as place_id',
-      'places.name as place_name',
-      'places.slug as place_slug',
-      'places.abbreviation',
-      'places.street_address',
-      'regions.id as region_id',
-      'regions.slug as region_slug',
-      'regions.name as region_name'
+  knex.select([
+    'places.id as place_id',
+    'places.name as place_name',
+    'places.slug as place_slug',
+    'places.street_address as street_address',
+    'places.latitude',
+    'places.longitude',
+    'regions.id as region_id',
+    'regions.slug as region_slug',
+    'regions.name as region_name',
+    knex.raw(`COALESCE(JSON_AGG(activities.*) FILTER (WHERE activities.id IS NOT NULL), '[]') AS activities`)
     ])
-    .join('places', 'places.id', '=', 'activities.place_id')
-    .join('regions', 'regions.id', '=', 'places.region_id')
+    .from('regions')
+    .leftJoin('places', 'regions.id', 'places.region_id')
+    .leftJoin('activities', 'places.id', 'activities.place_id')
     .where({
       'places.slug': req.params.place,
       'regions.slug': req.params.region
     })
+    .groupBy(
+      'places.id',
+      'places.name',
+      'places.slug',
+      'places.street_address',
+      'places.latitude',
+      'places.longitude',
+      'regions.id',
+      'regions.slug',
+      'regions.name'
+    )
     .then((results) => {
       console.log(results);
-      if (results.length === 0) {
-        knex('places')
-          .select([
-            'places.id as place_id',
-            'places.name as place_name',
-            'places.slug as place_slug',
-            'places.abbreviation',
-            'places.street_address',
-            'regions.id as region_id',
-            'regions.slug as region_slug',
-            'regions.name as region_name'
-          ])
-          .join('regions', 'regions.id', '=', 'places.region_id')
-          .where({
-            'places.slug': req.params.place,
-            'regions.slug': req.params.region
-          })
-          .then((subResults) => {
-            let templateVars = {
-              activities: [],
-              place: subResults,
-              apiKey: googleMapsApiKey
-            }
-            res.render("event-search", templateVars);
-          })
-          .catch((err) => {
-            console.log(err);
-            res.status(404).send("No such event!");
-          })
-      } else {
-        let templateVars = {
-          activities: results,
-          apiKey: googleMapsApiKey
-        }
-        res.render("event-search", templateVars);
+      let templateVars = {
+        place: results[0],
+        activities: results[0].activities,
+        apiKey: googleMapsApiKey
       }
+      res.render("event-search", templateVars);
     })
     .catch((err) => {
       console.log(err);
-      res.status(404).send("No such event!");
+      res.status(404).send("No such place");
     });
 });
 
@@ -383,7 +361,7 @@ app.get('/BC/:region', (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      res.status(404).send("Event Not Saved");
+      res.status(404).send("Event not saved");
     });
 });
 
@@ -435,7 +413,7 @@ app.post('/event/saved/:activityId/:userId', (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      res.status(400).send("Event Not Saved");
+      res.status(400).send("Event not saved");
     })
 })
 
@@ -448,10 +426,10 @@ app.post('/place/saved/:placeId/:userId', (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      res.status(400).send("Place Not Favourited")
+      res.status(400).send("Place not favourited")
     })
 })
 
 app.listen(PORT, () =>{
-  console.log("Listening in on Port " + PORT)
+  console.log("Listening on port " + PORT)
 });
