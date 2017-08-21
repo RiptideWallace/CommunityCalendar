@@ -1,3 +1,13 @@
+$price-color-0: rgba(78, 177, 81, 1);
+$price-color-1: rgba(70, 160, 73, 1);
+$price-color-2: rgba(62, 142, 65, 1);
+$price-color-3: rgba(54, 124, 57, 1);
+$price-color-4: rgba(47, 106, 49, 1);
+$price-color-5: rgba(47, 106, 49, 1);
+$price-color-background: rgba(220, 239, 220, 1);
+$price-button-text-color: #ffffff;
+$price-button-font-weight: 600;
+
 html {
   position: relative;
   min-height: 100%;
@@ -180,14 +190,52 @@ footer {
     color: #888;
   }
   .price-range {
-    color: #255704;
+    color: $price-color-3;
     margin: 0;
   }
-  background-color: #eee;
+  background-color: $price-color-background;
+  border-radius: 5px;
   display: inline-block;
   font-weight: 900;
   margin-bottom: 10px;
   padding: 10px;
+}
+
+.price-buttons {
+  .price-button {
+    color: $price-button-text-color;
+    font-weight: $price-button-font-weight;
+    padding: 16px;
+  }
+  .price-button:hover {
+    background-color: $price-color-5;
+  }
+  .price-button-left {
+    background-color: $price-color-0;
+    border: 1px solid $price-color-4;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .price-button-middle {
+    border: 1px solid $price-color-4;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+  }
+  .price-button-right {
+    background-color: $price-color-3;
+    border: 1px solid $price-color-4;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+  }
+  .price-button-middle-left {
+    background-color: $price-color-1;
+  }
+  .price-button-middle-right {
+    background-color: $price-color-2;
+  }
+  margin: 20px 0;
 }
 
 .scrollable-menu {
