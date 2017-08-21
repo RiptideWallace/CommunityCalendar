@@ -1,45 +1,86 @@
+<!-- views/price-search.ejs -->
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <title>
-      Victoria Community Calendar
+      <%= price %> - Victoria Community Calendar
     </title>
-
     <% include partials/_head.ejs %>
-
   </head>
 
   <body>
 
     <% include partials/_header.ejs %>
 
-     <div class="container">
+    <div class="container">
 
-    <h3>Event Details</h3>
+      <h3>Search Events by Price Range: <%= price %></h3>
 
-      <div>
-      <% activity.forEach(function(a) { %>
-        <h2><a href="/BC/<%=a.region_slug%>/<%=a.place_slug%>/<%=a.activity_slug%>"><%= a.name %></a></h2>
-        <h3>at <%= a.place_name %></h3>
-        <p>Address: <%= a.street_address %>, <%= a.region_name %></p>
-        <p><%= a.description %></p>
-        <% if (a.start_date === a.end_date) { %>
-          <p>Date: <%= a.start_date %></p>
-        <% } %>
-        <p>Starts: <%= a.start_date %></p>
-        <p>Ends: <%= a.end_date %></p>
-        <p>Price:</p>
-        <div class="price-box">
-          <% if (a.price_range === 0) { %>
-            <p class="price-range">Free!</p>
-          <% } else { %>
-            <% for (p = 0; p < a.price_range; p++) { %><span class="glyphicon glyphicon-usd price-range" aria-hidden="true"></span><% } %>
-            / <span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span><span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span><span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span>
-          <% } %>
+      <p class="panel">
+        Search for <a href="/price/0" title="Search for free events">free events</a>, events that cost at <a href="/price/1" title="Search for events under $10">less than &#36;10</a> (&#36; / &#36;&#36;&#36;), events that cost <a href="/price/2" title="Search for events $10 to $100">&#36;10 and up</a> (&#36;&#36; / &#36;&#36;&#36;), or events that cost <a href="/price/3" title="Search for $100 and up">$100 and up</a> (&#36;&#36;&#36; / &#36;&#36;&#36;).
+      </p>
+
+      <div class="btn-group btn-group-justified price-buttons" role="group" aria-label="...">
+        <div class="btn-group" role="group">
+          <a href="/price/0" title="Search for free events">
+            <button type="button" class="btn btn-default price-button price-button-left">Free!</button>
+          </a>
         </div>
-         <p><a href="<%= a.source %>" title="<%= a.name %>">Source</a></p>
-      <% } ) %>
+        <div class="btn-group" role="group">
+          <a href="/price/1" title="Search for events under $10">
+            <button type="button" class="btn btn-default price-button price-button-middle price-button-middle-left">
+              <span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span>
+            </button>
+          </a>
+        </div>
+        <div class="btn-group" role="group">
+          <a href="/price/2" title="Search for events $10 to $100">
+            <button type="button" class="btn btn-default price-button price-button-middle price-button-middle-right">
+              <span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span><span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span>
+            </button>
+          </a>
+        </div>
+        <div class="btn-group" role="group">
+          <a href="/price/3" title="Search for events $100 and up">
+            <button type="button" class="btn btn-default price-button price-button-right">
+              <span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span><span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span><span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span>
+            </button>
+          </a>
+        </div>
       </div>
+
+      <% if (activity.length === 0) { %>
+        <div class="alert alert-danger" role="alert">
+          <strong>Uh oh!</strong> There are no current events in that price range. Try another range above.
+        </div>
+      <% } else { %>
+        <% activity.forEach(function(a) { %>
+          <div class="well">
+            <h2><a href="/BC/<%=a.region_slug%>/<%=a.place_slug%>/<%=a.activity_slug%>"><%= a.name %></a></h2>
+            <h3>at <%= a.place_name %></h3>
+            <p>Address: <%= a.street_address %>, <%= a.region_name %></p>
+            <p><%= a.description %></p>
+            <% if (a.start_date === a.end_date) { %>
+              <p>Date: <%= a.start_date %></p>
+            <% } else { %>
+            <p>Starts: <%= a.start_date %></p>
+            <p>Ends: <%= a.end_date %></p>
+            <% } %>
+            <p>Price:</p>
+            <div class="price-box">
+              <% if (a.price_range === 0) { %>
+                <p class="price-range">Free!</p>
+              <% } else { %>
+                <% for (p = 0; p < a.price_range; p++) { %><span class="glyphicon glyphicon-usd price-range" aria-hidden="true"></span><% } %>
+                / <span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span><span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span><span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span>
+              <% } %>
+            </div>
+             <p><a href="<%= a.source %>" title="<%= a.name %>">Source</a></p>
+           </div>
+        <% } ) %>
+      <% } %>
+
     </div>
 
     <% include partials/_footer.ejs %>
