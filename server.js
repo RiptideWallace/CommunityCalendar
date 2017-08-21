@@ -52,6 +52,25 @@ function randomString() {
   return output;
 }
 
+function getPriceRangeString(priceParameter) {
+  let priceString = "";
+  switch (parseInt(priceParameter)) {
+    case 0:
+      priceString = "Free Events";
+      break;
+    case 1:
+      priceString = "Events Less Than $10";
+      break;
+    case 2:
+      priceString = "Events $10 and Up";
+      break;
+    case 3:
+      priceString = "Events $100 and Up";
+      break;
+  }
+  return priceString;
+}
+
 // For production (Heroku) http:// requests, redirect to https://
 if (app.get('env') === 'production') {
   app.use((req, res, next) => {
@@ -389,16 +408,13 @@ app.get('/price/:pricerange', (req, res) => {
     .join('places', 'places.id', '=', 'activities.place_id')
     .join('regions', 'regions.id', '=', 'places.region_id')
     .where({
-      'activities.price_range': req.params.pricerange,
+      'activities.price_range': parseInt(req.params.pricerange) || 0,
     })
     .then((results) => {
-      console.log(results);
-      if (results.length === 0) {
-        res.status(404).send("There are no activities in this price range");
-        return;
-      }
+      let priceRangeString = getPriceRangeString(req.params.pricerange)
       let templateVars = {
         activity: results,
+        price: priceRangeString
       }
       res.render("price-search", templateVars);
     });
