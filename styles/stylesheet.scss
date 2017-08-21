@@ -67,6 +67,9 @@ header {
     .navbar-right {
       margin-right: 0;
     }
+    .navbar-toggle {
+      padding: 6px 10px;
+    }
     .navbar-toggler-icon {
       color: white;
     }
@@ -117,6 +120,18 @@ footer {
   position: absolute;
   text-align: center;
   width: 100%
+}
+
+.delete-button {
+  padding-left: 15px;
+  padding-right: 15px;
+  max-width: 100px;
+}
+
+.delete-dropdown {
+  padding: 5px;
+  min-width: 0;
+  max-width: 100px;
 }
 
 /* Dropdown Button */
@@ -281,4 +296,3 @@ footer {
   top: 115;
   right: 75;
 }
-
