@@ -1,3 +1,5 @@
+$break-point-small: 320px;
+$break-point-mid: 500px;
 $price-color-0: rgba(78, 177, 81, 1);
 $price-color-1: rgba(70, 160, 73, 1);
 $price-color-2: rgba(62, 142, 65, 1);
@@ -179,6 +181,18 @@ footer {
   background-image: url("/images/victoria/victoria-hero-inner-harbour-parliament.jpg");
   background-position: center;
   background-size: cover;
+}
+
+.map-event {
+  @media only screen and (max-width: $break-point-small) {
+    height: 300px;
+  }
+  @media only screen and (max-width: $break-point-mid) {
+    height: 400px;
+  }
+  @media only screen and (min-width: $break-point-mid) {
+    height: 500px;
+  }
 }
 
 .map-place-event-search {
