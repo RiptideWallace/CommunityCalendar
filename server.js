@@ -212,6 +212,7 @@ app.post("/logout", (req, res) => {
   res.redirect("/");
 });
 
+// Route to show a user's profile page
 app.get("/users/:id/show", (req, res) => {
   knex('users')
   .where({id: req.params.id})
@@ -229,8 +230,10 @@ app.get("/users/:id/show", (req, res) => {
         'activities.source as activity_source',
         'activities.slug as activity_slug',
         'regions.slug as region_slug',
+        'regions.name as region_name',
         'places.slug as place_slug',
-        'places.name as place_name'
+        'places.name as place_name',
+        'places.street_address as street_address'
       ])
     .from("saved-events")
     .leftJoin('activities', 'saved-events.activity_id', 'activities.id')
@@ -241,16 +244,17 @@ app.get("/users/:id/show", (req, res) => {
       knex
         .select([
           '*',
-          'regions.slug as region_slug',
+          'places.name as place_name',
           'places.slug as place_slug',
-          'places.name as place_name'
+          'regions.name as region_name',
+          'regions.slug as region_slug',
         ])
       .from("favourited-places")
       .join('places', 'favourited-places.place_id', 'places.id')
       .join('regions', 'places.region_id', 'regions.id')
       .where({'favourited-places.user_id': req.params.id})
       .then((favedResults) => {
-        const templateVars = {
+        let templateVars = {
           user: userResults[0],
           savedEvents: savedResults,
           favedPlaces: favedResults
@@ -420,29 +424,81 @@ app.get('/price/:pricerange', (req, res) => {
     });
 });
 
-//Route for when an event is saved by a user
+// Route for when an event is saved by a user
 app.post('/event/saved/:activityId/:userId', (req, res) => {
   knex('saved-events')
-    .insert({activity_id: req.params.activityId, user_id: req.params.userId})
-    .then((results) => {
-      res.redirect(`/users/${req.params.userId}/show`)
+    .select('*')
+    .where({
+      'activity_id': req.params.activityId,
+      'user_id': req.params.userId
     })
-    .catch((err) => {
-      console.log(err);
-      res.status(400).send("Event not saved");
+    .then((searchResults) => {
+      if (searchResults.length >= 1) {
+        res.redirect(`/users/${req.params.userId}/show`)
+      } else {
+        knex('saved-events')
+          .insert({activity_id: req.params.activityId, user_id: req.params.userId})
+          .then((results) => {
+            res.redirect(`/users/${req.params.userId}/show`)
+          })
+          .catch((err) => {
+            console.log(err);
+            res.status(400).send("Event not saved");
+          })
+      }
     })
 })
 
-//Route for when a place is favourited by a user
-app.post('/place/saved/:placeId/:userId', (req, res) => {
-  knex('favourited-places')
-    .insert({place_id: req.params.placeId, user_id: req.params.userId})
+// Route for when a saved event is deleted by a user
+app.post('/event/delete/:activityId/:userId', (req, res) => {
+  knex('saved-events')
+    .where({activity_id: req.params.activityId, user_id: req.params.userId})
+    .del()
     .then((results) => {
       res.redirect(`/users/${req.params.userId}/show`)
     })
     .catch((err) => {
       console.log(err);
-      res.status(400).send("Place not favourited")
+      res.status(400).send("Event could not be deleted");
+    })
+})
+
+// Route for when a place is favourited by a user
+app.post('/place/saved/:placeId/:userId', (req, res) => {
+  knex('favourited-places')
+    .select('*')
+    .where({
+      'place_id': req.params.placeId,
+      'user_id': req.params.userId
+    })
+    .then((searchResults) => {
+      if (searchResults.length >= 1) {
+        res.redirect(`/users/${req.params.userId}/show`)
+      } else {
+        knex('favourited-places')
+          .insert({place_id: req.params.placeId, user_id: req.params.userId})
+          .then((results) => {
+            res.redirect(`/users/${req.params.userId}/show`)
+          })
+          .catch((err) => {
+            console.log(err);
+            res.status(400).send("Place not favourited")
+          })
+      }
+    })
+})
+
+// Route for when a saved event is deleted by a user
+app.post('/place/delete/:placeId/:userId', (req, res) => {
+  knex('favourited-places')
+    .where({place_id: req.params.placeId, user_id: req.params.userId})
+    .del()
+    .then((results) => {
+      res.redirect(`/users/${req.params.userId}/show`)
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(400).send("Place could not be un-favourited");
     })
 })
 

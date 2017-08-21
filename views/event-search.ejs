@@ -19,7 +19,7 @@
 
       <div class="well">
         <h4>Location details</h4>
-        <p><strong><%= place.place_name %></strong> in <strong><%= place.region_name %></strong></p>
+        <p><strong><%= place.place_name %></strong> in <strong><a href="/BC/<%= place.region_slug %>"><%= place.region_name %></a></strong></p>
         <p>Address: <%= place.street_address %></p>
         <div id="map" class="map-place-event-search"></div>
         <% if (userId) { %>
