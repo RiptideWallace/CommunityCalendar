@@ -14,15 +14,15 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="/" class="header-link">Home</a></li>
         <% if (userId) { %>
-          <li><a href="/users/<%= userId %>/show" class="header-link">User Profile</a></li>
+          <li><a href="/user/<%= userId %>/show" class="header-link">User Profile</a></li>
           <li>
-            <form class="logout" action="/logout" method="POST">
+            <form class="logout" action="/user/logout" method="POST">
               <input type="submit" value="Logout" class="btn btn-block btn-link logout-button">
             </form>
           </li>
         <% } else { %>
-          <li><a href="/register" class="header-link">Register</a></li>
-          <li><a href="/login" class="header-link">Login</a></li>
+          <li><a href="/user/register" class="header-link">Register</a></li>
+          <li><a href="/user/login" class="header-link">Login</a></li>
         <% } %>
       </ul>
     </div>
