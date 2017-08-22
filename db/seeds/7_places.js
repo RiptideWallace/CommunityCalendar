@@ -60,6 +60,7 @@ exports.seed = function(knex, Promise) {
         knex('places').insert({id: 55, region_id: 10, name: 'Sidney Museum and Archives', abbreviation: 'SMA', street_address: '2423 Beacon Avenue', slug: 'sidney-museum-and-archives', latitude: 48.411897, longitude: -123.368979}),
         knex('places').insert({id: 56, region_id: 3, name: 'Ecole Victor Brodeur', abbreviation: 'EVB', street_address: '637 Head Street', slug: 'ecole-victor-brodeur', latitude: 48.431887, longitude: -123.401294}),
         knex('places').insert({id: 57, region_id: 2, name: 'Windsor Pavillion', abbreviation: 'WP', street_address: '2451 Windsor Road', slug: 'windsor-pavillion', latitude: 48.421993, longitude: -123.309169}),
+        knex('places').insert({id: 58, region_id: 2, name: 'Oak Bay Online', abbreviation: 'OBOnline', street_address: 'www.oakbay.ca', slug: 'oak-bay-online', latitude: 48.430895, longitude: -123.320819}),
       ]);
     });
 };
