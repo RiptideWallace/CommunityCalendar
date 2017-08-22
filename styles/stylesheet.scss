@@ -16,7 +16,7 @@ html {
 }
 
 body {
-  margin-bottom: 180px;
+  margin-bottom: 140px;
 }
 
 header {
@@ -122,6 +122,10 @@ footer {
   width: 100%
 }
 
+.btn-link-list {
+  margin-bottom: 15px;
+}
+
 .delete-button {
   padding-left: 15px;
   padding-right: 15px;
@@ -134,36 +138,14 @@ footer {
   max-width: 100px;
 }
 
-/* Dropdown Button */
-.dropbtn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: 1px;
-  cursor: pointer;
-}
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-  position: relative;
-  margin-bottom: 20px;
-}
-
-/* A full-screen transparent div that opens when a dropdown menu opens */
+/* A full-screen transparent div that is created when a dropdown menu opens */
 /* Default z-index is 990, which covers navigation in Chrome mobile */
 .dropdown-backdrop {
   z-index: 0;
 }
 
-/* Dropdown Content (Hidden by Default) */
+/* Dropdown content (hidden by default until dropdown button is clicked) */
 .dropdown-content {
-  a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-  }
   background-color: #f9f9f9;
   display: none;
   position: absolute;
@@ -172,6 +154,12 @@ footer {
 }
 
 .dropdown-menu {
+  li {
+    a {
+      font-size: 16px;
+      padding: 8px 15px;
+    }
+  }
   border: 1px solid #ccc;
   margin: 0;
 }
