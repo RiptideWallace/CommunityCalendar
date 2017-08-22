@@ -23,7 +23,7 @@
             </button>
             <ul class="dropdown-content dropdown-menu scrollable-menu" role="menu">
             <% region.forEach(function(r) { %>
-              <li><a href="/BC/<%=r.region_slug%>"><%=r.region_name%></a></li>
+              <li class="dropdown-item"><a href="/BC/<%=r.region_slug%>"><%=r.region_name%></a></li>
             <% } ) %>
             </ul>
           </div>
@@ -36,7 +36,7 @@
             </button>
             <ul class="dropdown-content dropdown-menu scrollable-menu" role="menu">
             <% place.forEach(function(p) { %>
-              <li><a href="/BC/<%=p.region_slug%>/<%=p.place_slug%>"><%=p.place_name%></a></li>
+              <li class="dropdown-item"><a href="/BC/<%=p.region_slug%>/<%=p.place_slug%>"><%=p.place_name%></a></li>
             <% } ) %>
             </ul>
           </div>
@@ -48,10 +48,10 @@
               Choose a Price Range <span class="caret"></span>
             </button>
             <ul class="dropdown-content dropdown-menu scrollable-menu" role="menu">
-              <li><a href="/price/0">Free!</a></li>
-              <li><a href="/price/1">Less than &#36;10</a></li>
-              <li><a href="/price/2">&#36;10 and up</a></li>
-              <li><a href="/price/3">&#36;100 and up</a></li>
+              <li class="dropdown-item"><a href="/price/0">Free!</a></li>
+              <li class="dropdown-item"><a href="/price/1">Less than &#36;10</a></li>
+              <li class="dropdown-item"><a href="/price/2">&#36;10 and up</a></li>
+              <li class="dropdown-item"><a href="/price/3">&#36;100 and up</a></li>
             </ul>
           </div>
         </div>
