@@ -169,7 +169,7 @@ footer {
 
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {
-  background-color: #f1f1f1
+  background-color: #f1f1f1;
 }
 
 /* Show the dropdown menu on hover */
@@ -185,6 +185,13 @@ footer {
 .dropdown-menu {
   border: 1px solid #ccc;
   margin: 0;
+}
+
+.dropdown-nav {
+  .dropdown-button {
+    margin-bottom: 20px;
+  }
+  display: block;
 }
 
 .favourite-button {
@@ -269,6 +276,7 @@ footer {
 
 .scrollable-menu {
   height: auto;
+  margin-top: 46px;
   max-height: 200px;
   overflow-x: hidden;
 }
