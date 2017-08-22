@@ -188,9 +188,7 @@ footer {
 }
 
 .home-page-body {
-  background-attachment: fixed;
-  background-image: url("/images/victoria/victoria-hero-inner-harbour-parliament.jpg");
-  background-position: center;
+  background: url("/images/victoria/victoria-hero-inner-harbour-parliament.jpg") no-repeat center center fixed;
   background-size: cover;
 }
 
