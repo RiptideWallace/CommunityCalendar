@@ -40,12 +40,12 @@
           <% } %>
           <p><a href="<%= savedEvent.activity_source %>" title="<%= savedEvent.place_name %>">Source</a></p>
           <div class="dropup">
-            <button class="btn btn-warning dropdown-toggle delete-button" type="button" data-toggle="dropdown">Delete?
+            <button class="btn btn-block btn-warning dropdown-toggle" type="button" data-toggle="dropdown">Remove saved event?
              <i class="fa fa-trash-o" aria-hidden="true"></i></button>
             <ul class="dropdown-menu delete-dropdown">
               <li>
                 <form action="/event/delete/<%= savedEvent.activity_id %>/<%= userId %>" method="POST">
-                  <button class="btn btn-danger" title="Delete <%= savedEvent.activity_name %> from your Saved Events">
+                  <button class="btn btn-block btn-danger" title="Delete <%= savedEvent.activity_name %> from your Saved Events">
                     Delete! <i class="fa fa-trash-o" aria-hidden="true"></i>
                   </button>
                 </form>
@@ -70,12 +70,12 @@
           <h3><a href="/BC/<%= favedPlace.region_slug %>/<%= favedPlace.place_slug %>" title="Events at <%= favedPlace.place_name %>"><%= favedPlace.place_name %></a></h3>
           <p><%= favedPlace.street_address %> in <a href="/BC/<%= favedPlace.region_slug %>" title="Events in <%= favedPlace.region_name %>"><%= favedPlace.region_name %></a></p>
           <div class="dropup">
-            <button class="btn btn-warning dropdown-toggle delete-button" type="button" data-toggle="dropdown">Delete?
+            <button class="btn btn-block btn-warning dropdown-toggle" type="button" data-toggle="dropdown">Remove favourited place?
              <i class="fa fa-trash-o" aria-hidden="true"></i></button>
             <ul class="dropdown-menu delete-dropdown">
               <li>
                 <form action="/place/delete/<%= favedPlace.place_id %>/<%= userId %>" method="POST">
-                  <button class="btn btn-danger" title="Delete <%= favedPlace.place_name %> from your Favourite Places">
+                  <button class="btn btn-block btn-danger" title="Delete <%= favedPlace.place_name %> from your Favourite Places">
                     Delete! <i class="fa fa-trash-o" aria-hidden="true"></i>
                   </button>
                 </form>
