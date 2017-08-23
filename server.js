@@ -214,6 +214,7 @@ app.get("/users/:id/show", (req, res) => {
     .leftJoin('activities', 'saved-events.activity_id', 'activities.id')
     .leftJoin('places', 'activities.place_id', 'places.id')
     .leftJoin('regions', 'places.region_id', 'regions.id')
+    .where({'saved-events.user_id': req.params.id})
     .then((savedResults) => {
       knex
         .select([
@@ -225,6 +226,7 @@ app.get("/users/:id/show", (req, res) => {
       .from("favourited-places")
       .join('places', 'favourited-places.place_id', 'places.id')
       .join('regions', 'places.region_id', 'regions.id')
+      .where({'favourited-places.user_id': req.params.id})
       .then((favedResults) => {
         const templateVars = {
           user: userResults[0],

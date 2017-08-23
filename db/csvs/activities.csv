@@ -1,4 +1,8 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 949a3b357a7892f656fff1c88cca116e53b13ad4
 id,place_id,name,description,start_date,end_date,price_range,source,slug
 1,25,Sportball - Parent and Child Indoor Multi-Sport(2-3 YRS),"Focusing on physical literacy and social exploration as toddlers learn fundamental sport skills and participate in creative motor games, in 8 different popular sports. Children are challenged according to their individual skill level and grownups are taught techniques to help toddlers refine motor skills while developing social skills.","July 8th, 2017","August 26th, 2017",3,http://www.oaklandscommunitycentre.com/recreation/preschool,sportball-parent-and-child-indoor-multi-sport2-3-yrs-1
 2,25,Kids At Tennis Society (KATS) Tennis Lessons (9-13 YRS),"Using Tennis Canada's progressive tennis approach we supply smaller racquets and courts, lower nets and low compression balls. All of these are designed to help kids begin to develop confidence in their ability to hit the ball and allows them to be successful very quickly. This program is sponsored by KATS and free for those participants who qualify. L.I.F.E. program members are pre-qualified","June 29th, 2017","August 31st, 2017",0,http://www.oaklandscommunitycentre.com/recreation/youth,"'kids-at-tennis-society-kats-tennis-lessons-9-13-yrs-2"""
@@ -163,6 +167,7 @@ id,place_id,name,description,start_date,end_date,price_range,source,slug
 161,4,Hockey: Victoria Grizzlies vs Vernon,Hockey: Victoria Grizzlies vs Vernon,"September 29th, 2017","September 29th, 2017",2,http://www.victoriagrizzlies.com/stats/schedule/18/32/9/home?league=1,hockey:-victoria-grizzlies-vs-vernon024561
 162,4,Hockey: Victoria Grizzlies vs Langley,Hockey: Victoria Grizzlies vs Langley,"September 30th, 2017","September 30th, 2017",2,http://www.victoriagrizzlies.com/stats/schedule/18/32/9/home?league=1,hockey:-victoria-grizzlies-vs-langley819812
 163,4,Lacrosse: Victoria Shamrocks vs New Westminster,Lacrosse: Victoria Shamrocks vs New Westminster,"August 20th, 2017","August 20th, 2017",2,http://www.victoriashamrocks.com/stats#/team-schedule?team_id=16040,lacrosse:-victoria-shamrocks-vs-new-westminster672199
+<<<<<<< HEAD
 164,4,Lacrosse: Victoria Shamrocks vs New Westminster,Lacrosse: Victoria Shamrocks vs New Westminster,"August 25th, 2017","August 25th, 2017",2,http://www.victoriashamrocks.com/stats#/team-schedule?team_id=16040,lacrosse:-victoria-shamrocks-vs-new-westminster107780
 =======
 id,place_id,name,description,start_date,end_date,price_range,source,slug
@@ -230,3 +235,6 @@ adults,high-intensity-interval-training-hiit-3
 
 31,24,Engineering 101 (6-12 Years),"Are you curious how airplanes fly? How wind turbines make energy? Or how bridges carry heavy trucks? They are all designed and built by Engineers. Engineering 101 offers a new challenge each week in areas like Aerospace, Civil, Mechanical, Marine, Environmental and more.","September 14th, 2017","October 19th, 2017",3,http://www.victoriawest.ca/classes-item/engineering-101-6-12-years/,engineering-101-6-12-years-31}
 >>>>>>> upstream-chris/master
+=======
+164,4,Lacrosse: Victoria Shamrocks vs New Westminster,Lacrosse: Victoria Shamrocks vs New Westminster,"August 25th, 2017","August 25th, 2017",2,http://www.victoriashamrocks.com/stats#/team-schedule?team_id=16040,lacrosse:-victoria-shamrocks-vs-new-westminster107780
+>>>>>>> 949a3b357a7892f656fff1c88cca116e53b13ad4
