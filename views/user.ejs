@@ -1,42 +1,91 @@
-<!DOCTYPE hmtl>
+<!-- views/users.ejs -->
+
+<!DOCTYPE html>
 <html>
   <head>
     <title>
-      Victoria Community Calendar
+      User Profile: <%= user.name %> - Victoria Community Calendar
     </title>
     <% include partials/_head.ejs %>
-
   </head>
 
   <body>
 
     <% include partials/_header.ejs %>
 
-    <div>
-      <input type="hidden" id="user-profile-id" value="<%=user.id%>">
-      <h1><span class="user-name-highlight"><%=user.name%></span></h1>
-    </div>
-
-    <div class="saved-events-body">
-      <h3>Saved Events</h3>
-      <% savedEvents.forEach(function(savedEvent) { %>
-      <div class="saved-events well">
-        <a href="/BC/<%=savedEvent.region_slug%>/<%=savedEvent.place_slug%>/<%=savedEvent.activity_slug%>"><%=savedEvent.activity_name%></a>
-        <p> at <%=savedEvent.place_name%></p>
-        <p><%=savedEvent.activity_start_date%></p>
-        <p><%=savedEvent.activity_end_date%></p>
-        <p><%=savedEvent.activity_source%></p>
+    <div class="container">
+      <div>
+        <input type="hidden" id="user-profile-id" value="<%= user.id %>">
+        <h1>User Profile: <span class="user-name-highlight"><%= user.name %></span></h1>
       </div>
-      <% } ) %>
-    </div>
 
-    <div>
-      <h3> Favourited Places</h3>
-      <% favedPlaces.forEach(function(favedPlace) { %>
-      <div class="favourited-places well">
-        <a href="/BC/<%=favedPlace.region_slug%>/<%=favedPlace.place_slug%>"><%=favedPlace.place_name%></a>
+      <hr>
+
+      <div class="saved-events-body">
+        <h2>Saved Events</h2>
+        <% if (savedEvents.length === 0) { %>
+          <div class="alert alert-info" role="alert">
+            <i class="fa fa-info-circle" aria-hidden="true"></i> No events saved yet.
+          </div>
+        <% } %>
+        <% savedEvents.forEach(function(savedEvent) { %>
+        <div class="saved-events well">
+          <h3><a href="/BC/<%= savedEvent.region_slug %>/<%= savedEvent.place_slug %>/<%= savedEvent.activity_slug %>" title="<%= savedEvent.activity_name %> at <%= savedEvent.place_name %>"><%= savedEvent.activity_name %></a></h3>
+          <h4><p> at <%= savedEvent.place_name %></p></h4>
+          <% if (savedEvent.activity_start_date === savedEvent.activity_end_date) { %>
+            <p>Date: <%= savedEvent.activity_start_date %></p>
+          <% } else { %>
+            <p>Starts: <%= savedEvent.activity_start_date %></p>
+            <p>Ends: <%= savedEvent.activity_end_date %></p>
+          <% } %>
+          <p><a href="<%= savedEvent.activity_source %>" title="<%= savedEvent.place_name %>">Source</a></p>
+          <div class="dropup">
+            <button class="btn btn-warning dropdown-toggle delete-button" type="button" data-toggle="dropdown">Delete?
+             <i class="fa fa-trash-o" aria-hidden="true"></i></button>
+            <ul class="dropdown-menu delete-dropdown">
+              <li>
+                <form action="/event/delete/<%= savedEvent.activity_id %>/<%= userId %>" method="POST">
+                  <button class="btn btn-danger" title="Delete <%= savedEvent.activity_name %> from your Saved Events">
+                    Delete! <i class="fa fa-trash-o" aria-hidden="true"></i>
+                  </button>
+                </form>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <% } ) %>
       </div>
-      <% } ) %>
+
+      <hr>
+
+      <div>
+        <h2>Favourited Places</h2>
+        <% if (favedPlaces.length === 0) { %>
+          <div class="alert alert-info" role="alert">
+            <i class="fa fa-info-circle" aria-hidden="true"></i> No places favourited yet.
+          </div>
+        <% } %>
+        <% favedPlaces.forEach(function(favedPlace) { %>
+        <div class="favourited-places well">
+          <h3><a href="/BC/<%= favedPlace.region_slug %>/<%= favedPlace.place_slug %>" title="Events at <%= favedPlace.place_name %>"><%= favedPlace.place_name %></a></h3>
+          <p><%= favedPlace.street_address %> in <a href="/BC/<%= favedPlace.region_slug %>" title="Events in <%= favedPlace.region_name %>"><%= favedPlace.region_name %></a></p>
+          <div class="dropup">
+            <button class="btn btn-warning dropdown-toggle delete-button" type="button" data-toggle="dropdown">Delete?
+             <i class="fa fa-trash-o" aria-hidden="true"></i></button>
+            <ul class="dropdown-menu delete-dropdown">
+              <li>
+                <form action="/place/delete/<%= favedPlace.place_id %>/<%= userId %>" method="POST">
+                  <button class="btn btn-danger" title="Delete <%= favedPlace.place_name %> from your Favourite Places">
+                    Delete! <i class="fa fa-trash-o" aria-hidden="true"></i>
+                  </button>
+                </form>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <% } ) %>
+      </div>
+
     </div>
 
     <% include partials/_footer.ejs %>

@@ -1,10 +1,22 @@
+$break-point-small: 320px;
+$break-point-mid: 500px;
+$price-color-0: rgba(78, 177, 81, 1);
+$price-color-1: rgba(70, 160, 73, 1);
+$price-color-2: rgba(62, 142, 65, 1);
+$price-color-3: rgba(54, 124, 57, 1);
+$price-color-4: rgba(47, 106, 49, 1);
+$price-color-5: rgba(47, 106, 49, 1);
+$price-color-background: rgba(220, 239, 220, 1);
+$price-button-text-color: #ffffff;
+$price-button-font-weight: 600;
+
 html {
   position: relative;
   min-height: 100%;
 }
 
 body {
-  margin-bottom: 180px;
+  margin-bottom: 140px;
 }
 
 header {
@@ -54,6 +66,9 @@ header {
     }
     .navbar-right {
       margin-right: 0;
+    }
+    .navbar-toggle {
+      padding: 6px 10px;
     }
     .navbar-toggler-icon {
       color: white;
@@ -107,23 +122,29 @@ footer {
   width: 100%
 }
 
-/* Dropdown Button */
-.dropbtn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: 1px;
-  cursor: pointer;
+.btn-link-list {
+  margin-bottom: 15px;
 }
 
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-  position: relative;
-  margin-bottom: 20px;
+.delete-button {
+  padding-left: 15px;
+  padding-right: 15px;
+  max-width: 100px;
 }
 
-/* Dropdown Content (Hidden by Default) */
+.delete-dropdown {
+  padding: 5px;
+  min-width: 0;
+  max-width: 100px;
+}
+
+/* A full-screen transparent div that is created when a dropdown menu opens */
+/* Default z-index is 990, which covers navigation in Chrome mobile */
+.dropdown-backdrop {
+  z-index: 0;
+}
+
+/* Dropdown content (hidden by default until dropdown button is clicked) */
 .dropdown-content {
   background-color: #f9f9f9;
   display: none;
@@ -132,39 +153,43 @@ footer {
   z-index: 1;
 }
 
-/* Links inside the dropdown */
-.dropdown-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {
-  background-color: #f1f1f1
-}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-/* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {
-    background-color: #3e8e41;
-}
-
 .dropdown-menu {
+  li {
+    a {
+      font-size: 16px;
+      padding: 8px 15px;
+    }
+  }
   border: 1px solid #ccc;
   margin: 0;
 }
 
+.dropdown-nav {
+  .dropdown-button {
+    margin-bottom: 20px;
+  }
+  display: block;
+}
+
+.favourite-button {
+  margin-top: 20px;
+}
+
 .home-page-body {
-  background-attachment: fixed;
-  background-image: url("/images/victoria/victoria-hero-inner-harbour-parliament.jpg");
-  background-position: center;
+  background: url("/images/victoria/victoria-hero-inner-harbour-parliament.jpg") no-repeat center center fixed;
   background-size: cover;
+}
+
+.map-event {
+  @media only screen and (max-width: $break-point-small) {
+    height: 300px;
+  }
+  @media only screen and (max-width: $break-point-mid) {
+    height: 400px;
+  }
+  @media only screen and (min-width: $break-point-mid) {
+    height: 500px;
+  }
 }
 
 .map-place-event-search {
@@ -176,18 +201,57 @@ footer {
     color: #888;
   }
   .price-range {
-    color: #255704;
+    color: $price-color-3;
     margin: 0;
   }
-  background-color: #eee;
+  background-color: $price-color-background;
+  border-radius: 5px;
   display: inline-block;
   font-weight: 900;
   margin-bottom: 10px;
   padding: 10px;
 }
 
+.price-buttons {
+  .price-button {
+    color: $price-button-text-color;
+    font-weight: $price-button-font-weight;
+    padding: 16px;
+  }
+  .price-button:hover {
+    background-color: $price-color-5;
+  }
+  .price-button-left {
+    background-color: $price-color-0;
+    border: 1px solid $price-color-4;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .price-button-middle {
+    border: 1px solid $price-color-4;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+  }
+  .price-button-right {
+    background-color: $price-color-3;
+    border: 1px solid $price-color-4;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+  }
+  .price-button-middle-left {
+    background-color: $price-color-1;
+  }
+  .price-button-middle-right {
+    background-color: $price-color-2;
+  }
+  margin: 20px 0;
+}
+
 .scrollable-menu {
   height: auto;
+  margin-top: 46px;
   max-height: 200px;
   overflow-x: hidden;
 }
@@ -215,4 +279,3 @@ footer {
   top: 115;
   right: 75;
 }
-

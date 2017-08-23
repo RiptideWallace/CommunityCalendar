@@ -4,8 +4,8 @@
   <% if (userId) { %>
     <div class="footer-link">
       <a href="/">Home</a> -
-      <a href="/users/<%= userId %>/show">User Profile</a> -
-      <form class="footer-logout" action="/logout" method="POST">
+      <a href="/user/<%= userId %>/show">User Profile</a> -
+      <form class="footer-logout" action="/user/logout" method="POST">
         <input type="submit" value="Logout" class="btn btn-link">
       </form>
     </div>
@@ -13,8 +13,8 @@
   <% } else { %>
     <div class="footer-link">
       <a href="/">Home</a> -
-      <a href="/register">Register</a> -
-      <a href="/login">Login</a>
+      <a href="/user/register">Register</a> -
+      <a href="/user/login">Login</a>
     </div>
     <p class="footer-company-name">Victoria Community Calendar</p>
   <% } %>

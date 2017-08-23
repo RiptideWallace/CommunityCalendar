@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include partials/_head.ejs %>
+    <title>
+      404 - Victoria Community Calendar
+    </title>
+  </head>
+
+  <body>
+
+    <% include partials/_header.ejs %>
+
+    <div class="container">
+      <div class="jumbotron col-xs-12 col-sm-6 col-sm-offset-3">
+
+        <h1>Whoops!</h1>
+
+        <p>We can't find what you're looking for.</p>
+
+        <p>How about one of these options instead?</p>
+
+        <ul class="list-unstyled">
+          <li><a href="/" class="btn btn-block btn-link-list btn-success" title="Home - Community Calendar">Home</a></li>
+          <% if (userId) { %>
+            <li><a href="/user/<%= userId %>/show" class="btn btn-block btn-link-list btn-success" title="User Profile - Community Calendar">User Profile</a></li>
+            <li>
+              <form class="logout" action="/user/logout" method="POST">
+                <input type="submit" value="Logout" class="btn btn-block btn-link-list btn-success">
+              </form>
+            </li>
+          <% } else { %>
+            <li><a href="/user/register" class="btn btn-block btn-link-list btn-success" title="Register - Community Calendar">Register</a></li>
+            <li><a href="/user/login" class="btn btn-block btn-link-list btn-success" title="Login - Community Calendar">Login</a></li>
+          <% } %>
+        </ul>
+
+      </div>
+    </div>
+
+  <% include partials/_footer.ejs %>
+
+  </body>
+</html>

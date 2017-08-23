@@ -4,17 +4,9 @@
 <html lang="en">
   <head>
     <title>
-      Events at
-      <% if (activities.length === 0) { %>
-        <%= place[0].place_name %>
-      <% } else { %>
-        <%= activities[0].place_name %>
-      <% } %>
-      - Victoria Community Calendar
+      Events at <%= place.place_name %> - Victoria Community Calendar
     </title>
-
     <% include partials/_head.ejs %>
-
   </head>
 
   <body>
@@ -23,72 +15,34 @@
 
     <div class="container">
 
-      <h3>Events at
-        <% if (activities.length === 0) { %>
-          <%= place[0].place_name %>
-        <% } else { %>
-          <%= activities[0].place_name %>
-        <% } %>
-      </h3>
+      <h3>Events at <%= place.place_name %></h3>
 
       <div class="well">
         <h4>Location details</h4>
-        <p>
-          <strong>
-            <% if (activities.length === 0) { %>
-              <%= place[0].place_name %>
-            <% } else { %>
-              <%= activities[0].place_name %>
-            <% } %>
-          </strong>
-          in
-          <strong>
-            <% if (activities.length === 0) { %>
-              <%= place[0].region_name %>
-            <% } else { %>
-              <%= activities[0].region_name %>
-            <% } %>
-          </strong>
-        </p>
-        <p>Address:
-          <% if (activities.length === 0) { %>
-            <%= place[0].street_address %>
-          <% } else { %>
-            <%= activities[0].street_address %>
-          <% } %>
-        </p>
+        <p><strong><%= place.place_name %></strong> in <strong><a href="/BC/<%= place.region_slug %>"><%= place.region_name %></a></strong></p>
+        <p>Address: <%= place.street_address %></p>
         <div id="map" class="map-place-event-search"></div>
         <% if (userId) { %>
           <div>
-          <% if (activities.length === 0) { %>
-            <form action="/place/saved/<%= place[0].place_id %>/<%= userId %>" method="POST">
-              <button type="submit" class="btn btn-block btn-primary">
+            <form action="/place/saved/<%= place.place_id %>/<%= userId %>" method="POST">
+              <button type="submit" class="btn btn-block btn-primary favourite-button">
                 <i class="fa fa-heart" aria-hidden="true"></i>
                 <span>&nbsp Add this place to favourites</span>
               </button>
             </form>
-          <% } else { %>
-            <form action="/place/saved/<%= activities[0].place_id %>/<%= userId %>" method="POST">
-              <button type="submit" class="btn btn-block btn-primary">
-                <i class="fa fa-heart" aria-hidden="true"></i>
-                <span>&nbsp Add this place to favourites</span>
-              </button>
-            </form>
-          <% } %>
-
           </div>
         <% } %>
       </div>
 
-      <% if (activities.length === 0) { %>
+      <% if (!activities.length) { %>
         <h3>No activities for this place. <i class="fa fa-frown-o" aria-hidden="true"></i></h3>
       <% } else { %>
         <div>
           <% activities.forEach(function(a) { %>
             <div class="well">
-              <h2><a href="/BC/<%=a.region_slug%>/<%=a.place_slug%>/<%=a.activity_slug%>"><%= a.name %></a></h2>
-              <h3>at <%= a.place_name %></h3>
-              <p>Address: <%= a.street_address %>, <%= a.region_name %></p>
+              <h2><a href="/BC/<%=place.region_slug%>/<%=place.place_slug%>/<%=a.slug%>"><%= a.name %></a></h2>
+              <h3>at <%= place.place_name %></h3>
+              <p>Address: <%= place.street_address %>, <%= place.region_name %></p>
               <p><%= a.description %></p>
               <% if (a.start_date === a.end_date) { %>
                 <p>Date: <%= a.start_date %></p>
@@ -119,8 +73,8 @@
       var map;
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 8
+          center: {lat: <%= place.latitude %>, lng: <%= place.longitude %>},
+          zoom: 16
         });
       }
     </script>

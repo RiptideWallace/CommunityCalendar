@@ -1,93 +1,94 @@
+<!-- views/event.ejs -->
+
 <!DOCTYPE html>
 <html>
   <head>
     <title>
-      Victoria Community Calendar
+      <%= activity.name %> at <%= activity.place_name %> - Victoria Community Calendar
     </title>
-
     <% include partials/_head.ejs %>
-
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 20%;
-        width: 25%;
-        position: absolute;
-        top: 0;
-        right: 0;
-        margin-top: 325px;
-        margin-right: 25px;
-        border: 10px;
-      }
-    </style>
-
   </head>
   <body>
 
     <% include partials/_header.ejs %>
 
-    <div class="container">
-      <h3>Event Details</h3>
-      <div>
-        <h2><%= activity.name %></h2>
-        <h3>at <%= activity.place_name %></h3>
-        <p>Address: <%= activity.street_address %>, <%= activity.region_name %></p>
-        <p><%= activity.description %></p>
-        <% if (activity.start_date === activity.end_date) { %>
-          <p>Date: <%= activity.start_date %></p>
-        <% } %>
-        <p>Starts: <%= activity.start_date %></p>
-        <p>Ends: <%= activity.end_date %></p>
-        <p>Price:</p>
-        <div class="price-box">
-          <% if (activity.price_range === 0) { %>
-            <p class="price-range">Free!</p>
-          <% } else { %>
-            <% for (p = 0; p < activity.price_range; p++) { %><span class="glyphicon glyphicon-usd price-range" aria-hidden="true"></span><% } %>
-            / <span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span><span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span><span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span>
+    <div class="container well">
+
+      <div class="row">
+
+        <div class="col-xs-12 col-sm-7">
+
+          <h2>Event Details</h2>
+          <div>
+            <h3><%= activity.name %></h3>
+            <h3>at <a href="/BC/<%= activity.region_slug %>/<%= activity.place_slug %>" title="<%= activity.place_name %>"><%= activity.place_name %></a></h3>
+            <p>Address: <%= activity.street_address %>, <%= activity.region_name %></p>
+            <p><%= activity.description %></p>
+            <% if (activity.start_date === activity.end_date) { %>
+              <p>Date: <%= activity.start_date %></p>
+            <% } else { %>
+            <p>Starts: <%= activity.start_date %></p>
+            <p>Ends: <%= activity.end_date %></p>
+            <% } %>
+            <p>Price:</p>
+            <div class="price-box">
+              <% if (activity.price_range === 0) { %>
+                <p class="price-range">Free!</p>
+              <% } else { %>
+                <% for (p = 0; p < activity.price_range; p++) { %><span class="glyphicon glyphicon-usd price-range" aria-hidden="true"></span><% } %>
+                / <span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span><span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span><span class="glyphicon glyphicon-usd price-denominator" aria-hidden="true"></span>
+              <% } %>
+            </div>
+            <p><a href="<%= activity.source %>" title="<%= activity.name %>">Source</a></p>
+          </div>
+
+        </div>
+
+        <div class="col-xs-12 col-sm-5">
+          <div id="map" class="map-event"></div>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12">
+          <% if (userId) { %>
+            <div>
+              <form action="/event/saved/<%=activity.id%>/<%=userId%>" method="POST">
+                <button type="submit" class="btn btn-block btn-primary favourite-button">
+                  <i class="fa fa-heart" aria-hidden="true"></i>
+                  <span>&nbsp Save this event</span>
+                </button>
+              </form>
+            </div>
           <% } %>
         </div>
-        <p><a href="<%= activity.source %>" title="<%= activity.name %>">Source</a></p>
       </div>
-    </div>
 
-    <div id="map"></div>
-    <script>
-      function initMap() {
-        var eventLoc = {
-          lat: <%= activity.latitude %>,
-          lng: <%= activity.longitude %>
-        };
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 15,
-          center: eventLoc
-        });
-        var marker = new google.maps.Marker({
-          position: eventLoc,
-          map: map
-        });
-      }
-    </script>
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=<%= apiKey %>&callback=initMap"
-    async defer></script>
+  </div>
 
-      <% if (userId) { %>
-      <div>
-        <form action="/event/saved/<%=activity.id%>/<%=userId%>" method="POST">
-          <button type="submit" class="btn btn-block btn-primary">
-            <span class="glyphicon"></span>
-            <span>&nbsp Save This Event</span>
-          </button>
-        </form>
-      </div>
-    <% } %>
-
-
+  <% include partials/_footer.ejs %>
 
   </body>
 
-  <% include partials/_footer.ejs %>
+  <script>
+    function initMap() {
+      var eventLoc = {
+        lat: <%= activity.latitude %>,
+        lng: <%= activity.longitude %>
+      };
+      var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 15,
+        center: eventLoc
+      });
+      var marker = new google.maps.Marker({
+        position: eventLoc,
+        map: map
+      });
+    }
+  </script>
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=<%= apiKey %>&callback=initMap"
+  async defer></script>
 
 </html>
