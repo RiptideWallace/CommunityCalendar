@@ -9,7 +9,7 @@ The stack for this project includes NodeJS, Express, Postgres & Knex.
 ## Final Product
 !["Screenshot of Home Page"](https://github.com/RiptideWallace/CommunityCalendar/blob/master/CCHomepage.png)
 
-!["Screenshot of a Region Search"](https://github.com/RiptideWallace/CommunityCalendar/blob/master/CCPlacesSearch.png0)
+!["Screenshot of a Region Search"](https://github.com/RiptideWallace/CommunityCalendar/blob/master/CCPlacesSearch.png)
 
 !["Screenshot of a search of a Centre"](https://github.com/RiptideWallace/CommunityCalendar/blob/master/CCEventSearch.png)
 
