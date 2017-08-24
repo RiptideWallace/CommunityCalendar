@@ -52,11 +52,13 @@
 
       <div class="row">
         <div class="col-xs-12">
-          <div class="well favourite-well">
-            <% if (!userId && savedUsers.length) { %>
+          <% if (!userId && savedUsers.length) { %>
+            <div class="well favourite-well">
               <p><i class="fa fa-heart" aria-hidden="true"></i>&nbsp x <%= savedUsers.length %> : <a href="/user/register">Register</a> or <a href="/user/login">login</a> to save this event.</p>
-            <% } else if (userId && savedUsers.indexOf(userId) === -1) { %>
-            <p><i class="fa fa-heart" aria-hidden="true"></i>&nbsp <%= savedUsers.length %> user(s) have saved this event.</p>
+            </div>
+          <% } else if (userId && savedUsers.indexOf(userId) === -1) { %>
+            <div class="well favourite-well">
+              <p><i class="fa fa-heart" aria-hidden="true"></i>&nbsp <%= savedUsers.length %> user(s) have saved this event.</p>
               <div>
                 <form action="/event/saved/<%=activity.id%>/<%=userId%>" method="POST">
                   <button type="submit" class="btn btn-block btn-primary favourite-button">
@@ -65,24 +67,27 @@
                   </button>
                 </form>
               </div>
-            <% } else if (userId && (savedUsers.indexOf(userId) !== -1)) { %>
+            </div>
+          <% } else if (userId && (savedUsers.indexOf(userId) !== -1)) { %>
+            <div class="well favourite-well">
               <% if (savedUsers.length > 1) { %>
                 <p><i class="fa fa-heart" aria-hidden="true"></i>&nbsp You and <%= savedUsers.length - 1 %> other(s) have saved this event.</p>
               <% } else { %>
                 <p><i class="fa fa-heart" aria-hidden="true"></i>&nbsp You are the first one to save this event. Woohoo!</p>
               <% } %>
-              <div class="dropup">
-                <button class="btn btn-block btn-warning dropdown-toggle" type="button" data-toggle="dropdown">Remove saved event?
-                 <i class="fa fa-trash-o" aria-hidden="true"></i></button>
-                <ul class="dropdown-menu delete-dropdown">
-                  <li>
-                    <form action="/event/delete/<%= activity.id %>/<%= userId %>" method="POST">
-                      <button class="btn btn-block btn-danger" title="Delete <%= activity.name %> from your Saved Events">
-                        Delete! <i class="fa fa-trash-o" aria-hidden="true"></i>
-                      </button>
-                    </form>
-                  </li>
-                </ul>
+                <div class="dropup">
+                  <button class="btn btn-block btn-warning dropdown-toggle" type="button" data-toggle="dropdown">Remove saved event?
+                   <i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                  <ul class="dropdown-menu delete-dropdown">
+                    <li>
+                      <form action="/event/delete/<%= activity.id %>/<%= userId %>" method="POST">
+                        <button class="btn btn-block btn-danger" title="Delete <%= activity.name %> from your Saved Events">
+                          Delete! <i class="fa fa-trash-o" aria-hidden="true"></i>
+                        </button>
+                      </form>
+                    </li>
+                  </ul>
+                </div>
               </div>
             <% } %>
           </div>

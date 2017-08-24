@@ -22,8 +22,8 @@
         <p><strong><%= place.place_name %></strong> in <strong><a href="/BC/<%= place.region_slug %>"><%= place.region_name %></a></strong></p>
         <p>Address: <%= place.street_address %></p>
         <div id="map" class="map-place-event-search"></div>
-          <div class="well favourite-well">
-            <% if (userId && favouritedUsers.indexOf(userId) === -1) { %>
+          <% if (userId && favouritedUsers.indexOf(userId) === -1) { %>
+            <div class="well favourite-well">
               <p><i class="fa fa-heart" aria-hidden="true">&nbsp </i> <%= favouritedUsers.length %> user(s) have favourited this place.</p>
               <div>
                 <form action="/place/saved/<%= place.place_id %>/<%= userId %>" method="POST">
@@ -52,8 +52,8 @@
                   </li>
                 </ul>
               </div>
-            <% } %>
-          </div>
+            </div>
+          <% } %>
         </div>
 
       <% if (!activities.length) { %>
