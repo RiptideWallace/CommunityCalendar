@@ -18,21 +18,43 @@
       <h3>Events at <%= place.place_name %></h3>
 
       <div class="well">
-        <h4>Location details</h4>
+        <h4>Location Details</h4>
         <p><strong><%= place.place_name %></strong> in <strong><a href="/BC/<%= place.region_slug %>"><%= place.region_name %></a></strong></p>
         <p>Address: <%= place.street_address %></p>
         <div id="map" class="map-place-event-search"></div>
-        <% if (userId) { %>
-          <div>
-            <form action="/place/saved/<%= place.place_id %>/<%= userId %>" method="POST">
-              <button type="submit" class="btn btn-block btn-primary favourite-button">
-                <i class="fa fa-heart" aria-hidden="true"></i>
-                <span>&nbsp Add this place to favourites</span>
-              </button>
-            </form>
+          <div class="well favourite-well">
+            <% if (userId && favouritedUsers.indexOf(userId) === -1) { %>
+              <p><i class="fa fa-heart" aria-hidden="true">&nbsp </i> <%= favouritedUsers.length %> user(s) have favourited this place.</p>
+              <div>
+                <form action="/place/saved/<%= place.place_id %>/<%= userId %>" method="POST">
+                  <button type="submit" class="btn btn-block btn-primary favourite-button">
+                    <i class="fa fa-heart" aria-hidden="true"></i>
+                    <span>&nbsp Add place to favourites</span>
+                  </button>
+                </form>
+              </div>
+            <% } else if (userId && (favouritedUsers.indexOf(userId) !== -1)) { %>
+              <% if (favouritedUsers.length > 1) { %>
+                <p><i class="fa fa-heart" aria-hidden="true"></i>&nbsp You and <%= favouritedUsers.length - 1 %> other(s) have favourited this place.</p>
+              <% } else { %>
+                <p><i class="fa fa-heart" aria-hidden="true"></i>&nbsp You are the first one to favourite this place. Woohoo!</p>
+              <% } %>
+              <div class="dropup">
+                <button class="btn btn-block btn-warning dropdown-toggle" type="button" data-toggle="dropdown">Remove favourite?
+                 <i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                <ul class="dropdown-menu delete-dropdown">
+                  <li>
+                    <form action="/place/delete/<%= place.place_id %>/<%= userId %>" method="POST">
+                      <button class="btn btn-block btn-danger" title="Delete <%= place.name %> from your Favourite Places">
+                        Remove favourite! <i class="fa fa-trash-o" aria-hidden="true"></i>
+                      </button>
+                    </form>
+                  </li>
+                </ul>
+              </div>
+            <% } %>
           </div>
-        <% } %>
-      </div>
+        </div>
 
       <% if (!activities.length) { %>
         <h3>No activities for this place. <i class="fa fa-frown-o" aria-hidden="true"></i></h3>
