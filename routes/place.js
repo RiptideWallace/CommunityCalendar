@@ -4,7 +4,7 @@ const knex = require('../db').handle;
 
 // Route for when a place is favourited by a user (POST)
 router.post('/saved/:placeId/:userId', (req, res) => {
-  knex()('favourited-places')
+  knex()('favourited_places')
     .select('*')
     .where({
       'place_id': req.params.placeId,
@@ -14,7 +14,7 @@ router.post('/saved/:placeId/:userId', (req, res) => {
       if (searchResults.length >= 1) {
         res.redirect(`/user/${req.params.userId}/show`)
       } else {
-        knex()('favourited-places')
+        knex()('favourited_places')
           .insert({place_id: req.params.placeId, user_id: req.params.userId})
           .then((results) => {
             res.redirect(`/user/${req.params.userId}/show`)
@@ -29,7 +29,7 @@ router.post('/saved/:placeId/:userId', (req, res) => {
 
 // Route for when a saved event is deleted by a user (POST)
 router.post('/delete/:placeId/:userId', (req, res) => {
-  knex()('favourited-places')
+  knex()('favourited_places')
     .where({place_id: req.params.placeId, user_id: req.params.userId})
     .del()
     .then((results) => {
