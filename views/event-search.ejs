@@ -59,6 +59,7 @@
       <% if (!activities.length) { %>
         <h3>No activities for this place. <i class="fa fa-frown-o" aria-hidden="true"></i></h3>
       <% } else { %>
+        <h3><%= activities.length %> activities at this place:</h3>
         <div>
           <% activities.forEach(function(a) { %>
             <div class="well">
