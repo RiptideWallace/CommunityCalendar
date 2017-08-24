@@ -33,7 +33,9 @@
                   </button>
                 </form>
               </div>
-            <% } else if (userId && (favouritedUsers.indexOf(userId) !== -1)) { %>
+            </div>
+          <% } else if (userId && (favouritedUsers.indexOf(userId) !== -1)) { %>
+            <div class="well favourite-well">
               <% if (favouritedUsers.length > 1) { %>
                 <p><i class="fa fa-heart" aria-hidden="true"></i>&nbsp You and <%= favouritedUsers.length - 1 %> other(s) have favourited this place.</p>
               <% } else { %>
