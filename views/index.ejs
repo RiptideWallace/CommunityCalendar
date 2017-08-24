@@ -65,6 +65,11 @@
             </span>
             <hr>
             <p><strong>Community Calendar</strong> is your Greater Victoria event guide. Find activities by region, centre, and price range.</p>
+            <% if (!userId) { %>
+              <p><a href="/user/register">Register</a> or <a href="/user/login">login</a> to save events you're interested in and keep track of what's happening at your favourite places.</p>
+            <% } else { %>
+              <p>Use Community Calendar to save events you're interested in and keep track of what's happening at your favourite places.</p>
+            <% } %>
           </div>
         </div>
       </div>
