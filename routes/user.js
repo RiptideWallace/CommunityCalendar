@@ -59,11 +59,11 @@ router.get("/:id/show", (req, res) => {
         'places.name as place_name',
         'places.street_address as street_address'
       ])
-    .from("saved-events")
-    .leftJoin('activities', 'saved-events.activity_id', 'activities.id')
+    .from("saved_events")
+    .leftJoin('activities', 'saved_events.activity_id', 'activities.id')
     .leftJoin('places', 'activities.place_id', 'places.id')
     .leftJoin('regions', 'places.region_id', 'regions.id')
-    .where({'saved-events.user_id': req.params.id})
+    .where({'saved_events.user_id': req.params.id})
     .then((savedResults) => {
       knex()
         .select([
@@ -73,10 +73,10 @@ router.get("/:id/show", (req, res) => {
           'regions.name as region_name',
           'regions.slug as region_slug',
         ])
-      .from("favourited-places")
-      .join('places', 'favourited-places.place_id', 'places.id')
+      .from("favourited_places")
+      .join('places', 'favourited_places.place_id', 'places.id')
       .join('regions', 'places.region_id', 'regions.id')
-      .where({'favourited-places.user_id': req.params.id})
+      .where({'favourited_places.user_id': req.params.id})
       .then((favedResults) => {
         let templateVars = {
           user: userResults[0],
