@@ -23,23 +23,50 @@ router.get('/:region/:place/:activity', function(req, res, next) {
       'places.longitude as longitude',
       'regions.id as region_id',
       'regions.slug as region_slug',
-      'regions.name as region_name'
+      'regions.name as region_name',
+      knex().raw(`COALESCE(JSON_AGG(saved_events.*) FILTER (WHERE saved_events.activity_id = activities.id), '[]') AS saved_events`)
     ])
     .join('places', 'places.id', '=', 'activities.place_id')
     .join('regions', 'regions.id', '=', 'places.region_id')
+    .leftJoin('saved_events', 'activities.id', 'saved_events.activity_id')
     .where({
       'activities.slug': req.params.activity,
       'places.slug': req.params.place,
       'regions.slug': req.params.region
     })
+    .groupBy(
+      'activities.id',
+      'activities.name',
+      'activities.start_date',
+      'activities.end_date',
+      'activities.price_range',
+      'activities.source',
+      'activities.description',
+      'activities.slug',
+      'places.id',
+      'places.name',
+      'places.slug',
+      'places.abbreviation',
+      'places.street_address',
+      'places.latitude',
+      'places.longitude',
+      'regions.id',
+      'regions.slug',
+      'regions.name'
+    )
     .then((results) => {
-      console.log(results);
       if (results.length === 0) {
         res.status(404).send("This activity does not exist");
         return;
       }
+      let savedUsers = [];
+      let savedEvents = results[0].saved_events;
+      savedEvents.forEach(function(result) {
+        savedUsers.push(result.user_id);
+      });
       let templateVars = {
-        activity: results[0]
+        activity: results[0],
+        savedUsers: savedUsers
       }
       res.render("event", templateVars);
     });
@@ -57,11 +84,13 @@ router.get('/:region/:place', function(req, res) {
     'regions.id as region_id',
     'regions.slug as region_slug',
     'regions.name as region_name',
-    knex().raw(`COALESCE(JSON_AGG(activities.*) FILTER (WHERE activities.id IS NOT NULL), '[]') AS activities`)
+    knex().raw(`COALESCE(JSON_AGG(activities.*) FILTER (WHERE activities.id IS NOT NULL), '[]') AS activities`),
+    knex().raw(`COALESCE(JSON_AGG(favourited_places.*) FILTER (WHERE favourited_places.id IS NOT NULL), '[]') AS favourited_places`)
     ])
     .from('regions')
     .leftJoin('places', 'regions.id', 'places.region_id')
     .leftJoin('activities', 'places.id', 'activities.place_id')
+    .leftJoin('favourited_places', 'places.id', 'favourited_places.place_id')
     .where({
       'places.slug': req.params.place,
       'regions.slug': req.params.region
@@ -78,16 +107,23 @@ router.get('/:region/:place', function(req, res) {
       'regions.name'
     )
     .then((results) => {
-      console.log(results);
+      let favouritedUsers = [];
+      let favouritedPlacesResults = results[0].favourited_places;
+      favouritedPlacesResults.forEach(function(result) {
+        if (favouritedUsers.indexOf(result.user_id) === -1 ) {
+          favouritedUsers.push(result.user_id);
+        }
+      });
       let templateVars = {
         place: results[0],
         activities: results[0].activities,
+        favouritedUsers: favouritedUsers
       }
       res.render("event-search", templateVars);
     })
     .catch((err) => {
       console.log(err);
-      res.status(404).send("No such place");
+      res.status(404).send("This place does not exist");
     });
 });
 
@@ -109,7 +145,7 @@ router.get('/:region', (req, res) => {
     .then((results) => {
       console.log(results);
       if (results.length === 0) {
-        res.status(404).send("This place does not exist");
+        res.status(404).send("This region does not exist");
         return;
       }
       let templateVars = {
@@ -119,7 +155,7 @@ router.get('/:region', (req, res) => {
     })
     .catch((err) => {
       console.log(err);
-      res.status(404).send("Event not saved");
+      res.status(404).send("This region does not exist");
     });
 });
 

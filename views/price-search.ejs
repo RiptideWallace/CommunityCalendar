@@ -55,6 +55,7 @@
           <strong>Uh oh!</strong> There are no current events in that price range. Try another range above.
         </div>
       <% } else { %>
+        <h3><%= activity.length %> activities in this price range:</h3>
         <% activity.forEach(function(a) { %>
           <div class="well">
             <h2><a href="/BC/<%=a.region_slug%>/<%=a.place_slug%>/<%=a.activity_slug%>"><%= a.name %></a></h2>
