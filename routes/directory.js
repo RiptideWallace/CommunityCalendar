@@ -85,7 +85,7 @@ router.get('/:region/:place', function(req, res) {
     'regions.slug as region_slug',
     'regions.name as region_name',
     knex().raw(`COALESCE(JSON_AGG(activities.*) FILTER (WHERE activities.id IS NOT NULL), '[]') AS activities`),
-    knex().raw(`COALESCE(JSON_AGG(favourited_places.*) FILTER (WHERE favourited_places.place_id = places.id), '[]') AS favourited_places`)
+    knex().raw(`COALESCE(JSON_AGG(favourited_places.*) FILTER (WHERE favourited_places.id IS NOT NULL), '[]') AS favourited_places`)
     ])
     .from('regions')
     .leftJoin('places', 'regions.id', 'places.region_id')
@@ -107,17 +107,13 @@ router.get('/:region/:place', function(req, res) {
       'regions.name'
     )
     .then((results) => {
-      console.log(results);
       let favouritedUsers = [];
       let favouritedPlacesResults = results[0].favourited_places;
-      console.log(favouritedPlacesResults);
       favouritedPlacesResults.forEach(function(result) {
         if (favouritedUsers.indexOf(result.user_id) === -1 ) {
           favouritedUsers.push(result.user_id);
         }
       });
-      console.log("Here is favouritedUsers:");
-      console.log(favouritedUsers);
       let templateVars = {
         place: results[0],
         activities: results[0].activities,
