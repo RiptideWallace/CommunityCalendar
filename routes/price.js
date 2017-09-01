@@ -1,25 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const knex = require('../db').handle;
-
-function getPriceRangeString(priceParameter) {
-  let priceString = "";
-  switch (parseInt(priceParameter)) {
-    case 0:
-      priceString = "Free Events";
-      break;
-    case 1:
-      priceString = "Events Less Than $10";
-      break;
-    case 2:
-      priceString = "Events $10 and Up";
-      break;
-    case 3:
-      priceString = "Events $100 and Up";
-      break;
-  }
-  return priceString;
-}
+const getPriceRangeString = require("../utils/price-range-string").getPriceRangeString;
 
 //Route for when a search is conducted by price range (GET)
 router.get('/:pricerange', (req, res) => {
