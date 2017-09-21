@@ -3,15 +3,7 @@ const router = express.Router();
 const knex = require('../db').handle;
 const slug = require('slug');
 slug.defaults.mode = 'rfc3986';
-
-function randomString() {
-  let output = "";
-  let characters = "abcdefghijklmnopqrstuvwxyz1234567890";
-  for (let i = 0; i < 6; i++) {
-    output += characters.charAt(Math.floor(Math.random() * characters.length));
-  }
-  return output;
-}
+const randomString = require("../utils/random-string").randomString;
 
 // Route to create-event page (GET)
 router.get("/", (req, res, next) => {
