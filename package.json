@@ -10,26 +10,22 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/RiptideWallace/CommunityCalendar"
+    "url": "https://github.com/ty2k/CommunityCalendar"
   },
   "dependencies": {
-    "basic-auth": "^1.1.0",
-    "bcrypt": "latest",
-    "body-parser": "latest",
-    "bootstrap": "latest",
-    "cookie-session": "latest",
-    "dotenv": "latest",
-    "ejs": "latest",
-    "express": "latest",
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.1",
+    "cookie-session": "^1.3.1",
+    "dotenv": "^4.0.0",
+    "ejs": "^2.5.7",
+    "express": "^4.15.4",
     "helmet": "^3.8.1",
-    "jquery": "latest",
-    "knex": "latest",
+    "knex": "^0.13.0",
     "knex-csv-seeder": "^0.4.1",
-    "knex-logger": "latest",
-    "node-sass": "latest",
-    "node-sass-middleware": "latest",
-    "pg": "latest",
-    "secure-route": "^3.0.1",
+    "knex-logger": "^0.1.0",
+    "node-sass": "^4.5.3",
+    "node-sass-middleware": "^0.11.0",
+    "pg": "^7.3.0",
     "slug": "^0.9.1"
   },
   "devDependencies": {
