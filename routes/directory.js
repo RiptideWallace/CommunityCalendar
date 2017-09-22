@@ -1,9 +1,11 @@
-const express = require("express");
+'use strict';
+
+const express = require('express');
 const router = express.Router();
 const knex = require('../db').handle;
 
 // Route to an event's page with URLs in slug form
-router.get('/:region/:place/:activity', function(req, res, next) {
+router.get('/:region/:place/:activity', function(req, res) {
   knex()('activities')
     .select([
       'activities.id as id',
@@ -56,7 +58,7 @@ router.get('/:region/:place/:activity', function(req, res, next) {
     )
     .then((results) => {
       if (results.length === 0) {
-        res.status(404).send("This activity does not exist");
+        res.status(404).send('This activity does not exist');
         return;
       }
       let savedUsers = [];
@@ -67,8 +69,8 @@ router.get('/:region/:place/:activity', function(req, res, next) {
       let templateVars = {
         activity: results[0],
         savedUsers: savedUsers
-      }
-      res.render("event", templateVars);
+      };
+      res.render('event', templateVars);
     });
 });
 
@@ -86,7 +88,7 @@ router.get('/:region/:place', function(req, res) {
     'regions.name as region_name',
     knex().raw(`COALESCE(JSON_AGG(activities.*) FILTER (WHERE activities.id IS NOT NULL), '[]') AS activities`),
     knex().raw(`COALESCE(JSON_AGG(favourited_places.*) FILTER (WHERE favourited_places.id IS NOT NULL), '[]') AS favourited_places`)
-    ])
+  ])
     .from('regions')
     .leftJoin('places', 'regions.id', 'places.region_id')
     .leftJoin('activities', 'places.id', 'activities.place_id')
@@ -118,18 +120,17 @@ router.get('/:region/:place', function(req, res) {
         place: results[0],
         activities: results[0].activities,
         favouritedUsers: favouritedUsers
-      }
-      res.render("event-search", templateVars);
+      };
+      res.render('event-search', templateVars);
     })
     .catch((err) => {
-      console.log(err);
-      res.status(404).send("This place does not exist");
+      res.status(404).send('This place does not exist');
     });
 });
 
 // Route for when a search is conducted on a region
 router.get('/:region', (req, res) => {
-   knex()('places')
+  knex()('places')
     .select([
       'places.id as id',
       'places.name as name',
@@ -143,19 +144,17 @@ router.get('/:region', (req, res) => {
     .join('regions', 'regions.id', '=', 'places.region_id')
     .where({'regions.slug': req.params.region})
     .then((results) => {
-      console.log(results);
       if (results.length === 0) {
-        res.status(404).send("This region does not exist");
+        res.status(404).send('This region does not exist');
         return;
       }
       let templateVars = {
         place: results,
-      }
-      res.render("place-search", templateVars);
+      };
+      res.render('place-search', templateVars);
     })
     .catch((err) => {
-      console.log(err);
-      res.status(404).send("This region does not exist");
+      res.status(404).send('This region does not exist');
     });
 });
 
