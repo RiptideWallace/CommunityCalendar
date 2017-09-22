@@ -4,7 +4,7 @@
 <html lang="en">
   <head>
     <title>
-      <%= price %> - Victoria Community Calendar
+      <%= priceString %> - Victoria Community Calendar
     </title>
     <% include partials/_head.ejs %>
   </head>
@@ -15,7 +15,7 @@
 
     <div class="container">
 
-      <h3>Search Events by Price Range: <%= price %></h3>
+      <h3>Search Events by Price Range: <%= priceString %></h3>
 
       <p class="panel">
         Search for <a href="/price/0" title="Search for free events">free events</a>, events that cost at <a href="/price/1" title="Search for events under $10">less than &#36;10</a> (&#36; / &#36;&#36;&#36;), events that cost <a href="/price/2" title="Search for events $10 to $100">&#36;10 and up</a> (&#36;&#36; / &#36;&#36;&#36;), or events that cost <a href="/price/3" title="Search for $100 and up">$100 and up</a> (&#36;&#36;&#36; / &#36;&#36;&#36;).
@@ -58,7 +58,7 @@
         <h3><%= activity.length %> activities in this price range:</h3>
         <% activity.forEach(function(a) { %>
           <div class="well">
-            <h2><a href="/BC/<%=a.region_slug%>/<%=a.place_slug%>/<%=a.activity_slug%>"><%= a.name %></a></h2>
+            <h2><a href="/bc/<%=a.region_slug%>/<%=a.place_slug%>/<%=a.activity_slug%>"><%= a.name %></a></h2>
             <h3>at <%= a.place_name %></h3>
             <p>Address: <%= a.street_address %>, <%= a.region_name %></p>
             <p><%= a.description %></p>
@@ -85,6 +85,7 @@
     </div>
 
     <% include partials/_footer.ejs %>
+    <% include partials/_footerscripts.ejs %>
 
   </body>
 </html>
