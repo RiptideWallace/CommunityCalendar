@@ -1,12 +1,14 @@
-const express = require("express");
+'use strict';
+
+const express = require('express');
 const router = express.Router();
 const knex = require('../db').handle;
-const getPriceRangeString = require("../utils/price-range-string").getPriceRangeString;
+const getPriceRangeString = require('../utils/price-range-string').getPriceRangeString;
 
 //Route for when a search is conducted by price range (GET)
 router.get('/:pricerange', (req, res) => {
   knex()('activities')
-   .select([
+    .select([
       'activities.id as id',
       'activities.name as name',
       'activities.start_date',
@@ -33,9 +35,9 @@ router.get('/:pricerange', (req, res) => {
       let priceRangeString = getPriceRangeString(req.params.pricerange);
       let templateVars = {
         activity: results,
-        price: priceRangeString
-      }
-      res.render("price-search", templateVars);
+        priceString: priceRangeString
+      };
+      res.render('price-search', templateVars);
     });
 });
 
