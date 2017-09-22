@@ -21,7 +21,7 @@
           <h2>Event Details</h2>
           <div>
             <h3><%= activity.name %></h3>
-            <h3>at <a href="/BC/<%= activity.region_slug %>/<%= activity.place_slug %>" title="<%= activity.place_name %>"><%= activity.place_name %></a></h3>
+            <h3>at <a href="/bc/<%= activity.region_slug %>/<%= activity.place_slug %>" title="<%= activity.place_name %>"><%= activity.place_name %></a></h3>
             <p>Address: <%= activity.street_address %>, <%= activity.region_name %></p>
             <p><%= activity.description %></p>
             <% if (activity.start_date === activity.end_date) { %>
@@ -97,6 +97,7 @@
   </div>
 
   <% include partials/_footer.ejs %>
+  <% include partials/_footerscripts.ejs %>
 
   </body>
 
