@@ -1,3 +1,5 @@
+// Not currently implemented; events and places currently refresh on page load
+
 jQuery(document).ready(function() {
 
   var userProfileId = $("#user-profile-id").val();
@@ -8,7 +10,7 @@ jQuery(document).ready(function() {
   }).done((activities) => {
     activities.forEach(function(activity) {
       ($(".saved-events")
-        .append($("<a class='activity-name'>").attr("href", "/BC/" + activity.region_slug + "/" + activity.place_slug + "/" + activity.activity_slug ).text(
+        .append($("<a class='activity-name'>").attr("href", "/bc/" + activity.region_slug + "/" + activity.place_slug + "/" + activity.activity_slug ).text(
           activity.activity_name))
         .append($("<div class='activity-start-date'>").text(
           "Start Date - " + activity.activity_start_date))
@@ -27,7 +29,7 @@ jQuery(document).ready(function() {
     places.forEach(function(place) {
 
       ($(".favourited-places")
-        .append($("<a class='place-name'>").attr("href", "/BC/" + place.region_slug + "/" + place.place_slug).text(
+        .append($("<a class='place-name'>").attr("href", "/bc/" + place.region_slug + "/" + place.place_slug).text(
           place.place_name))
       )
   });

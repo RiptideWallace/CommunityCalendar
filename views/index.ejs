@@ -23,7 +23,7 @@
             </button>
             <ul class="dropdown-content dropdown-menu scrollable-menu" role="menu">
             <% region.forEach(function(r) { %>
-              <li class="dropdown-item"><a href="/BC/<%=r.region_slug%>"><%=r.region_name%></a></li>
+              <li class="dropdown-item"><a href="/bc/<%=r.region_slug%>"><%=r.region_name%></a></li>
             <% } ) %>
             </ul>
           </div>
@@ -36,7 +36,7 @@
             </button>
             <ul class="dropdown-content dropdown-menu scrollable-menu" role="menu">
             <% place.forEach(function(p) { %>
-              <li class="dropdown-item"><a href="/BC/<%=p.region_slug%>/<%=p.place_slug%>"><%=p.place_name%></a></li>
+              <li class="dropdown-item"><a href="/bc/<%=p.region_slug%>/<%=p.place_slug%>"><%=p.place_name%></a></li>
             <% } ) %>
             </ul>
           </div>
@@ -77,6 +77,7 @@
     </div>
 
     <% include partials/_footer.ejs %>
+    <% include partials/_footerscripts.ejs %>
 
   </body>
 </html>

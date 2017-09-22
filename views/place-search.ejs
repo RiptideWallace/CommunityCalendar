@@ -22,7 +22,7 @@
         <div>
           <% place.forEach(function(p) { %>
             <div class="well">
-              <h2><a href="/BC/<%=p.region_slug%>/<%=p.place_slug%>"><%= p.name %></a></h2>
+              <h2><a href="/bc/<%=p.region_slug%>/<%=p.place_slug%>"><%= p.name %></a></h2>
               <p>Address: <%= p.street_address %>, <%= p.region_name %></p>
               <% if (userId) { %>
                 <div>
@@ -41,6 +41,7 @@
       </div>
 
     <% include partials/_footer.ejs %>
+    <% include partials/_footerscripts.ejs %>
 
   </body>
 </html>

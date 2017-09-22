@@ -19,7 +19,7 @@
 
       <div class="well">
         <h4>Location Details</h4>
-        <p><strong><%= place.place_name %></strong> in <strong><a href="/BC/<%= place.region_slug %>"><%= place.region_name %></a></strong></p>
+        <p><strong><%= place.place_name %></strong> in <strong><a href="/bc/<%= place.region_slug %>"><%= place.region_name %></a></strong></p>
         <p>Address: <%= place.street_address %></p>
         <div id="map" class="map-place-event-search"></div>
           <% if (userId && favouritedUsers.indexOf(userId) === -1) { %>
@@ -65,7 +65,7 @@
         <div>
           <% activities.forEach(function(a) { %>
             <div class="well">
-              <h2><a href="/BC/<%=place.region_slug%>/<%=place.place_slug%>/<%=a.slug%>"><%= a.name %></a></h2>
+              <h2><a href="/bc/<%=place.region_slug%>/<%=place.place_slug%>/<%=a.slug%>"><%= a.name %></a></h2>
               <h3>at <%= place.place_name %></h3>
               <p>Address: <%= place.street_address %>, <%= place.region_name %></p>
               <p><%= a.description %></p>
@@ -93,6 +93,7 @@
     </div>
 
     <% include partials/_footer.ejs %>
+    <% include partials/_footerscripts.ejs %>
 
     <script>
       var map;
